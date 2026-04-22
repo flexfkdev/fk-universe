@@ -937,7 +937,7 @@ body.user-logged .auth-tabs{display:none!important}
     </div>
   </div>
   <div class="mus-cols" id="musCols"><div id="albL" class="mcl"></div><div id="albR"></div></div>
-  <div class="mus-hint" id="musHint"><div class="mus-ht">Próximamente</div><p>Música en camino.</p></div>
+  <div class="mus-hint" id="musHint"><div id="musHintLogo" style="margin-bottom:18px;display:none"><img id="musHintLogoImg" style="height:48px;object-fit:contain;opacity:.25" alt=""></div><div class="mus-ht">Próximamente</div><p>Música en camino.</p></div>
 </section>
 
 <!-- 7 CONTACTO -->
@@ -1505,6 +1505,8 @@ function applyLogo(){
   const ni=g('logoNav'),nt=g('navTL'),fi=g('logoFt'),ft=g('ftTxt');
   if(logo){ni.src=logo;ni.className='loaded';nt.style.display='none';fi.src=logo;fi.className='loaded';ft.style.display='none';}
   else{ni.className='';nt.style.display='';fi.className='';ft.style.display='';}
+  // Update logo in empty states
+  const mhl=g('musHintLogoImg');if(mhl){if(logo){mhl.src=logo;g('musHintLogo').style.display='block';}else{g('musHintLogo').style.display='none';}}
 }
 
 // SECTION VIDEO
@@ -2197,6 +2199,7 @@ function renderMerch(){
   const dropIsOpen=activeDropId&&(!DROP.open||DROP.open<=now)&&(!DROP.target||DROP.target>now);
   const visibleP=P.filter(p=>{
     if(!p.dropId)return true;
+    if(adm)return true; // admin always sees drop products to manage them
     return dropIsOpen&&String(p.dropId)===String(activeDropId);
   });
   const filt=af==='Todos'?visibleP:visibleP.filter(p=>p.cat===af||(af==='Hoodies'&&p.cat==='Buzos'));
@@ -2210,10 +2213,11 @@ function renderMerch(){
   track.innerHTML=filt.map(p=>{
     const i0=(p.imgs&&p.imgs[0])||p.img||null,i1=(p.imgs&&p.imgs[1])||null;
     const discBadge=p.discount?`<span class="mc-disc">-${p.discount}%</span>`:p.promo?`<span class="mc-disc">${p.promo}</span>`:'';
+    const dropBadge=adm&&p.dropId?`<span style="position:absolute;top:44px;left:12px;background:rgba(0,0,0,.88);border:1px solid #e81c1c44;color:var(--red);font-family:Barlow Condensed,sans-serif;font-style:italic;font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:3px 8px;z-index:5">DROP</span>`:'';
     const stockBadge=p.stock!=null&&p.stock<=10&&p.stock>0?`<span style="position:absolute;bottom:12px;right:12px;background:rgba(0,0,0,.88);border:1px solid #2a2a2a;color:#888;font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:3px 8px;z-index:4">${p.stock} und.</span>`:(p.stock===0?`<span style="position:absolute;bottom:12px;right:12px;background:rgba(0,0,0,.92);border:1px solid #e81c1c22;color:#444;font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:3px 8px;z-index:4">Agotado</span>`:'');
     const priceHtml=p.discount?`<span class="mc-price-old">${p.price}</span><span class="mc-price mc-price-sale">${discountedPrice(p.price,p.discount)}</span>`:`<span class="mc-price">${p.price}</span>`;
     const soldOut=p.stock===0;
-    return `<div class="mc"${soldOut?' style="opacity:.6;cursor:default"':''} onclick="${soldOut?'':'openPM(\''+p.id+'\')'}">${'<span class="mc-badge">Preventa</span>'}${discBadge}${stockBadge}<button class="mc-del" onclick="event.stopPropagation();delP('${p.id}')">✕</button><button class="mc-edit-btn" onclick="event.stopPropagation();openEditP('${p.id}')">✎</button><div class="mc-iw">${i0?`<img class="mc-img mc-f" src="${i0}" alt="${p.name}"><img class="mc-img mc-b" src="${i1||i0}" alt="${p.name}">`:'<div class="mc-ph" style="position:relative;width:100%;height:100%">FK</div>'}</div><div class="mc-info"><div class="mc-tag">${p.cat}</div><div class="mc-name">${p.name}</div><div class="mc-price-row">${priceHtml}</div></div></div>`;
+    return `<div class="mc"${soldOut?' style="opacity:.6;cursor:default"':''} onclick="${soldOut?'':'openPM(\''+p.id+'\')'}">${'<span class="mc-badge">Preventa</span>'}${discBadge}${stockBadge}${dropBadge}<button class="mc-del" onclick="event.stopPropagation();delP('${p.id}')">✕</button><button class="mc-edit-btn" onclick="event.stopPropagation();openEditP('${p.id}')">✎</button><div class="mc-iw">${i0?`<img class="mc-img mc-f" src="${i0}" alt="${p.name}"><img class="mc-img mc-b" src="${i1||i0}" alt="${p.name}">`:'<div class="mc-ph" style="position:relative;width:100%;height:100%">FK</div>'}</div><div class="mc-info"><div class="mc-tag">${p.cat}</div><div class="mc-name">${p.name}</div><div class="mc-price-row">${priceHtml}</div></div></div>`;
   }).join('');
   setSlP(0);
 }
@@ -2526,16 +2530,20 @@ function renderDrop(){
   // Only show banner if past the start date (or no start date set)
   const now=new Date();
   if(!DROP.name&&!DROP.target){b.style.display='none';return;}
-  if(DROP.start&&DROP.start>now){
-    b.style.display='none';
-    // If admin, show anyway with a note
-    if(!adm)return;
+  const bannerScheduled=DROP.start&&DROP.start>now;
+  const bannerHidden=bannerScheduled; // hide from public until start date
+  if(bannerHidden){
+    if(!adm){b.style.display='none';return;} // public: hidden
+    // Admin: show dimmed with tooltip
     b.style.display='block';
-    b.style.opacity='0.4';
-    b.title='Banner programado para: '+DROP.start.toLocaleString('es-CO');
+    b.style.opacity='0.45';
+    const scheduledEl=b.querySelector('#dropScheduledNote')||Object.assign(document.createElement('div'),{id:'dropScheduledNote',style:'background:#1a1a00;border:1px solid #333;color:#888;font-family:Barlow Condensed,sans-serif;font-style:italic;font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:6px 14px;margin-top:6px;text-align:center'});
+    scheduledEl.textContent='⏰ Programado para: '+DROP.start.toLocaleString('es-CO')+' — aún no visible para el público';
+    if(!b.querySelector('#dropScheduledNote'))b.appendChild(scheduledEl);
   }else{
     b.style.display='block';
     b.style.opacity='1';
+    const note=b.querySelector('#dropScheduledNote');if(note)note.remove();
   }
   if(g('dropName'))g('dropName').textContent=DROP.name||'DROP-001';
   const uw=g('dropUnitsWrap');

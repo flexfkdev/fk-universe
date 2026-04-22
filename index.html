@@ -221,6 +221,8 @@ nav.solid{background:rgba(0,0,0,.97);backdrop-filter:blur(18px);top:0;border-bot
 /* SECTION 6 MÚSICA */
 #s-music{background:#000;padding:80px 44px;position:relative;z-index:3}
 .mus-cols{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.mus-cols.single-album{display:flex;justify-content:center}
+.mus-cols.single-album .mcl{padding-right:0}
 .mcl{padding-right:60px}
 #albR{padding-left:60px}
 .alb-card{background:transparent;border:none;margin-bottom:44px}
@@ -249,8 +251,12 @@ nav.solid{background:rgba(0,0,0,.97);backdrop-filter:blur(18px);top:0;border-bot
 .mus-ht{font-family:'Bebas Neue',sans-serif;color:var(--red);font-size:40px;letter-spacing:5px;margin-bottom:12px}
 .trev .trk{flex-direction:row-reverse;border-left:none;border-right:none}
 .trev .t-nm{text-align:right}
-.trev-center .trk{justify-content:center;gap:18px}
-.trev-center .t-num{order:1}.trev-center .t-nm{order:2;text-align:center}.trev-center .t-pi{order:3}.trev-center .t-del{order:4}
+.trev-center{max-width:380px;margin:0 auto}
+.trev-center .trk{justify-content:center;gap:14px;padding:6px 0}
+.trev-center .t-num{order:1;color:#333;flex-shrink:0}
+.trev-center .t-nm{order:2;text-align:center;flex:unset;max-width:220px}
+.trev-center .t-pi{order:3;flex-shrink:0}
+.trev-center .t-del{order:4;flex-shrink:0}
 .mus-adm{margin-bottom:32px;display:none}
 .admin-mode .mus-adm{display:block}
 .trk.no-audio{opacity:.5}
@@ -330,6 +336,7 @@ footer{background:#000;padding:40px 44px 68px;border-top:1px solid #0a0a0a;displ
 .auth-m.open{display:flex}
 .auth-box{background:var(--sur);border:1px solid #1e1e1e;padding:42px;width:100%;max-width:440px}
 .auth-tabs{display:flex;margin-bottom:26px;border-bottom:1px solid #141414}
+body.user-logged .auth-tabs{display:none!important}
 .auth-tab{flex:1;background:none;border:none;border-bottom:2px solid transparent;color:var(--mu);font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:12px;letter-spacing:3px;text-transform:uppercase;padding:11px 0;cursor:pointer;transition:all .2s}
 .auth-tab.act{color:var(--red);border-bottom-color:var(--red)}
 .auth-form{display:flex;flex-direction:column;gap:11px}
@@ -1086,7 +1093,7 @@ footer{background:#000;padding:40px 44px 68px;border-top:1px solid #0a0a0a;displ
 <div class="auth-m" id="authModal">
   <div class="auth-box">
     <button class="auth-x" onclick="closeAuth()">✕</button>
-    <div class="auth-tabs">
+    <div class="auth-tabs" id="authTabsWrap">
       <button class="auth-tab act" id="tabL" onclick="switchTab('login')">Ingresar</button>
       <button class="auth-tab" id="tabR" onclick="switchTab('register')">Registrarse</button>
     </div>
@@ -1614,18 +1621,20 @@ function tP(id){const p=g(id);const open=p.style.display!=='block';p.style.displ
 
 // USER AUTH
 function genCap(){cn1=Math.floor(Math.random()*10)+1;cn2=Math.floor(Math.random()*10)+1;g('capQ').textContent=`¿Cuánto es ${cn1} + ${cn2}?`;g('capA').value='';}
-function openAuth(tab){g('authModal').classList.add('open');if(cu)showAcc();else{switchTab(tab||'login');if(tab==='register')genCap();}}
+function openAuth(tab){if(cu){const tw=g('authTabsWrap');if(tw)tw.style.display='none';g('loginF').style.display='none';g('regF').style.display='none';g('accF').style.display='block';g('accInfo').innerHTML=`<b style="color:#fff">${cu.name}</b><br>${cu.email}${cu.phone?`<br>📞 ${cu.phone}`:''}` ;}else{const tw=g('authTabsWrap');if(tw)tw.style.display='flex';switchTab(tab||'login');if(tab==='register')genCap();}g('authModal').classList.add('open');}
 function closeAuth(){g('authModal').classList.remove('open');}
 function switchTab(tab){
+  if(cu)return; // never switch to login/register when logged in
+  const tw=g('authTabsWrap');if(tw)tw.style.display='flex';
   g('tabL').classList.toggle('act',tab==='login');g('tabR').classList.toggle('act',tab==='register');
   g('loginF').style.display=tab==='login'?'flex':'none';g('regF').style.display=tab==='register'?'flex':'none';g('accF').style.display='none';
   if(tab==='register')genCap();
 }
-function showAcc(){g('loginF').style.display='none';g('regF').style.display='none';g('accF').style.display='block';g('accInfo').innerHTML=`<b style="color:#fff">${cu.name}</b><br>${cu.email}${cu.phone?`<br>📞 ${cu.phone}`:''}` ;}
+function showAcc(){const tw=g('authTabsWrap');if(tw)tw.style.display='none';g('loginF').style.display='none';g('regF').style.display='none';g('accF').style.display='block';g('accInfo').innerHTML=`<b style="color:#fff">${cu.name}</b><br>${cu.email}${cu.phone?`<br>📞 ${cu.phone}`:''}` ;}
 function updateUI(){
   const lb=g('loginBtn'),ub=g('ubWrap'),nd=g('uName');
-  if(cu){lb.style.display='none';ub.style.display='flex';nd.textContent=cu.name.split(' ')[0];}
-  else{lb.style.display='flex';ub.style.display='none';}
+  if(cu){lb.style.display='none';ub.style.display='flex';nd.textContent=cu.name.split(' ')[0];document.body.classList.add('user-logged');}
+  else{lb.style.display='flex';ub.style.display='none';document.body.classList.remove('user-logged');}
 }
 
 // ─── GOOGLE OAuth (SDK) ──────────────────────────────────────────────────────
@@ -1715,7 +1724,7 @@ async function doLogin(){
     const u=rows[0];
     const user={id:String(u.id),name:u.name,email:u.email,phone:u.phone||''};
     cu=user;sessionStorage.setItem('ffk_u',JSON.stringify(user));
-    closeAuth();updateUI();toast(`¡Bienvenido, ${user.name}!`);
+    updateUI();showAcc();toast(`¡Bienvenido, ${user.name}!`);
     await syncCartToAccount();await loadCartFromAccount();
     return;
   }
@@ -1732,7 +1741,7 @@ async function doLogin(){
   if(rows&&rows[0]){
     const user={id:String(rows[0].id),name:rows[0].name,email:rows[0].email,phone:rows[0].phone||''};
     cu=user;sessionStorage.setItem('ffk_u',JSON.stringify(user));
-    closeAuth();updateUI();toast(`¡Bienvenido, ${user.name}!`);
+    updateUI();showAcc();toast(`¡Bienvenido, ${user.name}!`);
     await syncCartToAccount();await loadCartFromAccount();
   }
 }
@@ -2083,8 +2092,8 @@ async function addProduct(){
   if(!adm)return;
   const name=gv('pN'),price=gv('pPr'),cat=g('pCat').value,link=gv('pLnk'),desc=gv('pDsc'),sizes=getPickedSizes('szPicker'),fi=g('pImg'),stockVal=g('pStock').value.trim(),discVal=g('pDiscField')?.value.trim()||'',dropId=g('pDropId')?.value||null;
   if(!name||!price)return toast('Completa nombre y precio');
-  const btn=g('pMerch').querySelector('.abtn');
-  if(btn.disabled)return;
+  const btn=g('pMerch').querySelector('button.abtn[onclick]');
+  if(!btn||btn.disabled)return;
   btn.disabled=true;btn.textContent='Publicando...';
   const files=Array.from(fi.files||[]).slice(0,5);
   const imgs=[];
@@ -2093,14 +2102,33 @@ async function addProduct(){
       const url=await sdkUpload('flexfk',`products/${Date.now()}_${i}.${ext}`,f);
     if(url)imgs.push(url);
   }
-  const data={name,price,cat,sizes,imgs,description:desc,link,is_new:true,stock:stockVal!==''?parseInt(stockVal):null,discount:discVal||'',drop_id:dropId||null};
-  const res=await sbPost('products',data);
+  // Build insert object — only include optional columns if they have values
+  // (avoids schema errors if columns haven't been added to Supabase yet)
+  const data={name,price,cat,sizes,imgs,description:desc,link,is_new:true};
+  if(discVal)data.discount=discVal;
+  if(stockVal!=='')data.stock=parseInt(stockVal);
+  if(dropId)data.drop_id=dropId;
+  let res=null;
+  try{
+    res=await sbPost('products',data);
+    // If failed due to unknown column, retry with base fields only
+    if(!res){
+      const baseData={name,price,cat,sizes,imgs,description:desc,link,is_new:true};
+      if(discVal)baseData.discount=discVal;
+      res=await sbPost('products',baseData);
+      if(res&&res[0])toast('⚠️ Subido sin stock/drop (corre el SQL en Supabase para activarlos)');
+    }
+  }catch(e){console.error('addProduct error',e);}
   if(res&&res[0]){
-    P.unshift({id:String(res[0].id),name,price,cat,sizes,imgs,desc,link,isNew:true,discount:data.discount||'',promo:'',code:'',stock:data.stock,dropId:data.drop_id});
+    if(!res[0].discount&&discVal)res[0].discount=discVal;
+    P.unshift({id:String(res[0].id),name,price,cat,sizes,imgs,desc,link,isNew:true,discount:res[0].discount||'',promo:'',code:'',stock:res[0].stock??null,dropId:res[0].drop_id||null});
     sOff=0;renderMerch();
     ['pN','pPr','pLnk','pDsc','pStock','pDiscField'].forEach(id=>{if(g(id))g(id).value='';});if(g('pDropId'))g('pDropId').value='';fi.value='';clearSzPicker('szPicker');
-    toast('✓ Producto publicado');
-  }else toast('Error al publicar producto');
+    if(!toast.shown)toast('✓ Producto publicado');
+  }else{
+    // Show the actual Supabase error in console and toast
+    toast('Error al publicar — revisa la consola (F12)');
+  }
   btn.disabled=false;btn.textContent='Publicar Producto';
 }
 async function delP(id){if(!adm)return;await sbDelete('products',id);P=P.filter(p=>String(p.id)!==String(id));sOff=0;renderMerch();toast('Producto eliminado');}
@@ -2207,12 +2235,13 @@ function openPM(id){
     :`<div class="pm-pr">${p.price}</div>`;
   const promoHtml=p.promo?`<div style="display:inline-block;background:var(--red);color:#fff;font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:11px;letter-spacing:3px;text-transform:uppercase;padding:3px 10px;margin-bottom:14px">${p.promo}</div><br>`:'';
   const thumbsDrag=i=>adm?`draggable="true" ondragstart="pmDragStart(event,${i})" ondragover="event.preventDefault()" ondrop="pmDrop(event,${i})"`:'' ;
+  const moveBtn=(i)=>adm&&pmImgs.length>1?`<div style="display:flex;gap:2px;margin-top:2px;justify-content:center">${i>0?`<button onclick="pmMove(${i},-1)" style="background:none;border:1px solid #222;color:#444;font-size:9px;padding:1px 4px;cursor:pointer">↑</button>`:''}<\/div>`:'';
   const gal=pmImgs.length
     ?`<div class="pm-gal"><div style="position:relative;overflow:visible;background:#0d0d0d" id="pmGalWrap">
         <img id="pmMain" class="pm-main" src="${pmImgs[0]}" onmouseenter="initZoom(this)" onmousemove="moveZoom(event,this)" onmouseleave="hideZoom()">
         <div class="pm-zoom-lens" id="pmLens"></div>
         <div class="pm-zoom-result" id="pmZoomResult"><img id="pmZoomImg" src="${pmImgs[0]}"></div>
-        ${pmImgs.length>1?`<div class="pm-thumbs">${pmImgs.map((s,i)=>`<img class="pm-th${i===0?' act':''}" src="${s}" onclick="pmGoto(${i})" ${thumbsDrag(i)}>`).join('')}</div>`:''}</div></div>`
+        ${pmImgs.length>1?`<div class="pm-thumbs">${pmImgs.map((s,i)=>`<div style="position:relative;display:inline-block"><img class="pm-th${i===0?' act':''}" src="${s}" onclick="pmGoto(${i})" ${thumbsDrag(i)}>${adm&&pmImgs.length>1?`<div style="display:flex;gap:2px;margin-top:2px;justify-content:center">${i>0?`<button onclick="pmMove(${i},-1)" title="Mover arriba" style="background:none;border:1px solid #222;color:#444;font-size:9px;padding:1px 5px;cursor:pointer;line-height:1">↑</button>`:''  }${i<pmImgs.length-1?`<button onclick="pmMove(${i},1)" title="Mover abajo" style="background:none;border:1px solid #222;color:#444;font-size:9px;padding:1px 5px;cursor:pointer;line-height:1">↓</button>`:''}</div>`:''}</div>`).join('')}</div>`:''}</div></div>`
     :`<div class="pm-gal"><div class="pm-gal-ph">FK</div></div>`;
   const sz=sizes.length?`<div class="pm-sl">Talla</div><div class="pm-sizes">${sizes.map(s=>`<button class="pm-sz" onclick="selSz(this)">${s}</button>`).join('')}</div>`:'';
   const codeHtml=p.code?`<div style="margin-bottom:16px"><span style="font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#444">Código: </span><span style="font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--red)">${p.code}</span></div>`:'';
@@ -2256,6 +2285,16 @@ async function pmDrop(e,to){
   p.imgs=imgs;
   await sbPatch('products',pmId,{imgs});
   pmImgs=imgs.filter(Boolean);pmIdx=to;
+  openPM(pmId);renderMerch();toast('✓ Orden actualizado');
+}
+async function pmMove(i,dir){
+  const to=i+dir;
+  const p=P.find(x=>String(x.id)===String(pmId));if(!p||!p.imgs)return;
+  if(to<0||to>=p.imgs.length)return;
+  const imgs=[...p.imgs];const[m]=imgs.splice(i,1);imgs.splice(to,0,m);
+  p.imgs=imgs;
+  await sbPatch('products',pmId,{imgs});
+  pmImgs=imgs.filter(Boolean);pmIdx=Math.max(0,Math.min(to,pmImgs.length-1));
   openPM(pmId);renderMerch();toast('✓ Orden actualizado');
 }
 function closePM(){g('pModal').classList.remove('open');document.body.style.overflow='';}
@@ -2607,14 +2646,32 @@ function populateAlbSelect(){
 function addTrack(){addSingleTrack();}// legacy alias
 
 function renderAlbums(){
-  const L=g('albL'),R=g('albR'),hint=g('musHint'),keys=Object.keys(AL);
-  if(!keys.length){L.innerHTML='';R.innerHTML='';hint.style.display='block';return;}
-  hint.style.display='none';L.innerHTML='';R.innerHTML='';
+  const L=g('albL'),R=g('albR'),hint=g('musHint'),MC=g('musCols');
+  const keys=Object.keys(AL);
+  if(!keys.length){if(L)L.innerHTML='';if(R)R.innerHTML='';if(hint)hint.style.display='block';return;}
+  if(hint)hint.style.display='none';
+  if(L)L.innerHTML='';if(R)R.innerHTML='';
+  const single=keys.length===1;
+  if(MC){
+    if(single){
+      // Single album: disable grid, center everything
+      MC.style.display='flex';
+      MC.style.justifyContent='center';
+    }else{
+      MC.style.display='grid';
+      MC.style.justifyContent='';
+      MC.style.gridTemplateColumns='1fr 1fr';
+    }
+  }
+  const trkHtml=(k,al)=>al.tracks.map((t,ii)=>`<div class="trk${t.src?'':' no-audio'}" data-alb="${k}" data-i="${ii}" onclick="playT('${k}',${ii})"><span class="t-num">${ii+1}</span><span class="t-nm">${t.name}${t.feat?`<span class="t-ft">ft. ${t.feat}</span>`:''}</span><span class="t-pi">${t.src?'▶':'○'}</span><button class="t-del" onclick="event.stopPropagation();delTrack('${k}',${ii})">✕</button></div>`).join('');
   keys.forEach((k,i)=>{
-    const al=AL[k],col=i%2===0?L:R;
-    const pos=al.position||'left';
-    const rc=pos==='right'?'trev':pos==='center'?'trev-center':'';
-    col.innerHTML+=`<div class="alb-card"><div class="alb-hdr"><div><div class="alb-nm">${al.name}</div><div class="alb-ar">${al.artist||'Flex FK'}</div></div><button class="pal" onclick="playT('${k}',0)">▶</button></div><div class="trk-list ${rc}">${al.tracks.map((t,ii)=>`<div class="trk${t.src?'':' no-audio'}" data-alb="${k}" data-i="${ii}" onclick="playT('${k}',${ii})"><span class="t-num">${ii+1}</span><span class="t-nm">${t.name}${t.feat?`<span class="t-ft">ft. ${t.feat}</span>`:''}</span><span class="t-pi">${t.src?'▶':'○'}</span><button class="t-del" onclick="event.stopPropagation();delTrack('${k}',${ii})">✕</button></div>`).join('')}</div></div>`;
+    const al=AL[k];
+    const pos=single?'center':(al.position||'left');
+    const col=single?L:(i%2===0?L:R);
+    const trkClass=pos==='right'?'trev':pos==='center'?'trev-center':'';
+    const wrapStyle=single?'max-width:480px;width:100%;text-align:center':'';
+    const hdrStyle=single?'justify-content:center;gap:16px':'justify-content:space-between';
+    col.innerHTML+=`<div class="alb-card" style="${wrapStyle}"><div class="alb-hdr" style="${hdrStyle}"><div><div class="alb-nm">${al.name}</div><div class="alb-ar">${al.artist||'Flex FK'}</div></div><button class="pal" onclick="playT('${k}',0)">▶</button></div><div class="trk-list${trkClass?' '+trkClass:''}">${trkHtml(k,al)}</div></div>`;
   });
 }
 

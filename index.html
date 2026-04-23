@@ -226,7 +226,7 @@ nav.solid{background:rgba(0,0,0,.97);backdrop-filter:blur(18px);top:0;border-bot
 .mcl{padding-right:60px}
 #albR{padding-left:60px}
 .alb-card{background:transparent;border:none;margin-bottom:44px}
-.alb-hdr{display:flex;align-items:flex-start;justify-content:space-between;padding:0 0 14px 0;border-bottom:none;margin-bottom:6px}
+.alb-hdr{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;padding:0 0 14px 0;border-bottom:none;margin-bottom:6px}
 .alb-nm{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:3px;color:var(--red);line-height:1}
 .alb-ar{font-family:'Barlow',sans-serif;font-size:12px;color:#444;margin-top:3px}
 .pal{width:44px;height:44px;border-radius:50%;background:var(--red);border:none;color:#fff;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .2s,background .2s;flex-shrink:0;margin-top:2px}
@@ -252,9 +252,9 @@ nav.solid{background:rgba(0,0,0,.97);backdrop-filter:blur(18px);top:0;border-bot
 .trev .trk{flex-direction:row-reverse;border-left:none;border-right:none}
 .trev .t-nm{text-align:right}
 .trev-center{max-width:380px;margin:0 auto}
-.trev-center .trk{justify-content:center;gap:14px;padding:6px 0}
+.trev-center .trk{justify-content:flex-start;gap:14px;padding:6px 0}
 .trev-center .t-num{order:1;color:#333;flex-shrink:0}
-.trev-center .t-nm{order:2;text-align:center;flex:unset;max-width:220px}
+.trev-center .t-nm{order:2;text-align:left;flex:1}
 .trev-center .t-pi{order:3;flex-shrink:0}
 .trev-center .t-del{order:4;flex-shrink:0}
 .mus-adm{margin-bottom:32px;display:none}
@@ -2712,11 +2712,11 @@ function renderAlbums(){
   const trkHtml=(k,al)=>al.tracks.map((t,ii)=>`<div class="trk${t.src?'':' no-audio'}" data-alb="${k}" data-i="${ii}" onclick="playT('${k}',${ii})"><span class="t-num">${ii+1}</span><span class="t-nm">${t.name}${t.feat?`<span class="t-ft">ft. ${t.feat}</span>`:''}</span><span class="t-pi">${t.src?'▶':'○'}</span><button class="t-del" onclick="event.stopPropagation();delTrack('${k}',${ii})">✕</button></div>`).join('');
   keys.forEach((k,i)=>{
     const al=AL[k];
-    const pos=single?'center':(al.position||'left');
+    const pos=single?'left':(al.position||'left');
     const col=single?L:(i%2===0?L:R);
     const trkClass=pos==='right'?'trev':pos==='center'?'trev-center':'';
-    const wrapStyle=single?'max-width:480px;width:100%;text-align:center':'';
-    const hdrStyle=single?'justify-content:center;gap:16px':'justify-content:space-between';
+    const wrapStyle=single?'max-width:480px;width:100%':'';
+    const hdrStyle='justify-content:space-between';
     col.innerHTML+=`<div class="alb-card" style="${wrapStyle}"><div class="alb-hdr" style="${hdrStyle}"><div><div class="alb-nm">${al.name}</div><div class="alb-ar">${al.artist||'Flex FK'}</div></div><button class="pal" onclick="playT('${k}',0)">▶</button></div><div class="trk-list${trkClass?' '+trkClass:''}">${trkHtml(k,al)}</div></div>`;
   });
 }

@@ -831,6 +831,48 @@ body.user-logged .auth-tabs{display:none!important}
       </div>
       <button class="abtn" style="background:none;border:1px solid #333;margin-top:8px" onclick="clearDrop()">Quitar banner</button>
     </div>
+    <button class="tog-a" style="margin-top:8px" onclick="tP('pCodes')"><svg style="width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2"><use href="#i-lock"/></svg>Códigos de Descuento</button>
+    <div class="ap" id="pCodes" style="max-width:680px">
+      <div class="at">◆ Códigos de Descuento</div>
+      <!-- Form crear/editar código -->
+      <div id="codeFormWrap">
+        <div class="a2">
+          <div><label>Código</label><input type="text" id="dcCode" placeholder="FLEX20" style="text-transform:uppercase" oninput="this.value=this.value.toUpperCase()"></div>
+          <div><label>Tipo</label>
+            <select id="dcType" onchange="renderDcTypeFields()" style="width:100%;background:#0a0a0a;border:1px solid #1e1e1e;color:#fff;padding:10px 13px;font-family:'Barlow',sans-serif;font-size:13px;outline:none;margin-bottom:11px">
+              <option value="pct">% de descuento</option>
+              <option value="gift">Producto de regalo</option>
+            </select>
+          </div>
+        </div>
+        <div id="dcTypeFields">
+          <!-- rendered by renderDcTypeFields() -->
+        </div>
+        <div class="a2" style="margin-top:4px">
+          <div>
+            <label>Alcance</label>
+            <select id="dcScope" onchange="renderDcScopeFields()" style="width:100%;background:#0a0a0a;border:1px solid #1e1e1e;color:#fff;padding:10px 13px;font-family:'Barlow',sans-serif;font-size:13px;outline:none;margin-bottom:11px">
+              <option value="global">Toda la orden</option>
+              <option value="product">Solo a un producto</option>
+            </select>
+          </div>
+          <div id="dcScopeFields"></div>
+        </div>
+        <div class="a2" style="margin-top:0">
+          <div><label>Usos máximos (0 = ilimitado)</label><input type="number" id="dcUses" placeholder="0" min="0" value="0"></div>
+          <div><label>Fecha de expiración (opcional)</label><input type="datetime-local" id="dcExp"></div>
+        </div>
+        <div style="display:flex;gap:8px;margin-top:4px">
+          <button class="abtn" onclick="saveDc()">Guardar código</button>
+          <button class="abtn" id="dcCancelBtn" style="display:none;background:none;border:1px solid #333" onclick="cancelDcEdit()">Cancelar</button>
+        </div>
+      </div>
+      <!-- Lista de códigos -->
+      <div style="margin-top:20px;border-top:1px solid #141414;padding-top:16px">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--red);margin-bottom:12px">Códigos activos</div>
+        <div id="dcList"></div>
+      </div>
+    </div>
     <button class="tog-a" style="margin-top:8px" onclick="tP('pMerch')"><svg style="width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2"><use href="#i-lock"/></svg>Agregar Producto</button>
     <div class="ap" id="pMerch">
       <div class="at">◆ Nuevo Producto</div>
@@ -1389,6 +1431,8 @@ let ae=null,cAlb=null,cIdx=-1,playing=false;
 let cn1=0,cn2=0;
 let pvTarget=null; // preventa target date — overridden in new_js block
 let DROP={name:'',target:null,start:null,open:null,units:0,dropId:null};let dropTimer=null;
+let CODES=[];// discount codes: [{id,code,type:'pct'|'gift',pct,giftProductId,scope:'global'|'product',scopeProductId,uses,maxUses,exp,active}]
+let dcEditId=null;
 
 function rf(f,cb){const r=new FileReader();r.onload=e=>cb(e.target.result);r.readAsDataURL(f);}
 function g(id){return document.getElementById(id);}
@@ -1418,6 +1462,9 @@ async function loadAllFromSB(){
     // Usuarios
     const usrs=await sbGet('site_users');
     if(usrs)users=usrs.map(u=>({id:String(u.id),name:u.name,email:u.email,password:u.password,phone:u.phone||''}));
+    // Códigos de descuento
+    const codes=await sbGet('discount_codes','order=created_at.desc');
+    if(codes)CODES=codes.map(r=>({id:String(r.id),code:r.code,type:r.type||'pct',pct:r.pct||0,giftProductId:r.gift_product_id||'',scope:r.scope||'global',scopeProductId:r.scope_product_id||'',uses:r.uses||0,maxUses:r.max_uses||0,exp:r.exp||null,active:r.active!==false}));
   }catch(e){console.error('Error cargando datos:',e);}
 }
 
@@ -1461,6 +1508,7 @@ document.addEventListener('DOMContentLoaded',async()=>{
   });
   g('pModal').addEventListener('click',e=>{if(e.target===e.currentTarget)closePM();});
   loadPreventa();renderDrop();populateDropSelects();populateAlbSelect();checkPayUReturn();
+  renderDcTypeFields();renderDcScopeFields();renderDcList();
 });
 
 function openMob(){g('mobMenu').classList.add('open');g('hamBtn').classList.add('open');}
@@ -1792,7 +1840,7 @@ async function loadCartFromAccount(){
 }
 
 // ─── CHECKOUT ────────────────────────────────────────────────────────────────
-let coDiscCode='',coDiscPct=0;
+let coDiscCode='',coDiscPct=0,coGift=null;
 
 function openCheckout(){
   const modal=g('coModal');
@@ -1924,19 +1972,19 @@ function updateCoTotals(){
 function applyCoCode(){
   const code=(g('coCouponInput').value||'').trim().toUpperCase();
   const msg=g('coCouponMsg');
-  const allCodes=P.reduce((acc,p)=>{
-    if(p.code&&p.code.trim()&&p.discount){
-      const disc=parseFloat(String(p.discount));
-      if(disc>0)acc[p.code.trim().toUpperCase()]=disc;
-    }
-    return acc;
-  },{});
-  if(allCodes[code]){
-    coDiscCode=code;coDiscPct=allCodes[code];
-    msg.textContent=`✓ Código aplicado: ${coDiscPct}% de descuento`;msg.style.color='#3a8a3a';msg.style.display='block';
+  const result=validateCode(code);
+  if(!result.valid){
+    coDiscCode='';coDiscPct=0;coGift=null;
+    msg.textContent=result.msg;msg.style.color='var(--red)';msg.style.display='block';
   }else{
-    coDiscCode='';coDiscPct=0;
-    msg.textContent='Código inválido';msg.style.color='var(--red)';msg.style.display='block';
+    coDiscCode=code;
+    if(result.type==='pct'){
+      coDiscPct=result.pct;coGift=null;
+      msg.textContent=`✓ ${result.pct}% de descuento aplicado`;msg.style.color='#3a8a3a';msg.style.display='block';
+    }else if(result.type==='gift'&&result.giftProduct){
+      coDiscPct=0;coGift=result.giftProduct;
+      msg.textContent=`✓ Regalo incluido: ${result.giftProduct.name}`;msg.style.color='#3a8a3a';msg.style.display='block';
+    }
   }
   updateCoTotals();
 }
@@ -2053,6 +2101,8 @@ async function submitOrder(){
       try{await sbPatch('orders',savedOrder.id,{tracking_number:trackingNum,shipment_id:shipmentId,status:'processing'});}catch(e){}
     }
   }
+  // Increment discount code uses
+  if(coDiscCode)await incrementCodeUses(coDiscCode);
   btn.disabled=false;btn.textContent='Pagar';
   // ── PayU se integra vía Netlify Function ─────────────────────────────
   // La función /.netlify/functions/payu-checkout recibe el pedido,
@@ -2069,14 +2119,14 @@ async function submitOrder(){
       const form=document.createElement('form');
       form.method='POST';form.action=redirectUrl;
       Object.entries(pFields||{}).forEach(([k,v])=>{const i=document.createElement('input');i.type='hidden';i.name=k;i.value=v;form.appendChild(i);});
-      cart=[];cartQty={};coDiscCode='';coDiscPct=0;
+      cart=[];cartQty={};coDiscCode='';coDiscPct=0;coGift=null;
       localStorage.setItem('ffk_cart',JSON.stringify(cart));
       if(cu)await syncCartToAccount();updateCart();
       document.body.appendChild(form);form.submit();return;
     }
   }catch(e){console.error('PayU function error:',e);}
   // Fallback: mostrar pedido como recibido si PayU no está configurado aún
-  cart=[];cartQty={};coDiscCode='';coDiscPct=0;
+  cart=[];cartQty={};coDiscCode='';coDiscPct=0;coGift=null;
   localStorage.setItem('ffk_cart',JSON.stringify(cart));
   if(cu)await syncCartToAccount();updateCart();
   showCoStep(3);
@@ -2372,7 +2422,7 @@ function toggleCart(){
   document.body.style.overflow=opening?'hidden':'';
   if(opening)renderCart();
 }
-let appliedCode='',appliedDisc=0;
+let appliedCode='',appliedDisc=0,appliedGift=null;
 function renderCart(){
   const body=g('cartBody'),foot=g('cartFoot'),empty=g('cartEmpty');
   const ids=[...new Set(cart)];
@@ -2399,6 +2449,10 @@ function renderCart(){
   g('cartSubtotal').textContent=fmt(subtotal);
   const dr=g('cartDiscountRow'),dl=g('cartDiscLabel'),da=g('cartDiscAmt');
   if(discAmt>0){dr.style.display='flex';dl.textContent=`Código ${appliedCode} (-${appliedDisc}%)`;da.textContent='-'+fmt(discAmt);}else{dr.style.display='none';}
+  // Gift row
+  let giftRow=g('cartGiftRow');
+  if(!giftRow){giftRow=document.createElement('div');giftRow.id='cartGiftRow';giftRow.style.cssText='display:none;font-family:Barlow Condensed,sans-serif;font-style:italic;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#3a8a3a;padding:6px 0;border-bottom:1px solid #0d0d0d;margin-bottom:4px';g('cartFoot').prepend(giftRow);}
+  if(appliedGift){giftRow.textContent=`+ Regalo: ${appliedGift.name}`;giftRow.style.display='block';}else{giftRow.style.display='none';}
   g('cartTotal').textContent=fmt(total);
   g('cartInstall').textContent='';
   // show coupon row
@@ -2409,22 +2463,20 @@ function applyCartCode(){
   const code=(g('cartCodeInput').value||'').trim().toUpperCase();
   const msg=g('cartCodeMsg');
   if(!code){msg.textContent='Ingresa un código';msg.style.display='block';return;}
-  // find matching product with this code — code must have discount > 0
-  const allCodes=P.reduce((acc,p)=>{
-    if(p.code&&p.code.trim()&&p.discount){
-      const disc=parseFloat(String(p.discount));
-      if(disc>0)acc[p.code.trim().toUpperCase()]=disc;
-    }
-    return acc;
-  },{});
-  if(allCodes[code]){
-    appliedCode=code;appliedDisc=allCodes[code];
-    msg.textContent=`✓ Código aplicado: ${appliedDisc}% de descuento`;msg.style.color='#3a8a3a';msg.style.display='block';
-    renderCart();
-  } else {
-    msg.textContent='Código inválido';msg.style.color='var(--red)';msg.style.display='block';
-    appliedCode='';appliedDisc=0;renderCart();
+  const result=validateCode(code);
+  if(!result.valid){
+    msg.textContent=result.msg;msg.style.color='var(--red)';msg.style.display='block';
+    appliedCode='';appliedDisc=0;appliedGift=null;renderCart();return;
   }
+  appliedCode=code;
+  if(result.type==='pct'){
+    appliedDisc=result.pct;appliedGift=null;
+    msg.textContent=`✓ Código aplicado: ${result.pct}% de descuento`;msg.style.color='#3a8a3a';msg.style.display='block';
+  }else if(result.type==='gift'&&result.giftProduct){
+    appliedDisc=0;appliedGift=result.giftProduct;
+    msg.textContent=`✓ Regalo incluido: ${result.giftProduct.name}`;msg.style.color='#3a8a3a';msg.style.display='block';
+  }
+  renderCart();
 }
 function changeQty(id,delta){
   cartQty[id]=(cartQty[id]||1)+delta;
@@ -2439,7 +2491,7 @@ function removeFromCart(id){
   renderCart();
 }
 function clearCart(){
-  cart=[];cartQty={};appliedCode='';appliedDisc=0;
+  cart=[];cartQty={};appliedCode='';appliedDisc=0;appliedGift=null;
   localStorage.setItem('ffk_cart',JSON.stringify(cart));
   if(cu)syncCartToAccount();
   renderCart();toast('Carrito vacío');
@@ -2899,6 +2951,152 @@ document.addEventListener('click',e=>{
   if(e.target===g('policyModal'))closePolicy();
 });
 
-function addTrack(){addSingleTrack();}// legacy alias</script>
+function addTrack(){addSingleTrack();}// legacy alias
+
+// ─── DISCOUNT CODES ──────────────────────────────────────────────────────────
+function renderDcTypeFields(){
+  const type=g('dcType')?.value||'pct';
+  const el=g('dcTypeFields');if(!el)return;
+  if(type==='pct'){
+    el.innerHTML=`<div><label style="font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--mu);display:block;margin-bottom:5px">Descuento %</label><input type="number" id="dcPct" placeholder="Ej: 20" min="1" max="99" style="width:100%;background:#0a0a0a;border:1px solid #1e1e1e;color:#fff;padding:10px 13px;font-family:'Barlow',sans-serif;font-size:13px;margin-bottom:11px;outline:none;transition:border-color .2s"></div>`;
+  }else{
+    const opts=P.map(p=>`<option value="${p.id}">${p.name}</option>`).join('');
+    el.innerHTML=`<div><label style="font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--mu);display:block;margin-bottom:5px">Producto de regalo</label><select id="dcGiftProd" style="width:100%;background:#0a0a0a;border:1px solid #1e1e1e;color:#fff;padding:10px 13px;font-family:'Barlow',sans-serif;font-size:13px;outline:none;margin-bottom:11px"><option value="">Selecciona producto...</option>${opts}</select></div>`;
+  }
+}
+
+function renderDcScopeFields(){
+  const scope=g('dcScope')?.value||'global';
+  const el=g('dcScopeFields');if(!el)return;
+  if(scope==='product'){
+    const opts=P.map(p=>`<option value="${p.id}">${p.name}</option>`).join('');
+    el.innerHTML=`<div><label style="font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--mu);display:block;margin-bottom:5px">Producto al que aplica</label><select id="dcScopeProd" style="width:100%;background:#0a0a0a;border:1px solid #1e1e1e;color:#fff;padding:10px 13px;font-family:'Barlow',sans-serif;font-size:13px;outline:none;margin-bottom:11px"><option value="">Selecciona producto...</option>${opts}</select></div>`;
+  }else{
+    el.innerHTML='';
+  }
+}
+
+function renderDcList(){
+  const el=g('dcList');if(!el)return;
+  if(!CODES.length){el.innerHTML='<div style="font-family:\'Barlow Condensed\',sans-serif;font-style:italic;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#333;padding:8px 0">Sin códigos todavía</div>';return;}
+  el.innerHTML=CODES.map(c=>{
+    const expired=c.exp&&new Date(c.exp)<new Date();
+    const exhausted=c.maxUses>0&&c.uses>=c.maxUses;
+    const inactive=!c.active||expired||exhausted;
+    const typeLabel=c.type==='pct'?`${c.pct}% de descuento`:`Regalo: ${P.find(p=>String(p.id)===String(c.giftProductId))?.name||'Producto'}`;
+    const scopeLabel=c.scope==='global'?'Toda la orden':`Solo: ${P.find(p=>String(p.id)===String(c.scopeProductId))?.name||'Producto'}`;
+    const statusLabel=inactive?`<span style="color:#333">${expired?'Expirado':exhausted?'Agotado':'Pausado'}</span>`:`<span style="color:#3a8a3a">Activo · ${c.uses} uso${c.uses!==1?'s':''}</span>`;
+    return `<div style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:#0a0a0a;border:1px solid #1a1a1a;margin-bottom:6px;${inactive?'opacity:.5':''}">
+      <div style="flex:1;min-width:0">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:4px;color:${inactive?'#333':'var(--red)'};">${c.code}</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#555;margin-top:1px">${typeLabel} · ${scopeLabel}</div>
+        <div style="font-family:'Barlow',sans-serif;font-size:11px;color:#444;margin-top:2px">${statusLabel}${c.maxUses>0?' · Límite: '+c.maxUses:''}${c.exp?' · Vence: '+new Date(c.exp).toLocaleDateString('es-CO'):''}</div>
+      </div>
+      <div style="display:flex;gap:4px;flex-shrink:0">
+        <button onclick="editDc('${c.id}')" style="background:none;border:1px solid #222;color:#666;font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:5px 8px;cursor:pointer">✎</button>
+        <button onclick="toggleDcActive('${c.id}')" style="background:none;border:1px solid #222;color:#666;font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:5px 8px;cursor:pointer">${c.active?'Pausar':'Activar'}</button>
+        <button onclick="deleteDc('${c.id}')" style="background:none;border:1px solid #2a0808;color:#442222;font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:5px 8px;cursor:pointer">✕</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+async function saveDc(){
+  if(!adm)return;
+  const code=(g('dcCode')?.value||'').trim().toUpperCase();
+  if(!code){toast('Ingresa un código');return;}
+  const type=g('dcType')?.value||'pct';
+  const pct=type==='pct'?parseInt(g('dcPct')?.value||'0'):0;
+  const giftProductId=type==='gift'?(g('dcGiftProd')?.value||''):'';
+  if(type==='pct'&&(!pct||pct<1||pct>99)){toast('Ingresa un % válido (1–99)');return;}
+  if(type==='gift'&&!giftProductId){toast('Selecciona el producto de regalo');return;}
+  const scope=g('dcScope')?.value||'global';
+  const scopeProductId=scope==='product'?(g('dcScopeProd')?.value||''):'';
+  if(scope==='product'&&!scopeProductId){toast('Selecciona el producto al que aplica');return;}
+  const maxUses=parseInt(g('dcUses')?.value||'0')||0;
+  const exp=g('dcExp')?.value||null;
+  const data={code,type,pct,gift_product_id:giftProductId||null,scope,scope_product_id:scopeProductId||null,max_uses:maxUses,exp:exp||null,active:true};
+  if(dcEditId){
+    await sbPatch('discount_codes',dcEditId,data);
+    const idx=CODES.findIndex(c=>String(c.id)===String(dcEditId));
+    if(idx>=0)CODES[idx]={...CODES[idx],...data,giftProductId,scopeProductId,maxUses,pct};
+    toast('✓ Código actualizado');cancelDcEdit();
+  }else{
+    if(CODES.find(c=>c.code===code)){toast('Ya existe un código con ese nombre');return;}
+    const res=await sbPost('discount_codes',{...data,uses:0});
+    if(res&&res[0]){
+      CODES.unshift({id:String(res[0].id),code,type,pct,giftProductId,scope,scopeProductId,uses:0,maxUses,exp,active:true});
+      toast('✓ Código creado');
+      g('dcCode').value='';if(g('dcPct'))g('dcPct').value='';if(g('dcUses'))g('dcUses').value='0';if(g('dcExp'))g('dcExp').value='';
+    }else{
+      toast('Error — crea la tabla discount_codes en Supabase (ver consola)');
+      console.warn('SQL para crear la tabla:\nCREATE TABLE discount_codes (\n  id bigserial primary key,\n  code text unique not null,\n  type text default \'pct\',\n  pct int default 0,\n  gift_product_id text,\n  scope text default \'global\',\n  scope_product_id text,\n  max_uses int default 0,\n  uses int default 0,\n  exp timestamptz,\n  active boolean default true,\n  created_at timestamptz default now()\n);');
+      return;
+    }
+  }
+  renderDcList();
+}
+
+function editDc(id){
+  const c=CODES.find(x=>String(x.id)===String(id));if(!c)return;
+  dcEditId=id;
+  g('dcCode').value=c.code;
+  g('dcType').value=c.type;renderDcTypeFields();
+  setTimeout(()=>{
+    if(c.type==='pct'&&g('dcPct'))g('dcPct').value=c.pct;
+    if(c.type==='gift'&&g('dcGiftProd'))g('dcGiftProd').value=c.giftProductId;
+    g('dcScope').value=c.scope;renderDcScopeFields();
+    setTimeout(()=>{if(c.scope==='product'&&g('dcScopeProd'))g('dcScopeProd').value=c.scopeProductId;},50);
+  },50);
+  g('dcUses').value=c.maxUses;
+  g('dcExp').value=c.exp?c.exp.replace('Z','').slice(0,16):'';
+  g('dcCancelBtn').style.display='inline-block';
+  g('codeFormWrap').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function cancelDcEdit(){
+  dcEditId=null;
+  g('dcCode').value='';g('dcType').value='pct';renderDcTypeFields();g('dcScope').value='global';renderDcScopeFields();
+  if(g('dcUses'))g('dcUses').value='0';if(g('dcExp'))g('dcExp').value='';g('dcCancelBtn').style.display='none';
+}
+
+async function toggleDcActive(id){
+  if(!adm)return;
+  const idx=CODES.findIndex(c=>String(c.id)===String(id));if(idx<0)return;
+  CODES[idx].active=!CODES[idx].active;
+  await sbPatch('discount_codes',id,{active:CODES[idx].active});
+  renderDcList();toast(CODES[idx].active?'Código activado':'Código pausado');
+}
+
+async function deleteDc(id){
+  if(!adm)return;
+  await sbDelete('discount_codes',id);
+  CODES=CODES.filter(c=>String(c.id)!==String(id));
+  renderDcList();toast('Código eliminado');
+}
+
+function validateCode(rawCode){
+  const code=(rawCode||'').trim().toUpperCase();
+  const now=new Date();
+  const c=CODES.find(x=>x.code===code&&x.active);
+  if(!c)return{valid:false,msg:'Código inválido'};
+  if(c.exp&&new Date(c.exp)<now)return{valid:false,msg:'Este código ya expiró'};
+  if(c.maxUses>0&&c.uses>=c.maxUses)return{valid:false,msg:'Este código ya alcanzó su límite de usos'};
+  if(c.scope==='product'){
+    const inCart=cart.some(id=>String(id)===String(c.scopeProductId));
+    if(!inCart){
+      const prod=P.find(p=>String(p.id)===String(c.scopeProductId));
+      return{valid:false,msg:`Este código solo aplica con: ${prod?.name||'un producto específico'}`};
+    }
+  }
+  const giftProduct=c.type==='gift'?P.find(p=>String(p.id)===String(c.giftProductId)):null;
+  return{valid:true,type:c.type,pct:c.pct||0,giftProduct,scope:c.scope,codeObj:c};
+}
+
+async function incrementCodeUses(code){
+  const c=CODES.find(x=>x.code===(code||'').toUpperCase());
+  if(!c)return;c.uses=(c.uses||0)+1;
+  await sbPatch('discount_codes',c.id,{uses:c.uses});
+}</script>
 </body>
 </html>

@@ -835,7 +835,7 @@ body.user-logged .auth-tabs{display:none!important}
     <div class="ap" id="pMerch">
       <div class="at">◆ Nuevo Producto</div>
       <label>Nombre</label><input type="text" id="pN" placeholder="Ej: Hoodie Monograma">
-      <div class="a2"><div><label>Precio</label><input type="text" id="pPr" placeholder="$90.000"></div><div><label>Categoría</label><select id="pCat"><option>Camisetas</option><option>Hoodies</option><option>Accesorios</option><option>Discos</option><option>Otro</option></select></div></div>
+      <div class="a2"><div><label>Precio</label><div style="position:relative;display:flex;align-items:center"><span style="position:absolute;left:10px;font-family:'Bebas Neue',sans-serif;font-size:16px;color:#555;pointer-events:none">$</span><input type="text" id="pPr" placeholder="90.000" style="padding-left:22px"></div></div><div><label>Categoría</label><select id="pCat"><option>Camisetas</option><option>Hoodies</option><option>Accesorios</option><option>Discos</option><option>Otro</option></select></div></div>
       <label>Tallas</label>
       <div class="sz-picker" id="szPicker">
         <button type="button" class="szp-btn" onclick="toggleSz(this,'XS')">XS</button>
@@ -1040,7 +1040,7 @@ body.user-logged .auth-tabs{display:none!important}
     <input type="hidden" id="epId">
     <label>Nombre</label><input type="text" id="epN">
     <div class="a2">
-      <div><label>Precio</label><input type="text" id="epPr"></div>
+      <div><label>Precio</label><div style="position:relative;display:flex;align-items:center"><span style="position:absolute;left:10px;font-family:'Bebas Neue',sans-serif;font-size:16px;color:#555;pointer-events:none">$</span><input type="text" id="epPr" style="padding-left:22px"></div></div>
       <div><label>Categoría</label><select id="epCat"><option>Camisetas</option><option>Hoodies</option><option>Accesorios</option><option>Discos</option><option>Otro</option></select></div>
     </div>
     <label>Tallas</label>
@@ -1193,15 +1193,15 @@ body.user-logged .auth-tabs{display:none!important}
       <!-- Steps indicator -->
       <div class="co-steps">
         <div class="co-step done" id="coStep0">
-          <div class="co-step-ic">✓</div>
+          <div class="co-step-ic"><img class="co-step-logo" id="coStepLogo0" src="" alt="FK" style="width:20px;height:20px;object-fit:contain;display:none;filter:brightness(0) invert(1);opacity:.5"><span class="co-step-logo-fb" id="coStepFb0" style="font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:1px">FK</span></div>
           <div class="co-step-lbl">Carrito</div>
         </div>
         <div class="co-step active" id="coStep1">
-          <div class="co-step-ic">🚚</div>
+          <div class="co-step-ic"><img class="co-step-logo" id="coStepLogo1" src="" alt="FK" style="width:20px;height:20px;object-fit:contain;display:none;filter:brightness(0) invert(1)"><span class="co-step-logo-fb" id="coStepFb1" style="font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:1px">FK</span></div>
           <div class="co-step-lbl">Entrega</div>
         </div>
         <div class="co-step" id="coStep2">
-          <div class="co-step-ic">💳</div>
+          <div class="co-step-ic"><img class="co-step-logo" id="coStepLogo2" src="" alt="FK" style="width:20px;height:20px;object-fit:contain;display:none;filter:brightness(0) invert(1);opacity:.3"><span class="co-step-logo-fb" id="coStepFb2" style="font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:1px">FK</span></div>
           <div class="co-step-lbl">Pago</div>
         </div>
       </div>
@@ -1273,7 +1273,7 @@ body.user-logged .auth-tabs{display:none!important}
         <div class="co-sec">
           <div class="co-sec-ttl">Confirmar pedido</div>
           <div style="background:#0a0a0a;border:1px solid #1a1a1a;padding:18px;margin-bottom:20px;font-family:'Barlow',sans-serif;font-size:13px;color:#888;line-height:1.8">
-            <b style="color:#fff;font-size:11px;letter-spacing:3px;font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;display:block;margin-bottom:8px">🔒 Pedido seguro</b>
+            <b style="color:#fff;font-size:11px;letter-spacing:3px;font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;display:block;margin-bottom:8px">Pedido seguro</b>
             Tu pedido es bajo preventa — fabricado especialmente para ti.<br>
             Tiempo estimado de envío: <b style="color:#fff">2 a 3 semanas</b>.<br>
             <span style="color:#555;font-size:11px">Al confirmar recibirás un número de guía por email para rastrear tu pedido.</span>
@@ -1282,7 +1282,7 @@ body.user-logged .auth-tabs{display:none!important}
         </div>
         <div class="co-btn-row">
           <button class="co-back" onclick="backToDelivery()">← Volver</button>
-          <button class="co-btn" id="coPayBtn" onclick="submitOrder()" style="font-size:14px;letter-spacing:3px">🔒 Pagar</button>
+          <button class="co-btn" id="coPayBtn" onclick="submitOrder()" style="font-size:14px;letter-spacing:3px">Confirmar pedido</button>
         </div>
       </div>
 
@@ -1513,6 +1513,13 @@ function applyLogo(){
   else{ni.className='';nt.style.display='';fi.className='';ft.style.display='';}
   // Update logo in empty states
   const mhl=g('musHintLogoImg');if(mhl){if(logo){mhl.src=logo;g('musHintLogo').style.display='block';}else{g('musHintLogo').style.display='none';}}
+  // Update checkout step logos
+  [0,1,2].forEach(i=>{
+    const img=g('coStepLogo'+i),fb=g('coStepFb'+i);
+    if(!img||!fb)return;
+    if(logo){img.src=logo;img.style.display='block';fb.style.display='none';}
+    else{img.style.display='none';fb.style.display='';}
+  });
 }
 
 // SECTION VIDEO
@@ -1823,7 +1830,7 @@ function renderCoItems(){
         ${img?`<img class="co-item-img" src="${img}" alt="${p.name}">`:`<div class="co-item-img-ph">FK</div>`}
         <span class="co-item-qty">${qty}</span>
       </div>
-      <div class="co-item-info"><div class="co-item-name">${p.name}</div><div class="co-item-meta">${p.cat}${p.sizes&&p.sizes.length?' · '+p.sizes[0]:''}</div><div style="font-size:10px;color:var(--red);font-family:'Barlow',sans-serif;margin-top:3px">🕐 Preventa · 2–3 semanas</div></div>
+      <div class="co-item-info"><div class="co-item-name">${p.name}</div><div class="co-item-meta">${p.cat}${p.sizes&&p.sizes.length?' · '+p.sizes[0]:''}</div><div style="font-size:10px;color:#555;font-family:'Barlow Condensed',sans-serif;font-style:italic;letter-spacing:1px;text-transform:uppercase;margin-top:3px">Preventa · 2–3 semanas</div></div>
       <div class="co-item-price">${price}</div>
     </div>`;
   }).join('');
@@ -1917,7 +1924,13 @@ function updateCoTotals(){
 function applyCoCode(){
   const code=(g('coCouponInput').value||'').trim().toUpperCase();
   const msg=g('coCouponMsg');
-  const allCodes=P.reduce((acc,p)=>{if(p.code&&p.discount){acc[p.code.toUpperCase()]=parseFloat(p.discount);}return acc;},{});
+  const allCodes=P.reduce((acc,p)=>{
+    if(p.code&&p.code.trim()&&p.discount){
+      const disc=parseFloat(String(p.discount));
+      if(disc>0)acc[p.code.trim().toUpperCase()]=disc;
+    }
+    return acc;
+  },{});
   if(allCodes[code]){
     coDiscCode=code;coDiscPct=allCodes[code];
     msg.textContent=`✓ Código aplicado: ${coDiscPct}% de descuento`;msg.style.color='#3a8a3a';msg.style.display='block';
@@ -2099,7 +2112,8 @@ function filterM(cat){
 }
 async function addProduct(){
   if(!adm)return;
-  const name=gv('pN'),price=gv('pPr'),cat=g('pCat').value,link=gv('pLnk'),desc=gv('pDsc'),sizes=getPickedSizes('szPicker'),fi=g('pImg'),stockVal=g('pStock').value.trim(),discVal=g('pDiscField')?.value.trim()||'',dropId=g('pDropId')?.value||null;
+  const name=gv('pN'),rawPrice=gv('pPr'),cat=g('pCat').value,link=gv('pLnk'),desc=gv('pDsc'),sizes=getPickedSizes('szPicker'),fi=g('pImg'),stockVal=g('pStock').value.trim(),discVal=g('pDiscField')?.value.trim()||'',dropId=g('pDropId')?.value||null;
+  const price=rawPrice?('$'+rawPrice.replace(/^\$/,'')):'';
   if(!name||!price)return toast('Completa nombre y precio');
   const btn=g('pMerch').querySelector('button.abtn[onclick]');
   if(!btn||btn.disabled)return;
@@ -2144,7 +2158,7 @@ async function delP(id){if(!adm)return;await sbDelete('products',id);P=P.filter(
 function openEditP(id){
   if(!adm)return;
   const p=P.find(x=>String(x.id)===String(id));if(!p)return;
-  g('epId').value=id;g('epN').value=p.name;g('epPr').value=p.price;
+  g('epId').value=id;g('epN').value=p.name;g('epPr').value=String(p.price).replace(/^\$/,'');
   g('epCat').value=p.cat;setSzPicker('epSzPicker',p.sizes||[]);
   g('epDsc').value=p.desc||'';g('epLnk').value=p.link||'';
   g('epDisc').value=p.discount||'';g('epPromo').value=p.promo||'';g('epCode').value=p.code||'';
@@ -2184,7 +2198,8 @@ async function saveEditP(){
   if(!adm)return;
   const id=g('epId').value;const idx=P.findIndex(x=>String(x.id)===String(id));if(idx<0)return;
   const epStockVal=g('epStock')?.value.trim();
-  const updates={name:gv('epN')||P[idx].name,price:gv('epPr')||P[idx].price,
+  const rawEpPr=gv('epPr')||String(P[idx].price).replace(/^\$/,'');
+  const updates={name:gv('epN')||P[idx].name,price:'$'+rawEpPr.replace(/^\$/,''),
     cat:g('epCat').value,sizes:getPickedSizes('epSzPicker'),
     description:gv('epDsc'),link:gv('epLnk'),discount:gv('epDisc'),promo:gv('epPromo'),code:gv('epCode'),
     stock:epStockVal!==''&&epStockVal!==undefined?parseInt(epStockVal):null,
@@ -2286,8 +2301,8 @@ function openPM(id){
         ${pmImgs.length>1?`<div class="pm-thumbs">${pmImgs.map((s,i)=>`<div style="position:relative;display:inline-block"><img class="pm-th${i===0?' act':''}" src="${s}" onclick="pmGoto(${i})" ${thumbsDrag(i)}>${adm&&pmImgs.length>1?`<div style="display:flex;gap:2px;margin-top:2px;justify-content:center">${i>0?`<button onclick="pmMove(${i},-1)" title="Mover arriba" style="background:none;border:1px solid #222;color:#444;font-size:9px;padding:1px 5px;cursor:pointer;line-height:1">↑</button>`:''  }${i<pmImgs.length-1?`<button onclick="pmMove(${i},1)" title="Mover abajo" style="background:none;border:1px solid #222;color:#444;font-size:9px;padding:1px 5px;cursor:pointer;line-height:1">↓</button>`:''}</div>`:''}</div>`).join('')}</div>`:''}</div></div>`
     :`<div class="pm-gal"><div class="pm-gal-ph">FK</div></div>`;
   const sz=sizes.length?`<div class="pm-sl">Talla</div><div class="pm-sizes">${sizes.map(s=>`<button class="pm-sz" onclick="selSz(this)">${s}</button>`).join('')}</div>`:'';
-  const codeHtml=p.code?`<div style="margin-bottom:16px"><span style="font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#444">Código: </span><span style="font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--red)">${p.code}</span></div>`:'';
-  g('pmIn').innerHTML=`${gal}<div class="pm-info"><div class="pm-bc">Shop › ${p.cat}</div><div class="pm-nm">${p.name}</div>${promoHtml}${priceHtml}${sz}${codeHtml}<div style="background:rgba(232,28,28,.07);border:1px solid rgba(232,28,28,.2);padding:10px 14px;font-family:'Barlow',sans-serif;font-size:12px;color:#aaa;line-height:1.6;margin-bottom:14px">🕐 <b style="color:var(--red)">Preventa</b> — Producto fabricado bajo pedido. Tiempo estimado de envío: <b style="color:#fff">2 a 3 semanas</b>.</div><button class="pm-add" onclick="buyP('${p.id}')">Agregar al carrito</button>${p.desc?`<div class="pm-desc">${p.desc}</div>`:''}</div>`;
+  const codeHtml=p.code&&adm?`<div style="margin-bottom:16px;background:rgba(232,28,28,.06);border:1px solid rgba(232,28,28,.15);padding:8px 12px;display:inline-block"><span style="font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#555">Código admin: </span><span style="font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--red)">${p.code}</span></div><br>`:'';
+  g('pmIn').innerHTML=`${gal}<div class="pm-info"><div class="pm-bc">Shop › ${p.cat}</div><div class="pm-nm">${p.name}</div>${promoHtml}${priceHtml}${sz}${codeHtml}<div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;padding:10px 14px;border-left:2px solid var(--red);background:rgba(232,28,28,.04)"><div><div style="font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--red);margin-bottom:2px">Preventa</div><div style="font-family:'Barlow',sans-serif;font-size:12px;color:#555;line-height:1.5">Fabricado bajo pedido · Envío en <span style="color:#999">2 a 3 semanas</span></div></div></div><button class="pm-add" onclick="buyP('${p.id}')">Agregar al carrito</button>${p.desc?`<div class="pm-desc">${p.desc}</div>`:''}</div>`;
   g('pModal').classList.add('open');document.body.style.overflow='hidden';
 }
 function pmGoto(i){
@@ -2373,7 +2388,7 @@ function renderCart(){
     subtotal+=rawPrice*qty;
     const img=(p.imgs&&p.imgs[0])||p.img||null;
     const div=document.createElement('div');div.className='cart-item';div.dataset.id=id;
-    div.innerHTML=`${img?`<img class="cart-item-img" src="${img}" alt="${p.name}">`:`<div class="cart-item-img-ph">FK</div>`}<div class="cart-item-info"><div class="cart-item-name">${p.name}</div><div class="cart-item-meta">${p.cat}${p.sizes&&p.sizes.length?' · '+p.sizes[0]:''}</div><div style="font-size:10px;color:var(--red);font-family:'Barlow',sans-serif;margin-bottom:6px;line-height:1.4">🕐 Preventa · Envío en 2–3 semanas</div><div class="cart-item-qty"><button class="cqbtn" onclick="changeQty('${id}',-1)">−</button><div class="cqnum">${qty}</div><button class="cqbtn" onclick="changeQty('${id}',1)">+</button></div></div><div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px"><div class="cart-item-price">${p.discount?discountedPrice(p.price,p.discount):p.price}</div><button class="cart-item-del" onclick="removeFromCart('${id}')">🗑</button></div>`;
+    div.innerHTML=`${img?`<img class="cart-item-img" src="${img}" alt="${p.name}">`:`<div class="cart-item-img-ph">FK</div>`}<div class="cart-item-info"><div class="cart-item-name">${p.name}</div><div class="cart-item-meta">${p.cat}${p.sizes&&p.sizes.length?' · '+p.sizes[0]:''}</div><div style="font-size:10px;color:#555;font-family:'Barlow Condensed',sans-serif;font-style:italic;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;line-height:1.4">Preventa · 2–3 semanas</div><div class="cart-item-qty"><button class="cqbtn" onclick="changeQty('${id}',-1)">−</button><div class="cqnum">${qty}</div><button class="cqbtn" onclick="changeQty('${id}',1)">+</button></div></div><div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px"><div class="cart-item-price">${p.discount?discountedPrice(p.price,p.discount):p.price}</div><button class="cart-item-del" onclick="removeFromCart('${id}')">🗑</button></div>`;
     body.insertBefore(div,g('cartEmpty'));
   });
   const fmt=n=>'$'+Math.round(n).toLocaleString('es-CO');
@@ -2394,8 +2409,14 @@ function applyCartCode(){
   const code=(g('cartCodeInput').value||'').trim().toUpperCase();
   const msg=g('cartCodeMsg');
   if(!code){msg.textContent='Ingresa un código';msg.style.display='block';return;}
-  // find matching product with this code
-  const allCodes=P.reduce((acc,p)=>{if(p.code&&p.discount){acc[p.code.toUpperCase()]=parseFloat(p.discount);}return acc;},{});
+  // find matching product with this code — code must have discount > 0
+  const allCodes=P.reduce((acc,p)=>{
+    if(p.code&&p.code.trim()&&p.discount){
+      const disc=parseFloat(String(p.discount));
+      if(disc>0)acc[p.code.trim().toUpperCase()]=disc;
+    }
+    return acc;
+  },{});
   if(allCodes[code]){
     appliedCode=code;appliedDisc=allCodes[code];
     msg.textContent=`✓ Código aplicado: ${appliedDisc}% de descuento`;msg.style.color='#3a8a3a';msg.style.display='block';

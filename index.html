@@ -20,7 +20,82 @@ body{background:var(--bg);color:var(--txt);font-family:'Barlow',sans-serif;overf
 .abar-i b{color:var(--red);margin:0 16px}
 @keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-/* NAV */
+/* ── TICKET MODAL ─────────────────────────────────────────────────────────── */
+.tkt-m{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:600;display:none;align-items:center;justify-content:center;padding:20px}
+.tkt-m.open{display:flex}
+.tkt-box{background:#0a0a0a;border:1px solid #1e1e1e;width:100%;max-width:480px;position:relative;max-height:90vh;overflow-y:auto}
+.tkt-close{position:absolute;top:14px;right:16px;background:none;border:none;color:#444;font-size:18px;cursor:pointer;font-family:'Barlow Condensed',sans-serif;letter-spacing:2px;transition:color .2s}
+.tkt-close:hover{color:#fff}
+.tkt-head{padding:28px 28px 0}
+.tkt-tag{font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--red);margin-bottom:6px}
+.tkt-title{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:4px;color:#fff;line-height:1}
+.tkt-meta{font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#444;margin-top:4px}
+.tkt-body{padding:20px 28px 28px}
+.tkt-types{display:flex;flex-direction:column;gap:8px;margin-bottom:20px}
+.tkt-type{border:1px solid #1e1e1e;padding:14px 16px;cursor:pointer;transition:border-color .2s;display:flex;align-items:center;justify-content:space-between;background:none}
+.tkt-type:hover,.tkt-type.selected{border-color:var(--red)}
+.tkt-type.selected{background:rgba(232,28,28,.05)}
+.tkt-type-name{font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:3px;color:#fff}
+.tkt-type-desc{font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#444;margin-top:2px}
+.tkt-type-price{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;color:var(--red)}
+.tkt-qty{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.tkt-qty-label{font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#555;flex:1}
+.tkt-qty-ctrl{display:flex;align-items:center;gap:0;border:1px solid #1e1e1e}
+.tkt-qty-ctrl button{background:none;border:none;color:#fff;width:36px;height:36px;font-size:18px;cursor:pointer;font-family:'Barlow Condensed',sans-serif;transition:color .2s}
+.tkt-qty-ctrl button:hover{color:var(--red)}
+.tkt-qty-ctrl span{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:2px;color:#fff;width:36px;text-align:center;border-left:1px solid #1e1e1e;border-right:1px solid #1e1e1e;line-height:36px}
+.tkt-preventa{background:rgba(232,28,28,.04);border-left:2px solid var(--red);padding:8px 12px;margin-bottom:20px}
+.tkt-preventa-label{font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--red);margin-bottom:2px}
+.tkt-preventa-text{font-family:'Barlow',sans-serif;font-size:12px;color:#555}
+.tkt-add-btn{width:100%;background:var(--red);color:#fff;border:none;padding:14px;font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:12px;letter-spacing:4px;text-transform:uppercase;cursor:pointer;transition:background .2s}
+.tkt-add-btn:hover{background:#c00}
+
+/* ── TOUR ─────────────────────────────────────────────────────────────────── */
+#s-tour{position:relative;min-height:100vh;overflow:hidden;background:#000}
+.tour-bg{position:absolute;inset:0;background-size:cover;background-position:center top;background-repeat:no-repeat;transition:opacity .4s}
+.tour-fade{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0) 0%,rgba(0,0,0,0) 30%,rgba(0,0,0,.7) 60%,#000 85%);z-index:1;pointer-events:none}
+.tour-inner{position:relative;z-index:2;padding:80px 44px 100px;max-width:1200px;margin:0 auto}
+.tour-hdr{text-align:center;margin-bottom:60px}
+.tour-hdr-logo{display:none;margin-bottom:16px}
+.tour-hdr-logo img{height:54px;object-fit:contain}
+.tour-hdr-eye{font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:11px;letter-spacing:5px;text-transform:uppercase;color:var(--red);margin-bottom:10px}
+.tour-hdr-ttl{font-family:'Bebas Neue',sans-serif;font-size:clamp(64px,9vw,110px);letter-spacing:8px;color:#fff;line-height:.9}
+.tour-empty-msg{text-align:center;padding:40px 0}
+.tour-empty-msg .te-title{font-family:'Bebas Neue',sans-serif;font-size:48px;letter-spacing:8px;color:var(--red)}
+.tour-empty-msg .te-sub{font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:12px;letter-spacing:4px;text-transform:uppercase;color:#333;margin-top:8px}
+.tour-regions{display:grid;grid-template-columns:1fr 1fr;gap:0 80px}
+.tour-region-col{}
+.tour-region-title{font-family:'Bebas Neue',sans-serif;font-size:52px;letter-spacing:6px;color:var(--red);margin-bottom:32px;margin-top:48px}
+.tour-region-col:first-child .tour-region-title{margin-top:0}
+.tour-show{display:flex;align-items:center;gap:0;padding:14px 0;border-bottom:1px solid #1a1a1a;position:relative;transition:background .2s}
+.tour-show.sold-out{opacity:.55}
+.tour-show-country{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:3px;color:#444;width:52px;flex-shrink:0;text-decoration:line-through}
+.tour-show.sold-out .tour-show-country{text-decoration:line-through}
+.tour-show-date{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:2px;color:#444;width:64px;flex-shrink:0;text-decoration:line-through}
+.tour-show:not(.sold-out) .tour-show-date{text-decoration:none;color:#666}
+.tour-show-info{flex:1;min-width:0}
+.tour-show-city{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:2px;color:#fff;line-height:1.1}
+.tour-show.sold-out .tour-show-city{text-decoration:line-through;color:#555}
+.tour-show-venue{font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#333;margin-top:1px}
+.tour-show-status{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:3px;flex-shrink:0;margin-left:12px}
+.tour-show-status.available{color:var(--red)}
+.tour-show-status.sold-out{color:var(--red)}
+.tour-show-status.soon{color:#555}
+.tour-show-btn{margin-left:10px;flex-shrink:0;background:var(--red);color:#fff;border:none;font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:10px;letter-spacing:3px;text-transform:uppercase;padding:7px 14px;cursor:pointer;text-decoration:none;display:inline-block;transition:background .2s}
+.tour-show-btn:hover{background:#c00}
+.tour-show .mc-del,.tour-show .mc-edit-btn{display:none}
+.admin-mode .tour-show .mc-del,.admin-mode .tour-show .mc-edit-btn{display:flex}
+.tour-bg-adm{display:none;padding:12px 44px;background:rgba(0,0,0,.7);position:absolute;bottom:0;left:0;right:0;z-index:3;flex-direction:row;gap:8px}
+.admin-mode .tour-bg-adm{display:flex}
+.admin-mode-show{display:none}
+@media(max-width:768px){
+  .tour-regions{grid-template-columns:1fr}
+  .tour-region-col:first-child .tour-region-title{margin-top:0}
+  .tour-region-title{font-size:36px;margin-top:32px}
+  .tour-inner{padding:60px 20px 80px}
+  .tour-hdr{margin-bottom:40px}
+}
+
 nav{position:fixed;top:28px;left:0;right:0;z-index:300;display:flex;align-items:center;justify-content:space-between;padding:0 44px;height:56px;transition:background .3s,top .3s}
 nav.solid{background:rgba(0,0,0,.97);backdrop-filter:blur(18px);top:0;border-bottom:1px solid #111}
 .nav-logo{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:8px;color:var(--red);text-decoration:none;display:flex;align-items:center;gap:10px}
@@ -209,18 +284,19 @@ nav.solid{background:rgba(0,0,0,.97);backdrop-filter:blur(18px);top:0;border-bot
 .pm-add:hover{background:#c01010}
 .pm-desc{font-family:'Barlow',sans-serif;font-size:14px;color:var(--mu);line-height:1.75;margin-top:18px;border-top:1px solid #161616;padding-top:18px}
 
-/* SECTION 5 SCROLL PHOTO */
-#s-photo{position:relative;overflow:hidden;min-height:100vh}
-#s-photo .sp-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none}
-.sp-ov{position:absolute;inset:0;background:rgba(8,8,8,0);transition:background .1s;z-index:1}
-.sp-bot{position:absolute;bottom:0;left:0;right:0;height:40%;background:linear-gradient(to bottom,transparent,rgba(8,8,8,.97));z-index:2}
+/* SECTION 5+6 — FOTO + MÚSICA FUSIONADAS */
+#s-photo{position:relative;overflow:hidden;background:#000;height:100vh;min-height:600px}
+#s-photo .sp-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center;display:none}
+.sp-ov{position:absolute;inset:0;background:rgba(0,0,0,0);transition:none;z-index:1;pointer-events:none}
+.sp-bot{position:absolute;bottom:0;left:0;right:0;height:20%;background:linear-gradient(to bottom,transparent,#000);z-index:2;pointer-events:none}
+.sp-top-fade{position:absolute;top:0;left:0;right:0;height:20%;background:linear-gradient(to bottom,rgba(0,0,0,.3),transparent);z-index:2;pointer-events:none}
 .sp-ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:#030303}
 .sp-ph span{font-family:'Bebas Neue',sans-serif;font-size:80px;color:#0d0d0d;letter-spacing:10px}
 .sp-upl{display:none;position:absolute;top:18px;right:18px;z-index:10;background:rgba(0,0,0,.9);border:1px solid #1e1e1e;padding:10px 16px;flex-direction:column;gap:4px;min-width:140px}
 .admin-mode .sp-upl{display:flex}
 
-/* SECTION 6 MÚSICA */
-#s-music{background:#000;padding:80px 44px;position:relative;z-index:3}
+/* SECTION 6 MÚSICA — superpuesta sobre la foto */
+#s-music{background:#000;padding:80px 44px 80px;position:relative;z-index:3}
 .mus-cols{display:grid;grid-template-columns:1fr 1fr;gap:0}
 .mus-cols.single-album{display:flex;justify-content:center}
 .mus-cols.single-album .mcl{padding-right:0}
@@ -684,6 +760,7 @@ body.user-logged .auth-tabs{display:none!important}
       </div>
     </li>
     <li><a href="#s-music">Música</a></li>
+    <li><a href="#s-tour">Tour</a></li>
     <li><a href="#s-contact">Contacto</a></li>
   </ul>
   <div class="nav-right">
@@ -711,6 +788,7 @@ body.user-logged .auth-tabs{display:none!important}
     <a href="#s-merch2" onclick="goF('Accesorios');closeMob()">Accesorios</a>
   </div>
   <a href="#s-music" onclick="closeMob()">Música</a>
+  <a href="#s-tour" onclick="closeMob()">Tour</a>
   <a href="#s-contact" onclick="closeMob()">Contacto</a>
 </div>
 
@@ -833,6 +911,71 @@ body.user-logged .auth-tabs{display:none!important}
       </div>
       <button class="abtn" style="background:none;border:1px solid #333;margin-top:8px" onclick="clearDrop()">Quitar banner</button>
     </div>
+    <button class="tog-a" style="margin-top:8px" onclick="tP('pTour')"><svg style="width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2"><use href="#i-lock"/></svg>Gestionar Tour</button>
+    <div class="ap" id="pTour" style="max-width:680px">
+      <div class="at">◆ Shows / Tour</div>
+      <!-- Regiones -->
+      <div style="margin-bottom:16px">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--red);margin-bottom:8px">Regiones</div>
+        <div id="tourRegionList" style="margin-bottom:8px"></div>
+        <div style="display:flex;gap:8px">
+          <input type="text" id="newRegionName" placeholder="Ej: Latinoamérica, Colombia, Europa..." style="flex:1;background:#0a0a0a;border:1px solid #1e1e1e;color:#fff;padding:9px 12px;font-family:'Barlow',sans-serif;font-size:13px;outline:none">
+          <button class="abtn" style="margin:0;white-space:nowrap" onclick="addTourRegion()">+ Región</button>
+        </div>
+      </div>
+      <div style="border-top:1px solid #141414;padding-top:16px">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--red);margin-bottom:12px">Agregar Show</div>
+        <div class="a2">
+          <div><label>País / Código</label><input type="text" id="shCountry" placeholder="COL, ARG, ESP..."></div>
+          <div><label>Fecha</label><input type="text" id="shDate" placeholder="Ej: 15.06"></div>
+        </div>
+        <div class="a2" style="margin-top:0">
+          <div><label>Ciudad</label><input type="text" id="shCity" placeholder="Bogotá"></div>
+          <div><label>Recinto</label><input type="text" id="shVenue" placeholder="Movistar Arena"></div>
+        </div>
+        <div class="a2" style="margin-top:0">
+          <div><label>Estado</label>
+            <select id="shStatus" style="width:100%;background:#0a0a0a;border:1px solid #1e1e1e;color:#fff;padding:10px 13px;font-family:'Barlow',sans-serif;font-size:13px;outline:none;margin-bottom:11px">
+              <option value="available">Disponible</option>
+              <option value="soon">Próximamente</option>
+              <option value="sold-out">Agotado</option>
+            </select>
+          </div>
+          <div><label>Región</label>
+            <select id="shRegion" style="width:100%;background:#0a0a0a;border:1px solid #1e1e1e;color:#fff;padding:10px 13px;font-family:'Barlow',sans-serif;font-size:13px;outline:none;margin-bottom:11px">
+            </select>
+          </div>
+        </div>
+        <div class="a2" style="margin-top:0">
+          <div><label>Tipo de venta</label>
+            <select id="shSaleType" onchange="renderShSaleFields()" style="width:100%;background:#0a0a0a;border:1px solid #1e1e1e;color:#fff;padding:10px 13px;font-family:'Barlow',sans-serif;font-size:13px;outline:none;margin-bottom:11px">
+              <option value="link">Link externo (TuBoleta, etc.)</option>
+              <option value="direct">Venta directa en la página</option>
+              <option value="none">Sin botón de compra</option>
+            </select>
+          </div>
+          <div id="shSaleFields"></div>
+        </div>
+        <!-- Ticket types (shown when saleType=direct) -->
+        <div id="shTicketTypesWrap" style="display:none">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--red);margin-bottom:10px">Tipos de entrada</div>
+          <div id="shTicketTypesList"></div>
+          <div class="a2" style="margin-top:4px">
+            <div><label>Nombre del tipo</label><input type="text" id="tktTypeName" placeholder="General, VIP, Preventa..."></div>
+            <div><label>Precio</label><div style="position:relative;display:flex;align-items:center"><span style="position:absolute;left:10px;font-family:'Bebas Neue',sans-serif;font-size:16px;color:#555;pointer-events:none">$</span><input type="text" id="tktTypePrice" placeholder="80.000" style="padding-left:22px"></div></div>
+          </div>
+          <div class="a2" style="margin-top:0">
+            <div><label>Descripción (opcional)</label><input type="text" id="tktTypeDesc" placeholder="Acceso general, zona de pie..."></div>
+            <div style="display:flex;align-items:center;gap:8px;margin-top:20px">
+              <input type="checkbox" id="tktTypePreventa" style="accent-color:var(--red)">
+              <label style="font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#666;margin:0">Es preventa</label>
+            </div>
+          </div>
+          <button class="abtn" style="margin-top:4px" onclick="addTicketType()">+ Tipo de entrada</button>
+        </div>
+        <button class="abtn" onclick="saveShow()" style="margin-top:12px">Agregar show</button>
+      </div>
+    </div>
     <button class="tog-a" style="margin-top:8px" onclick="tP('pCodes')"><svg style="width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2"><use href="#i-lock"/></svg>Códigos de Descuento</button>
     <div class="ap" id="pCodes" style="max-width:680px">
       <div class="at">◆ Códigos de Descuento</div>
@@ -925,6 +1068,7 @@ body.user-logged .auth-tabs{display:none!important}
   <div class="sp-ph" id="spPh"><span>FLEX FK</span></div>
   <img class="sp-img" id="spImg" src="" alt="">
   <div class="sp-ov" id="spOv"></div>
+  <div class="sp-top-fade"></div>
   <div class="sp-bot"></div>
   <div class="sp-upl">
     <input type="file" id="spFile" accept="image/*" style="display:none" onchange="uploadSP(this)">
@@ -933,6 +1077,7 @@ body.user-logged .auth-tabs{display:none!important}
   </div>
 </section>
 
+<!-- MÚSICA -->
 <section id="s-music">
   <div class="mus-adm">
     <button class="tog-a" onclick="tP('pMusic')"><svg style="width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2"><use href="#i-lock"/></svg>Gestionar Música</button>
@@ -973,7 +1118,6 @@ body.user-logged .auth-tabs{display:none!important}
         <button class="abtn" onclick="addSingleTrack()">Agregar canción</button>
       </div>
     </div>
-    <!-- Panel de edición de álbumes existentes -->
     <button class="tog-a" style="margin-top:8px" onclick="tP('pEditAlb')"><svg style="width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2"><use href="#i-lock"/></svg>Editar álbumes existentes</button>
     <div class="ap" id="pEditAlb" style="max-width:700px;display:none">
       <div class="at">✎ Editar tracks</div>
@@ -982,6 +1126,41 @@ body.user-logged .auth-tabs{display:none!important}
   </div>
   <div class="mus-cols" id="musCols"><div id="albL" class="mcl"></div><div id="albR"></div></div>
   <div class="mus-hint" id="musHint"><div id="musHintLogo" style="margin-bottom:18px;display:none"><img id="musHintLogoImg" style="height:48px;object-fit:contain;opacity:.25" alt=""></div><div class="mus-ht">Próximamente</div><p>Música en camino.</p></div>
+</section>
+
+<!-- TOUR -->
+<div class="mqd rev"><div class="t"><span class="i">SHOWS<span class="d">✦</span>TOUR<span class="d">✦</span>EN VIVO<span class="d">✦</span>FECHAS<span class="d">✦</span>TICKETS<span class="d">✦</span>SHOWS<span class="d">✦</span>TOUR<span class="d">✦</span>EN VIVO<span class="d">✦</span></span><span class="i">SHOWS<span class="d">✦</span>TOUR<span class="d">✦</span>EN VIVO<span class="d">✦</span>FECHAS<span class="d">✦</span>TICKETS<span class="d">✦</span>SHOWS<span class="d">✦</span>TOUR<span class="d">✦</span>EN VIVO<span class="d">✦</span></span></div></div>
+<section id="s-tour">
+  <div class="tour-bg" id="tourBg"></div>
+  <div class="tour-fade"></div>
+  <div class="tour-inner" id="tourInner">
+    <!-- Header centrado (siempre visible) -->
+    <div class="tour-hdr fade-up">
+      <div class="tour-hdr-logo" id="tourHdrLogo">
+        <img id="tourHdrLogoImg" alt="FLEX FK">
+      </div>
+      <div class="tour-hdr-eye">Próximas Fechas</div>
+      <div class="tour-hdr-ttl" id="tourHdrTtl">TOUR</div>
+    </div>
+    <!-- Shows list (cuando hay fechas) -->
+    <div class="tour-regions" id="tourRegions"></div>
+    <!-- Estado vacío (cuando no hay fechas) -->
+    <div class="tour-empty-msg" id="tourEmpty" style="display:none">
+      <div class="te-title">Sin Fechas</div>
+      <div class="te-sub">Próximamente...</div>
+    </div>
+  </div>
+  <!-- Admin: foto de fondo + título editable -->
+  <div class="tour-bg-adm admin-mode-show">
+    <input type="file" accept="image/*" id="tourBgFile" style="display:none" onchange="uploadTourBg(this)">
+    <button class="abtn" onclick="g('tourBgFile').click()">🖼 Foto de fondo Tour</button>
+    <button class="abtn" style="background:none;border:1px solid #333;margin-top:4px" onclick="clearTourBg()">Quitar foto</button>
+    <div style="display:flex;align-items:center;gap:8px;margin-top:10px">
+      <label style="font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--mu);white-space:nowrap">Título gira:</label>
+      <input type="text" id="tourTitleInp" placeholder="TOUR" value="TOUR" style="flex:1;background:#0a0a0a;border:1px solid #1e1e1e;color:#fff;padding:7px 11px;font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:3px;outline:none;max-width:240px">
+      <button class="abtn" style="margin:0" onclick="saveTourTitle()">✓ Guardar</button>
+    </div>
+  </div>
 </section>
 
 <!-- 7 CONTACTO -->
@@ -1443,15 +1622,18 @@ function gv(id){return g(id).value.trim();}
 function toast(msg){const t=g('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000);}
 
 async function loadAllFromSB(){
-  try{
-    // Productos
-    const prods=await sbGet('products','order=created_at.desc');
+  // Productos
+  try{const prods=await sbGet('products','order=created_at.desc');
     if(prods)P=prods.map(r=>({id:String(r.id),name:r.name,price:r.price,cat:r.cat,sizes:r.sizes||[],imgs:r.imgs||[],desc:r.description||'',link:r.link||'',discount:r.discount||'',promo:r.promo||'',code:r.code||'',isNew:r.is_new,stock:r.stock??null,dropId:r.drop_id||null}));
-    // Álbumes
-    const albs=await sbGet('albums');
+  }catch(e){console.warn('products:',e);}
+
+  // Álbumes
+  try{const albs=await sbGet('albums');
     if(albs){AL={};albs.forEach(r=>{const pos=r.position||'left';AL[r.key]={name:r.name,artist:r.artist||'Flex FK',reversed:pos==='right',position:pos,tracks:r.tracks||[]};});}
-    // Config general
-    const cfg=await sbGet('site_config');
+  }catch(e){console.warn('albums:',e);}
+
+  // Config general
+  try{const cfg=await sbGet('site_config');
     if(cfg){cfg.forEach(row=>{
       if(row.key==='logo')logo=row.value;
       else if(row.key==='hero_bg')try{hbg=JSON.parse(row.value);}catch(e){}
@@ -1462,13 +1644,17 @@ async function loadAllFromSB(){
       else if(row.key==='preventa_target')try{pvTarget=row.value?new Date(row.value):null;}catch(e){}
       else if(row.key==='drop_config')try{const dc=JSON.parse(row.value);DROP.name=dc.name||'';DROP.target=dc.target?new Date(dc.target):null;DROP.start=dc.start?new Date(dc.start):null;DROP.open=dc.open?new Date(dc.open):null;DROP.units=dc.units||0;DROP.dropId=dc.dropId||null;}catch(e){}
     });}
-    // Usuarios
-    const usrs=await sbGet('site_users');
+  }catch(e){console.warn('site_config:',e);}
+
+  // Usuarios
+  try{const usrs=await sbGet('site_users');
     if(usrs)users=usrs.map(u=>({id:String(u.id),name:u.name,email:u.email,password:u.password,phone:u.phone||''}));
-    // Códigos de descuento
-    const codes=await sbGet('discount_codes','order=created_at.desc');
+  }catch(e){console.warn('site_users:',e);}
+
+  // Códigos de descuento (tabla opcional)
+  try{const codes=await sbGet('discount_codes','order=created_at.desc');
     if(codes)CODES=codes.map(r=>({id:String(r.id),code:r.code,type:r.type||'pct',pct:r.pct||0,giftProductId:r.gift_product_id||'',scope:r.scope||'global',scopeProductId:r.scope_product_id||'',uses:r.uses||0,maxUses:r.max_uses||0,exp:r.exp||null,active:r.active!==false}));
-  }catch(e){console.error('Error cargando datos:',e);}
+  }catch(e){console.warn('discount_codes (tabla no creada aún):',e);}
 }
 
 async function sbSaveConfig(key,value){
@@ -1512,6 +1698,8 @@ document.addEventListener('DOMContentLoaded',async()=>{
   g('pModal').addEventListener('click',e=>{if(e.target===e.currentTarget)closePM();});
   loadPreventa();renderDrop();populateDropSelects();populateAlbSelect();checkPayUReturn();
   renderDcTypeFields();renderDcScopeFields();renderDcList();
+  await loadTourData();
+  await loadTicketTypes();
 });
 
 function openMob(){g('mobMenu').classList.add('open');g('hamBtn').classList.add('open');}
@@ -1565,6 +1753,7 @@ function applyLogo(){
   }else{ni.className='';nt.style.display='';fi.className='';ft.style.display='';}
   // Update logo in empty states
   const mhl=g('musHintLogoImg');if(mhl){if(logo){mhl.src=logo;g('musHintLogo').style.display='block';}else{g('musHintLogo').style.display='none';}}
+  const thl=g('tourHdrLogoImg');if(thl){if(logo){thl.src=logo;g('tourHdrLogo').style.display='block';}else{g('tourHdrLogo').style.display='none';}}
   // Update checkout step logos
   [0,1,2].forEach(i=>{
     const img=g('coStepLogo'+i),fb=g('coStepFb'+i);
@@ -1660,8 +1849,7 @@ function closeAdm(){g('admModal').classList.remove('open');}
 const ADMIN_EMAIL='booking.flex.mc@gmail.com';
 
 function doAdminGoogleLogin(){
-  // Store flag so on redirect back we know it was an admin login attempt
-  sessionStorage.setItem('ffk_adm_attempt','1');
+  localStorage.setItem('ffk_adm_attempt','1');
   _sb.auth.signInWithOAuth({provider:'google',options:{redirectTo:location.href}});
 }
 
@@ -1671,7 +1859,7 @@ function applyAdm(){
   g('admInd').classList.toggle('show',adm);
   document.body.classList.toggle('admin-mode',adm);
   g('leWrap').style.display=adm?'block':'none';
-  renderMerch();renderDrop();populateDropSelects();
+  renderMerch();renderDrop();populateDropSelects();renderTour();
 }
 function tP(id){const p=g(id);const open=p.style.display!=='block';p.style.display=open?'block':'none';if(open&&id==='pEditAlb')renderEditAlb();}
 
@@ -1709,27 +1897,24 @@ async function checkOAuthCallback(){
   const u=session.user;
   if(!u||!u.email)return;
 
-  const isAdminAttempt=sessionStorage.getItem('ffk_adm_attempt')==='1';
-  sessionStorage.removeItem('ffk_adm_attempt');
+  const isAdminAttempt=localStorage.getItem('ffk_adm_attempt')==='1';
+  if(isAdminAttempt)localStorage.removeItem('ffk_adm_attempt');
 
-  // ── Admin login via Google ──────────────────────────────────────────────────
   if(isAdminAttempt){
     if(u.email===ADMIN_EMAIL){
       adm=true;sessionStorage.setItem('ffk_adm','1');
       closeAdm();applyAdm();
-      if(location.hash.includes('access_token'))window.history.replaceState(null,'',location.pathname);
+      window.history.replaceState(null,'',location.pathname+location.search);
       toast('✓ Modo admin activado');
     }else{
-      // Wrong account — sign out and show error
       await _sb.auth.signOut();
-      g('admErr').style.display='block';
+      const err=g('admErr');if(err)err.style.display='block';
+      g('admModal').classList.add('open');
       toast('Acceso denegado');
     }
     return;
   }
 
-  // ── Regular user login via Google ──────────────────────────────────────────
-  // Also auto-activate admin silently if this is the admin email
   if(u.email===ADMIN_EMAIL){
     adm=true;sessionStorage.setItem('ffk_adm','1');
   }
@@ -1746,7 +1931,7 @@ async function checkOAuthCallback(){
       cu=user;sessionStorage.setItem('ffk_u',JSON.stringify(user));
       updateUI();if(adm)applyAdm();
       await syncCartToAccount();
-      if(location.hash.includes('access_token'))window.history.replaceState(null,'',location.pathname);
+      window.history.replaceState(null,'',location.pathname+location.search);
     }
   }
 }
@@ -3107,10 +3292,482 @@ function validateCode(rawCode){
   return{valid:true,type:c.type,pct:c.pct||0,giftProduct,scope:c.scope,codeObj:c};
 }
 
+
+// ─── TOUR ─────────────────────────────────────────────────────────────────────
+let TOUR_REGIONS=[];// [{id,name,order}]
+let TOUR_SHOWS=[];// [{id,regionId,country,date,city,venue,status,saleType,saleLink,price,order}]
+let tourBgUrl='';
+let tourTitleText='TOUR';
+let shEditId=null;
+
+async function loadTourData(){
+  // tour_bg config
+  try{const cfg=await sbGet('site_config','key=eq.tour_bg');
+    if(cfg&&cfg[0])tourBgUrl=cfg[0].value||'';
+  }catch(e){console.warn('tour_bg config:',e);}
+
+  // tour_title config
+  try{const cfg2=await sbGet('site_config','key=eq.tour_title');
+    if(cfg2&&cfg2[0]&&cfg2[0].value)tourTitleText=cfg2[0].value;
+  }catch(e){console.warn('tour_title config:',e);}
+
+  // tour_regions (tabla opcional)
+  try{const regs=await sbGet('tour_regions','order=sort_order.asc');
+    if(regs)TOUR_REGIONS=regs.map(r=>({id:String(r.id),name:r.name,order:r.sort_order||0}));
+  }catch(e){console.warn('tour_regions (tabla no creada aún):',e);}
+
+  // tour_shows (tabla opcional)
+  try{const shows=await sbGet('tour_shows','order=sort_order.asc');
+    if(shows)TOUR_SHOWS=shows.map(r=>({id:String(r.id),regionId:String(r.region_id),country:r.country,date:r.date,city:r.city,venue:r.venue||'',status:r.status||'available',saleType:r.sale_type||'none',saleLink:r.sale_link||'',price:r.price||'',order:r.sort_order||0}));
+  }catch(e){console.warn('tour_shows (tabla no creada aún):',e);}
+
+  applyTourBg();
+  applyTourTitle();
+  renderTour();
+  renderTourAdminPanel();
+}
+
+function applyTourBg(){
+  const el=g('tourBg');if(!el)return;
+  if(tourBgUrl){el.style.backgroundImage=`url('${tourBgUrl}')`;el.style.opacity='1';}
+  else{el.style.backgroundImage='none';el.style.opacity='1';}
+  // force scroll re-calc
+  updateTourBgScroll();
+}
+
+function applyTourTitle(){
+  const ttl=g('tourHdrTtl');if(ttl)ttl.textContent=tourTitleText||'TOUR';
+  const inp=g('tourTitleInp');if(inp)inp.value=tourTitleText||'TOUR';
+}
+
+async function saveTourTitle(){
+  if(!adm)return;
+  const v=(g('tourTitleInp')?.value||'').trim()||'TOUR';
+  tourTitleText=v;
+  await sbSaveConfig('tour_title',v);
+  applyTourTitle();
+  toast('✓ Título guardado');
+}
+
+function renderTour(){
+  const regionsEl=g('tourRegions'),emptyEl=g('tourEmpty');if(!regionsEl)return;
+  if(!TOUR_REGIONS.length&&!TOUR_SHOWS.length){regionsEl.style.display='none';if(emptyEl)emptyEl.style.display='block';return;}
+  regionsEl.style.display='';if(emptyEl)emptyEl.style.display='none';
+
+  // Split into two columns like the reference
+  const half=Math.ceil(TOUR_REGIONS.length/2);
+  const cols=[TOUR_REGIONS.slice(0,half),TOUR_REGIONS.slice(half)];
+
+  regionsEl.innerHTML=cols.map((colRegs,ci)=>`
+    <div class="tour-region-col">
+      ${colRegs.map(reg=>{
+        const shows=TOUR_SHOWS.filter(s=>s.regionId===reg.id);
+        return `<div class="tour-region-block" data-region="${reg.id}">
+          <div class="tour-region-title" style="${ci===0&&TOUR_REGIONS.indexOf(reg)===0?'margin-top:0':''}">${reg.name}
+            ${adm?`<button onclick="editRegionName('${reg.id}')" style="background:none;border:none;color:#444;font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:12px;letter-spacing:2px;cursor:pointer;vertical-align:middle;margin-left:8px">✎</button><button onclick="deleteTourRegion('${reg.id}')" style="background:none;border:none;color:#2a0808;font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:12px;letter-spacing:2px;cursor:pointer;vertical-align:middle">✕</button>`:''}
+          </div>
+          ${shows.map(s=>renderShowRow(s)).join('')}
+          ${!shows.length?`<div style="font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#222;padding:12px 0">Sin fechas aún</div>`:''}
+        </div>`;
+      }).join('')}
+    </div>
+  `).join('');
+}
+
+function renderShowRow(s){
+  const isSoldOut=s.status==='sold-out';
+  const isSoon=s.status==='soon';
+  let statusHtml='';
+  if(isSoldOut)statusHtml=`<span class="tour-show-status sold-out">Agotado</span>`;
+  else if(isSoon)statusHtml=`<span class="tour-show-status soon">Próximamente</span>`;
+
+  let btnHtml='';
+  if(s.status==='available'){
+    if(s.saleType==='link'&&s.saleLink)btnHtml=`<a class="tour-show-btn" href="${s.saleLink}" target="_blank" rel="noopener">Comprar</a>`;
+    else if(s.saleType==='direct')btnHtml=`<button class="tour-show-btn" onclick="openShowCheckout('${s.id}')">Comprar</button>`;
+  }
+
+  const adminBtns=adm?`
+    <button class="mc-edit-btn" onclick="editShow('${s.id}')" style="background:none;border:1px solid #222;color:#666;font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:4px 6px;cursor:pointer;margin-left:6px">✎</button>
+    <button class="mc-del" onclick="deleteShow('${s.id}')" style="background:none;border:1px solid #2a0808;color:#442222;font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:4px 6px;cursor:pointer">✕</button>`:'';
+
+  return `<div class="tour-show${isSoldOut?' sold-out':''}">
+    <span class="tour-show-country">${s.country}</span>
+    <span class="tour-show-date">${s.date}</span>
+    <div class="tour-show-info">
+      <div class="tour-show-city">${s.city}</div>
+      ${s.venue?`<div class="tour-show-venue">${s.venue}</div>`:''}
+    </div>
+    ${statusHtml}${btnHtml}${adminBtns}
+  </div>`;
+}
+
+function renderTourAdminPanel(){
+  renderTourRegionList();
+  populateTourRegionSelect();
+  renderShSaleFields();
+}
+
+function renderTourRegionList(){
+  const el=g('tourRegionList');if(!el)return;
+  if(!TOUR_REGIONS.length){el.innerHTML='<div style="font-family:\'Barlow Condensed\',sans-serif;font-style:italic;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#333;margin-bottom:8px">Sin regiones todavía</div>';return;}
+  el.innerHTML=TOUR_REGIONS.map(r=>`
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+      <input type="text" value="${r.name}" id="rname_${r.id}" style="flex:1;background:#0a0a0a;border:1px solid #1e1e1e;color:#fff;padding:7px 10px;font-family:'Barlow',sans-serif;font-size:13px;outline:none">
+      <button onclick="saveRegionName('${r.id}')" class="abtn" style="margin:0;padding:7px 10px;font-size:10px">✓</button>
+      <button onclick="deleteTourRegion('${r.id}')" class="abtn" style="margin:0;padding:7px 10px;font-size:10px;background:none;border:1px solid #2a0808;color:#622">✕</button>
+    </div>`).join('');
+}
+
+function populateTourRegionSelect(){
+  const sel=g('shRegion');if(!sel)return;
+  sel.innerHTML=TOUR_REGIONS.map(r=>`<option value="${r.id}">${r.name}</option>`).join('');
+}
+
+function renderShSaleFields(){
+  const type=g('shSaleType')?.value||'none';
+  const el=g('shSaleFields');if(!el)return;
+  if(type==='link')el.innerHTML=`<div><label>Link de compra</label><input type="text" id="shSaleLink" placeholder="https://..."></div>`;
+  else el.innerHTML='';
+  const tktWrap=g('shTicketTypesWrap');
+  if(tktWrap)tktWrap.style.display=type==='direct'?'block':'none';
+}
+
+async function addTourRegion(){
+  if(!adm)return;
+  const name=(g('newRegionName')?.value||'').trim();
+  if(!name){toast('Escribe el nombre de la región');return;}
+  const order=TOUR_REGIONS.length;
+  const res=await sbPost('tour_regions',{name,sort_order:order});
+  if(res&&res[0]){
+    TOUR_REGIONS.push({id:String(res[0].id),name,order});
+    g('newRegionName').value='';
+    renderTourAdminPanel();renderTour();toast('✓ Región creada');
+  }else{
+    toast('Error — crea las tablas tour_regions y tour_shows en Supabase (ver consola)');
+    console.warn(`-- SQL para crear las tablas del tour:
+CREATE TABLE tour_regions (
+  id bigserial PRIMARY KEY,
+  name text NOT NULL,
+  sort_order int DEFAULT 0,
+  created_at timestamptz DEFAULT now()
+);
+CREATE TABLE tour_shows (
+  id bigserial PRIMARY KEY,
+  region_id bigint REFERENCES tour_regions(id) ON DELETE CASCADE,
+  country text,
+  date text,
+  city text,
+  venue text,
+  status text DEFAULT 'available',
+  sale_type text DEFAULT 'none',
+  sale_link text,
+  price text,
+  sort_order int DEFAULT 0,
+  created_at timestamptz DEFAULT now()
+);
+ALTER TABLE tour_regions ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "anon all" ON tour_regions FOR ALL USING (true);
+ALTER TABLE tour_shows ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "anon all" ON tour_shows FOR ALL USING (true);`);
+  }
+}
+
+async function saveRegionName(id){
+  if(!adm)return;
+  const name=(g('rname_'+id)?.value||'').trim();
+  if(!name)return;
+  await sbPatch('tour_regions',id,{name});
+  const idx=TOUR_REGIONS.findIndex(r=>r.id===id);
+  if(idx>=0)TOUR_REGIONS[idx].name=name;
+  renderTour();toast('✓ Región actualizada');
+}
+
+async function deleteTourRegion(id){
+  if(!adm)return;
+  await sbDelete('tour_regions',id);
+  TOUR_REGIONS=TOUR_REGIONS.filter(r=>r.id!==id);
+  TOUR_SHOWS=TOUR_SHOWS.filter(s=>s.regionId!==id);
+  renderTourAdminPanel();renderTour();toast('Región eliminada');
+}
+
+async function saveShow(){
+  if(!adm)return;
+  const country=(g('shCountry')?.value||'').trim().toUpperCase();
+  const date=(g('shDate')?.value||'').trim();
+  const city=(g('shCity')?.value||'').trim();
+  const venue=(g('shVenue')?.value||'').trim();
+  const status=g('shStatus')?.value||'available';
+  const regionId=g('shRegion')?.value||'';
+  const saleType=g('shSaleType')?.value||'none';
+  const saleLink=(g('shSaleLink')?.value||'').trim();
+  const rawPrice=(g('shPrice')?.value||'').trim();
+  const price=rawPrice?'$'+rawPrice.replace(/^\$/,''):'';
+  if(!city){toast('Ingresa la ciudad');return;}
+  if(!regionId){toast('Selecciona una región');return;}
+  const order=TOUR_SHOWS.filter(s=>s.regionId===regionId).length;
+  const data={region_id:regionId,country,date,city,venue,status,sale_type:saleType,sale_link:saleLink||null,price:price||null,sort_order:order};
+  if(shEditId){
+    await sbPatch('tour_shows',shEditId,data);
+    const idx=TOUR_SHOWS.findIndex(s=>s.id===shEditId);
+    if(idx>=0)TOUR_SHOWS[idx]={...TOUR_SHOWS[idx],country,date,city,venue,status,saleType,saleLink,price,regionId,order};
+    shEditId=null;toast('✓ Show actualizado');
+  }else{
+    const res=await sbPost('tour_shows',data);
+    if(res&&res[0]){
+      const newShow={id:String(res[0].id),regionId,country,date,city,venue,status,saleType,saleLink,price:'',order};
+      TOUR_SHOWS.push(newShow);
+      // Save ticket types if direct sale
+      if(saleType==='direct')await saveTicketTypesForShow(res[0].id);
+      toast('✓ Show agregado');
+    }
+  }
+  // Reset form
+  ['shCountry','shDate','shCity','shVenue'].forEach(id=>{if(g(id))g(id).value='';});
+  if(g('shStatus'))g('shStatus').value='available';
+  if(g('shSaleType')){g('shSaleType').value='none';renderShSaleFields();}
+  renderTour();
+}
+
+function editShow(id){
+  const s=TOUR_SHOWS.find(x=>x.id===id);if(!s)return;
+  shEditId=id;
+  if(g('shCountry'))g('shCountry').value=s.country;
+  if(g('shDate'))g('shDate').value=s.date;
+  if(g('shCity'))g('shCity').value=s.city;
+  if(g('shVenue'))g('shVenue').value=s.venue;
+  if(g('shStatus'))g('shStatus').value=s.status;
+  if(g('shRegion'))g('shRegion').value=s.regionId;
+  if(g('shSaleType')){g('shSaleType').value=s.saleType;renderShSaleFields();setTimeout(()=>{if(s.saleType==='link'&&g('shSaleLink'))g('shSaleLink').value=s.saleLink;if(s.saleType==='direct'&&g('shPrice'))g('shPrice').value=String(s.price).replace(/^\$/,'');},50);}
+  g('pTour').scrollIntoView({behavior:'smooth',block:'start'});
+  toast('Editando: '+s.city);
+}
+
+async function deleteShow(id){
+  if(!adm)return;
+  await sbDelete('tour_shows',id);
+  TOUR_SHOWS=TOUR_SHOWS.filter(s=>s.id!==id);
+  renderTour();toast('Show eliminado');
+}
+
+async function uploadTourBg(input){
+  if(!input.files[0])return;
+  toast('Subiendo imagen...');
+  const file=input.files[0];
+  const ext=file.name.split('.').pop().toLowerCase()||'jpg';
+  const url=await sdkUpload('flexfk',`media/tour_bg_${Date.now()}.${ext}`,file);
+  if(url){tourBgUrl=url;await sbSaveConfig('tour_bg',url);applyTourBg();toast('✓ Foto de fondo guardada');}
+  else{toast('Error al subir la foto');}
+}
+
+async function clearTourBg(){
+  tourBgUrl='';await sbSaveConfig('tour_bg','');applyTourBg();toast('Foto removida');
+}
+
+function openShowCheckout(id){
+  const s=TOUR_SHOWS.find(x=>x.id===id);if(!s)return;
+  // Reuse existing checkout flow — add show as a virtual product
+  toast('Comprando entrada: '+s.city);// placeholder — extend checkout as needed
+}
+
+// Scroll parallax: fade photo to black as user scrolls into tour section
+function updateTourBgScroll(){
+  const sec=g('s-tour')||document.getElementById('s-tour');
+  const bg=g('tourBg');
+  if(!sec||!bg||!tourBgUrl)return;
+  const rect=sec.getBoundingClientRect();
+  const vh=window.innerHeight;
+  // How far into the section we are (0 = top of section at bottom of viewport, 1 = section scrolled past)
+  const progress=Math.max(0,Math.min(1,-rect.top/(rect.height-vh)));
+  // Fade bg: fully visible at top, fades out as you scroll
+  const opacity=Math.max(0,1-progress*2.5);
+  bg.style.opacity=opacity;
+}
+window.addEventListener('scroll',updateTourBgScroll,{passive:true});
+
+// Photo section: scroll → fade to black only once user starts scrolling it away
+function updatePhotoScroll(){
+  const sec=document.getElementById('s-photo');
+  const ov=g('spOv');
+  if(!sec||!ov)return;
+  const rect=sec.getBoundingClientRect();
+  // rect.top goes negative once you scroll past the top of the section
+  // fade starts at 0 (photo top at viewport top) and completes over 50% of section height
+  const scrolledPast=Math.max(0,-rect.top);
+  const fadeOver=sec.offsetHeight*0.5;
+  const progress=Math.min(1,scrolledPast/fadeOver);
+  ov.style.background=`rgba(0,0,0,${(progress*0.92).toFixed(3)})`;
+}
+window.addEventListener('scroll',updatePhotoScroll,{passive:true});
+
+// ─── TICKETS ──────────────────────────────────────────────────────────────────
+// pendingTicketTypes: types being built in the admin form before saving the show
+let pendingTicketTypes=[];// [{name,price,desc,isPreventa}]
+// TICKET_TYPES: saved types from DB [{id,showId,name,price,desc,isPreventa}]
+let TICKET_TYPES=[];
+let tktModal_showId=null;
+let tktModal_selectedTypeId=null;
+let tktModal_qty=1;
+
+async function loadTicketTypes(){
+  try{
+    const rows=await sbGet('ticket_types','order=sort_order.asc');
+    if(rows)TICKET_TYPES=rows.map(r=>({id:String(r.id),showId:String(r.show_id),name:r.name,price:r.price||'',desc:r.description||'',isPreventa:r.is_preventa||false,sortOrder:r.sort_order||0}));
+  }catch(e){console.warn('ticket_types table not yet created');}
+}
+
+function addTicketType(){
+  if(!adm)return;
+  const name=(g('tktTypeName')?.value||'').trim();
+  const rawPrice=(g('tktTypePrice')?.value||'').trim();
+  const desc=(g('tktTypeDesc')?.value||'').trim();
+  const isPreventa=g('tktTypePreventa')?.checked||false;
+  if(!name){toast('Ingresa el nombre del tipo');return;}
+  if(!rawPrice){toast('Ingresa el precio');return;}
+  const price='$'+rawPrice.replace(/^\$/,'');
+  pendingTicketTypes.push({name,price,desc,isPreventa});
+  renderPendingTicketTypes();
+  g('tktTypeName').value='';g('tktTypePrice').value='';g('tktTypeDesc').value='';if(g('tktTypePreventa'))g('tktTypePreventa').checked=false;
+  toast('Tipo agregado — guarda el show para confirmar');
+}
+
+function renderPendingTicketTypes(){
+  const el=g('shTicketTypesList');if(!el)return;
+  if(!pendingTicketTypes.length){el.innerHTML='';return;}
+  el.innerHTML=pendingTicketTypes.map((t,i)=>`
+    <div style="display:flex;align-items:center;gap:8px;padding:8px 10px;background:#0a0a0a;border:1px solid #1a1a1a;margin-bottom:4px">
+      <div style="flex:1">
+        <span style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:2px;color:#fff">${t.name}</span>
+        <span style="font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--red);margin-left:8px">${t.price}</span>
+        ${t.isPreventa?'<span style="font-family:\'Barlow Condensed\',sans-serif;font-style:italic;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#555;margin-left:6px">Preventa</span>':''}
+        ${t.desc?`<div style="font-family:'Barlow',sans-serif;font-size:11px;color:#333">${t.desc}</div>`:''}
+      </div>
+      <button onclick="removePendingType(${i})" style="background:none;border:none;color:#442222;font-size:14px;cursor:pointer">✕</button>
+    </div>`).join('');
+}
+
+function removePendingType(i){
+  pendingTicketTypes.splice(i,1);
+  renderPendingTicketTypes();
+}
+
+// Called after show is saved — save its ticket types
+async function saveTicketTypesForShow(showId){
+  if(!pendingTicketTypes.length)return;
+  for(let i=0;i<pendingTicketTypes.length;i++){
+    const t=pendingTicketTypes[i];
+    const res=await sbPost('ticket_types',{show_id:showId,name:t.name,price:t.price,description:t.desc||null,is_preventa:t.isPreventa,sort_order:i});
+    if(res&&res[0])TICKET_TYPES.push({id:String(res[0].id),showId:String(showId),name:t.name,price:t.price,desc:t.desc,isPreventa:t.isPreventa,sortOrder:i});
+  }
+  pendingTicketTypes=[];renderPendingTicketTypes();
+}
+
+function openShowCheckout(showId){
+  const s=TOUR_SHOWS.find(x=>x.id===String(showId));if(!s)return;
+  const types=TICKET_TYPES.filter(t=>t.showId===String(showId));
+  if(!types.length){toast('Sin tipos de entrada configurados');return;}
+  tktModal_showId=showId;
+  tktModal_selectedTypeId=types[0].id;
+  tktModal_qty=1;
+  g('tktTag').textContent=s.country+' · '+s.date;
+  g('tktTitle').textContent=s.city.toUpperCase();
+  g('tktMeta').textContent=s.venue;
+  g('tktQtyVal').textContent='1';
+  // Render ticket types
+  g('tktTypes').innerHTML=types.map((t,i)=>`
+    <div class="tkt-type${i===0?' selected':''}" onclick="selectTktType('${t.id}',this)">
+      <div>
+        <div class="tkt-type-name">${t.name}</div>
+        ${t.desc?`<div class="tkt-type-desc">${t.desc}</div>`:''}
+      </div>
+      <div class="tkt-type-price">${t.price}</div>
+    </div>`).join('');
+  // Preventa note
+  const hasPreventa=types.some(t=>t.isPreventa);
+  const preventaNote=g('tktPreventaNote');
+  if(preventaNote)preventaNote.style.display=hasPreventa?'block':'none';
+  g('tktModal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function closeTktModal(){
+  g('tktModal').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+function selectTktType(typeId,el){
+  tktModal_selectedTypeId=typeId;
+  document.querySelectorAll('.tkt-type').forEach(e=>e.classList.remove('selected'));
+  el.classList.add('selected');
+  // Update preventa note visibility
+  const t=TICKET_TYPES.find(x=>x.id===typeId);
+  const preventaNote=g('tktPreventaNote');
+  if(preventaNote)preventaNote.style.display=(t&&t.isPreventa)?'block':'none';
+}
+
+function changeTktQty(delta){
+  tktModal_qty=Math.max(1,Math.min(10,tktModal_qty+delta));
+  g('tktQtyVal').textContent=tktModal_qty;
+}
+
+function addTicketToCart(){
+  const t=TICKET_TYPES.find(x=>x.id===tktModal_selectedTypeId);
+  const s=TOUR_SHOWS.find(x=>x.id===String(tktModal_showId));
+  if(!t||!s)return;
+  // Create a virtual product object for the cart
+  const virtualId='ticket_'+t.id;
+  // Add to P if not already there
+  if(!P.find(p=>p.id===virtualId)){
+    P.push({id:virtualId,name:`${s.city.toUpperCase()} · ${t.name}`,price:t.price,cat:'Tickets',preventa:true,preventaWeeks:'2 a 3',desc:t.desc||'Entrada para el show',imgs:[],sizes:[],stock:null,isTicket:true});
+  }
+  // Add qty times
+  for(let i=0;i<tktModal_qty;i++){
+    cart.push(virtualId);
+    cartQty[virtualId]=(cartQty[virtualId]||0)+1;
+  }
+  closeTktModal();
+  renderCart();
+  g('cartW').classList.add('open');
+  document.body.style.overflow='hidden';
+  toast(`✓ ${tktModal_qty} entrada${tktModal_qty>1?'s':''} agregada${tktModal_qty>1?'s':''} al carrito`);
+}
+
 async function incrementCodeUses(code){
   const c=CODES.find(x=>x.code===(code||'').toUpperCase());
   if(!c)return;c.uses=(c.uses||0)+1;
   await sbPatch('discount_codes',c.id,{uses:c.uses});
 }</script>
+<!-- TICKET MODAL -->
+<div class="tkt-m" id="tktModal">
+  <div class="tkt-box">
+    <button class="tkt-close" onclick="closeTktModal()">✕ Cerrar</button>
+    <div class="tkt-head">
+      <div class="tkt-tag" id="tktTag">Show</div>
+      <div class="tkt-title" id="tktTitle"></div>
+      <div class="tkt-meta" id="tktMeta"></div>
+    </div>
+    <div class="tkt-body">
+      <div class="tkt-types" id="tktTypes"></div>
+      <div id="tktPreventaNote" class="tkt-preventa" style="display:none">
+        <div class="tkt-preventa-label">Preventa</div>
+        <div class="tkt-preventa-text" id="tktPreventaText">Entrada fabricada bajo pedido · Entrega confirmada por email</div>
+      </div>
+      <div class="tkt-qty">
+        <span class="tkt-qty-label">Entradas</span>
+        <div class="tkt-qty-ctrl">
+          <button onclick="changeTktQty(-1)">−</button>
+          <span id="tktQtyVal">1</span>
+          <button onclick="changeTktQty(1)">+</button>
+        </div>
+      </div>
+      <button class="tkt-add-btn" onclick="addTicketToCart()">Agregar al carrito</button>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  g('tktModal').addEventListener('click',e=>{if(e.target===g('tktModal'))closeTktModal();});
+</script>
 </body>
 </html>

@@ -26,7 +26,7 @@ nav.solid{background:rgba(0,0,0,.97);backdrop-filter:blur(18px);top:0;border-bot
 .nav-logo{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:8px;color:var(--red);text-decoration:none;display:flex;align-items:center;gap:10px}
 .nav-logo img{height:34px;object-fit:contain;display:none}
 .nav-logo img.loaded{display:block}
-.nav-links{display:flex;gap:36px;list-style:none;align-items:center}
+.nav-links{position:absolute;left:50%;transform:translateX(-50%);display:flex;gap:36px;list-style:none;align-items:center}
 .nav-links>li>a{font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:13px;letter-spacing:4px;text-transform:uppercase;color:var(--mu);text-decoration:none;transition:color .2s}
 .nav-links>li>a:hover{color:var(--red)}
 .shop-li{position:relative}
@@ -76,6 +76,7 @@ nav.solid{background:rgba(0,0,0,.97);backdrop-filter:blur(18px);top:0;border-bot
 /* SECTION 1 HERO */
 #s-hero{position:relative;height:100vh;min-height:560px;display:flex;align-items:center;justify-content:center;overflow:hidden}
 .hero-bg{position:absolute;inset:0;overflow:hidden;background:radial-gradient(ellipse at 50% 40%,#2a0505 0%,#000 70%)}
+.hero-bg::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,.45);z-index:1}
 .hero-bg video,.hero-bg img.hbgi{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .hero-ov{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.3) 0%,transparent 35%,transparent 55%,#080808 100%);z-index:1}
 .hero-cnt{position:relative;z-index:2;text-align:center;transition:transform .1s linear}

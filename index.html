@@ -1132,11 +1132,13 @@ body.user-logged .auth-tabs{display:none!important}
   <div style="background:var(--sur);border:1px solid #1e1e1e;padding:40px;width:100%;max-width:360px;text-align:center">
     <div style="font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:6px;color:var(--red);margin-bottom:6px">FLEX FK</div>
     <div style="font-family:'Bebas Neue',sans-serif;font-size:38px;letter-spacing:5px;color:#fff;margin-bottom:4px">ADMIN</div>
-    <p style="font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--mu);margin-bottom:24px">Ingresa tu contraseña</p>
-    <input type="password" id="admPw" placeholder="••••••••" style="width:100%;background:#090909;border:1px solid #222;color:#fff;padding:13px;font-family:'Barlow',sans-serif;font-size:16px;outline:none;text-align:center;letter-spacing:6px;margin-bottom:10px;transition:border-color .2s" onkeydown="if(event.key==='Enter')checkAdm()">
-    <button onclick="checkAdm()" style="width:100%;background:var(--red);color:#fff;border:none;padding:13px;font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:12px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;margin-bottom:8px">Entrar</button>
-    <div id="admErr" style="color:var(--red);font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:11px;letter-spacing:2px;text-transform:uppercase;display:none;margin-bottom:8px">Contraseña incorrecta</div>
-    <button onclick="closeAdm()" style="background:none;border:none;color:var(--mu);font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:11px;letter-spacing:2px;text-transform:uppercase;cursor:pointer">Cancelar</button>
+    <p style="font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--mu);margin-bottom:28px">Acceso restringido</p>
+    <button class="google-btn" onclick="doAdminGoogleLogin()" style="width:100%;justify-content:center">
+      <svg viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.34-8.16 2.34-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/><path fill="none" d="M0 0h48v48H0z"/></svg>
+      Continuar con Google
+    </button>
+    <div id="admErr" style="color:var(--red);font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:11px;letter-spacing:2px;text-transform:uppercase;display:none;margin-top:14px">Acceso denegado</div>
+    <button onclick="closeAdm()" style="margin-top:16px;background:none;border:none;color:var(--mu);font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:11px;letter-spacing:2px;text-transform:uppercase;cursor:pointer">Cancelar</button>
   </div>
 </div>
 
@@ -1158,7 +1160,6 @@ body.user-logged .auth-tabs{display:none!important}
       <input type="password" id="lPw" placeholder="Contraseña">
       <div class="auth-msg" id="lMsg"></div>
       <button onclick="doLogin()">Ingresar</button>
-      <button type="button" onclick="closeAuth();openAdm();" style="background:none;border:none;color:#1e1e1e;font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:10px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;margin-top:8px;transition:color .3s" onmouseover="this.style.color='#444'" onmouseout="this.style.color='#1e1e1e'">Acceso administrador</button>
     </div>
     <div id="regF" class="auth-form" style="display:none">
       <button class="google-btn" onclick="doGoogleLogin()">
@@ -1656,27 +1657,15 @@ async function saveLinks(){if(!adm)return;SL={ig:gv('le-ig'),tt:gv('le-tt'),sp:g
 // ADMIN
 function openAdm(){if(adm){logoutAdm();return;}g('admModal').classList.add('open');g('admPw').value='';g('admErr').style.display='none';setTimeout(()=>g('admPw').focus(),100);}
 function closeAdm(){g('admModal').classList.remove('open');}
-async function checkAdm(){
-  const pw=g('admPw').value;
-  if(!pw)return;
-  const btn=g('admModal').querySelector('button[onclick="checkAdm()"]');
-  btn.textContent='Verificando...';btn.disabled=true;
-  try{
-    // Obtener hash guardado desde Supabase (base64 de la contraseña)
-    const rows=await sbGet('site_config','key=eq.adm_hash');
-    if(!rows||!rows.length){btn.textContent='Entrar';btn.disabled=false;g('admErr').style.display='block';return;}
-    const stored=rows[0].value.trim();
-    // Comparar: el hash almacenado es base64 de la contraseña en UTF-8
-    const encoded=btoa(unescape(encodeURIComponent(pw)));
-    if(encoded===stored){
-      adm=true;sessionStorage.setItem('ffk_adm','1');
-      closeAdm();applyAdm();toast('✓ Modo admin activado');
-    }else{
-      g('admErr').style.display='block';g('admPw').value='';g('admPw').focus();
-    }
-  }catch(e){g('admErr').style.display='block';}
-  btn.textContent='Entrar';btn.disabled=false;
+const ADMIN_EMAIL='booking.flex.mc@gmail.com';
+
+function doAdminGoogleLogin(){
+  // Store flag so on redirect back we know it was an admin login attempt
+  sessionStorage.setItem('ffk_adm_attempt','1');
+  _sb.auth.signInWithOAuth({provider:'google',options:{redirectTo:location.href}});
 }
+
+async function checkAdm(){/* legacy - no longer used */}
 function logoutAdm(){adm=false;sessionStorage.removeItem('ffk_adm');applyAdm();toast('Sesión admin cerrada');}
 function applyAdm(){
   g('admInd').classList.toggle('show',adm);
@@ -1715,12 +1704,36 @@ async function doGoogleLogin(){
 
 // Verificar sesión de Supabase Auth al cargar (maneja callback de OAuth)
 async function checkOAuthCallback(){
-  // El SDK maneja el hash automáticamente
   const{data:{session}}=await _sb.auth.getSession();
   if(!session)return;
   const u=session.user;
   if(!u||!u.email)return;
-  // Buscar o crear en site_users
+
+  const isAdminAttempt=sessionStorage.getItem('ffk_adm_attempt')==='1';
+  sessionStorage.removeItem('ffk_adm_attempt');
+
+  // ── Admin login via Google ──────────────────────────────────────────────────
+  if(isAdminAttempt){
+    if(u.email===ADMIN_EMAIL){
+      adm=true;sessionStorage.setItem('ffk_adm','1');
+      closeAdm();applyAdm();
+      if(location.hash.includes('access_token'))window.history.replaceState(null,'',location.pathname);
+      toast('✓ Modo admin activado');
+    }else{
+      // Wrong account — sign out and show error
+      await _sb.auth.signOut();
+      g('admErr').style.display='block';
+      toast('Acceso denegado');
+    }
+    return;
+  }
+
+  // ── Regular user login via Google ──────────────────────────────────────────
+  // Also auto-activate admin silently if this is the admin email
+  if(u.email===ADMIN_EMAIL){
+    adm=true;sessionStorage.setItem('ffk_adm','1');
+  }
+
   let rows=await sbGet('site_users',`email=eq.${encodeURIComponent(u.email)}`);
   if(!rows||!rows.length){
     const name=u.user_metadata?.full_name||u.user_metadata?.name||u.email.split('@')[0];
@@ -1729,12 +1742,10 @@ async function checkOAuthCallback(){
   }
   if(rows&&rows[0]){
     const user={id:String(rows[0].id),name:rows[0].name,email:rows[0].email,phone:rows[0].phone||''};
-    // Solo actualizar si no hay sesión local ya
     if(!cu||cu.email!==user.email){
       cu=user;sessionStorage.setItem('ffk_u',JSON.stringify(user));
-      updateUI();
+      updateUI();if(adm)applyAdm();
       await syncCartToAccount();
-      // Limpiar hash de la URL
       if(location.hash.includes('access_token'))window.history.replaceState(null,'',location.pathname);
     }
   }

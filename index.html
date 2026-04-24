@@ -655,6 +655,7 @@ body.user-logged .auth-tabs{display:none!important}
 }
 
 </style>
+  <link rel="icon" id="faviconEl" type="image/png" href="data:,">
 </head>
 <body>
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
@@ -1558,8 +1559,9 @@ async function uploadLogo(input){
 async function clearLogo(){if(!adm)return;logo='';await sbSaveConfig('logo','');applyLogo();toast('Logo eliminado');}
 function applyLogo(){
   const ni=g('logoNav'),nt=g('navTL'),fi=g('logoFt'),ft=g('ftTxt');
-  if(logo){ni.src=logo;ni.className='loaded';nt.style.display='none';fi.src=logo;fi.className='loaded';ft.style.display='none';}
-  else{ni.className='';nt.style.display='';fi.className='';ft.style.display='';}
+  if(logo){ni.src=logo;ni.className='loaded';nt.style.display='none';fi.src=logo;fi.className='loaded';ft.style.display='none';
+    const fav=g('faviconEl');if(fav)fav.href=logo;
+  }else{ni.className='';nt.style.display='';fi.className='';ft.style.display='';}
   // Update logo in empty states
   const mhl=g('musHintLogoImg');if(mhl){if(logo){mhl.src=logo;g('musHintLogo').style.display='block';}else{g('musHintLogo').style.display='none';}}
   // Update checkout step logos

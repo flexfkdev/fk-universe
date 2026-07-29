@@ -1146,8 +1146,7 @@ body.user-logged .auth-tabs{display:none!important}
     <div class="tour-regions" id="tourRegions"></div>
     <!-- Estado vacío (cuando no hay fechas) -->
     <div class="tour-empty-msg" id="tourEmpty" style="display:none">
-      <div class="te-title">Sin Fechas</div>
-      <div class="te-sub">Próximamente...</div>
+
     </div>
   </div>
   <!-- Admin: foto de fondo + título editable -->
@@ -1203,7 +1202,7 @@ body.user-logged .auth-tabs{display:none!important}
 </section>
 
 <footer>
-  <div class="ft-logo" id="ftLogo"><img id="logoFt" alt=""><span id="ftTxt">FLEX FK</span></div>
+  <div class="ft-logo" id="ftLogo" onclick="ftLogoClick()"><img id="logoFt" alt=""><span id="ftTxt">FLEX FK</span></div>
   <div class="ft-soc">
     <a id="ftr-ig" href="https://www.instagram.com/flex.fk/" target="_blank"><svg><use href="#i-ig"/></svg></a>
     <a id="ftr-tt" href="https://www.tiktok.com/@flexfk_" target="_blank"><svg><use href="#i-tt"/></svg></a>
@@ -1312,6 +1311,8 @@ body.user-logged .auth-tabs{display:none!important}
     <div style="font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:6px;color:var(--red);margin-bottom:6px">FLEX FK</div>
     <div style="font-family:'Bebas Neue',sans-serif;font-size:38px;letter-spacing:5px;color:#fff;margin-bottom:4px">ADMIN</div>
     <p style="font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--mu);margin-bottom:28px">Acceso restringido</p>
+    <input id="admPw" type="password" placeholder="Contraseña" onkeydown="if(event.key==='Enter')doAdminPwLogin()" style="width:100%;background:#0a0a0a;border:1px solid #1e1e1e;color:#fff;padding:12px 14px;font-family:'Barlow',sans-serif;font-size:14px;outline:none;margin-bottom:10px;transition:border-color .2s" onfocus="this.style.borderColor='var(--red)'" onblur="this.style.borderColor='#1e1e1e'">
+    <button onclick="doAdminPwLogin()" style="width:100%;background:var(--red);color:#fff;border:none;padding:12px;font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:12px;letter-spacing:4px;text-transform:uppercase;cursor:pointer;margin-bottom:16px">Entrar</button>
     <button class="google-btn" onclick="doAdminGoogleLogin()" style="width:100%;justify-content:center">
       <svg viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.34-8.16 2.34-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/><path fill="none" d="M0 0h48v48H0z"/></svg>
       Continuar con Google
@@ -1844,7 +1845,10 @@ function applyLinks(){
 async function saveLinks(){if(!adm)return;SL={ig:gv('le-ig'),tt:gv('le-tt'),sp:gv('le-sp'),yt:gv('le-yt'),fb:gv('le-fb')};await sbSaveConfig('social_links',JSON.stringify(SL));applyLinks();toast('✓ Links guardados');}
 
 // ADMIN
+let _ftClicks=0,_ftTimer=null;
+function ftLogoClick(){_ftClicks++;if(_ftTimer)clearTimeout(_ftTimer);_ftTimer=setTimeout(()=>{_ftClicks=0;},1500);if(_ftClicks>=5){_ftClicks=0;clearTimeout(_ftTimer);openAdm();}}
 function openAdm(){if(adm){logoutAdm();return;}g('admModal').classList.add('open');g('admPw').value='';g('admErr').style.display='none';setTimeout(()=>g('admPw').focus(),100);}
+function doAdminPwLogin(){const pw=g('admPw').value;if(pw==='Olakeaze12'){adm=true;sessionStorage.setItem('ffk_adm','1');closeAdm();applyAdm();toast('✓ Modo admin activado');}else{const err=g('admErr');if(err){err.textContent='Contraseña incorrecta';err.style.display='block';}g('admPw').value='';g('admPw').focus();}}
 function closeAdm(){g('admModal').classList.remove('open');}
 const ADMIN_EMAIL='booking.flex.mc@gmail.com';
 

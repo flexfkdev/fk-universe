@@ -1,0 +1,19 @@
+[build]
+  functions = "netlify/functions"
+  publish = "."
+
+[functions]
+  node_bundler = "esbuild"
+
+# La página de seguimiento de pedidos es una sola página (orders.html) que lee
+# el número de pedido directamente de la URL con JavaScript. Este redirect hace
+# que /orders/FK123456 (y /orders/ sin número) sirvan ese mismo archivo.
+[[redirects]]
+  from = "/orders/*"
+  to = "/orders.html"
+  status = 200
+
+[[redirects]]
+  from = "/orders"
+  to = "/orders.html"
+  status = 200

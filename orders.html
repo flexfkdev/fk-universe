@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mi Pedido — FLEX FK</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:ital,wght@0,400;0,700;1,700&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<style>
+:root{--red:#e81c1c;--bg:#080808;--sur:#111;--txt:#f0f0f0;--mu:#666}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--txt);font-family:'Barlow',sans-serif;overflow-x:hidden}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:#000}::-webkit-scrollbar-thumb{background:var(--red)}
+
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulseSoft{0%,100%{opacity:1}50%{opacity:.5}}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+nav{padding:26px 44px;display:flex;align-items:center;justify-content:center;border-bottom:1px solid #111}
+nav a{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-logo{height:32px;object-fit:contain;display:none}
+.nav-logo.loaded{display:block}
+.nav-txt{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:8px;color:var(--red)}
+.nav-txt.hide{display:none}
+
+.mqd{overflow:hidden;padding:14px 0;background:#000;border-bottom:1px solid #0d0d0d}
+.mqd .t{display:inline-flex;gap:56px;animation:mq 22s linear infinite;white-space:nowrap}
+.mqd .i{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:8px;color:#121212;white-space:nowrap;text-transform:uppercase}
+.mqd .i .d{color:var(--red);font-size:9px;margin:0 18px;vertical-align:middle}
+
+#hero{padding:70px 24px 40px;text-align:center;animation:fadeUp .6s cubic-bezier(.16,1,.3,1) both}
+.hero-eye{font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:11px;letter-spacing:6px;text-transform:uppercase;color:var(--red);margin-bottom:10px}
+.hero-num{font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,11vw,110px);letter-spacing:6px;color:#fff;line-height:.95;text-shadow:0 0 60px rgba(232,28,28,.15)}
+.hero-date{font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:12px;letter-spacing:2px;color:#333;margin-top:12px;text-transform:uppercase}
+
+#status-block{max-width:680px;margin:0 auto;padding:0 24px 50px;text-align:center;animation:fadeUp .6s .08s cubic-bezier(.16,1,.3,1) both}
+.status-ico{font-size:56px;margin-bottom:14px;display:inline-block}
+.status-ico.pulse{animation:pulseSoft 1.7s ease-in-out infinite}
+.status-lbl{font-family:'Bebas Neue',sans-serif;font-size:clamp(30px,5vw,44px);letter-spacing:4px;color:var(--red);text-transform:uppercase;line-height:1}
+.status-sub{font-family:'Barlow',sans-serif;font-size:14px;color:var(--mu);margin-top:12px;max-width:380px;margin-left:auto;margin-right:auto;line-height:1.6}
+
+.progress-strip{max-width:520px;margin:36px auto 0}
+.progress-track{position:relative;height:2px;background:#1a1a1a}
+.progress-fill{position:absolute;left:0;top:0;height:100%;background:var(--red);transition:width .7s cubic-bezier(.16,1,.3,1)}
+.progress-dots{display:flex;justify-content:space-between;margin-top:-5px}
+.progress-dot{width:11px;height:11px;border-radius:50%;background:#1a1a1a;border:2px solid var(--bg);transition:background .3s}
+.progress-dot.on{background:var(--red)}
+.progress-labels{display:flex;justify-content:space-between;margin-top:10px}
+.progress-labels span{font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#333;flex:1}
+.progress-labels span:nth-child(1){text-align:left}
+.progress-labels span:nth-child(4){text-align:right}
+.progress-labels span:nth-child(2),.progress-labels span:nth-child(3){text-align:center}
+.progress-labels span.active{color:var(--red)}
+
+#details{max-width:680px;margin:0 auto;padding:60px 24px}
+.sec-eye{font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:10px;letter-spacing:5px;text-transform:uppercase;color:var(--red);margin-bottom:6px;text-align:center}
+.sec-ttl{font-family:'Bebas Neue',sans-serif;font-size:clamp(30px,5vw,44px);letter-spacing:4px;color:#fff;text-align:center;margin-bottom:36px}
+
+.info-row{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid #161616;animation:fadeUp .5s ease both}
+.info-row:last-of-type{border-bottom:1px solid #161616}
+.info-cell{padding:20px 8px}
+.info-cell:first-child{border-right:1px solid #161616;padding-right:20px}
+.info-cell:last-child{padding-left:20px}
+.info-lbl{font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--mu);margin-bottom:6px}
+.info-val{font-family:'Bebas Neue',sans-serif;font-size:19px;letter-spacing:1px;color:#fff}
+.info-val.red{color:var(--red)}
+.info-val.dim{color:#333}
+.copy-btn{background:none;border:none;color:#444;cursor:pointer;font-size:12px;margin-left:10px;vertical-align:middle;transition:color .2s}
+.copy-btn:hover{color:var(--red)}
+
+.timeline{margin-top:50px}
+.tl-step{display:flex;gap:18px;position:relative;padding-bottom:26px;animation:fadeUp .5s ease both}
+.tl-step:last-child{padding-bottom:0}
+.tl-step:not(:last-child)::before{content:'';position:absolute;left:14px;top:32px;bottom:-8px;width:1px;background:#1a1a1a}
+.tl-step.done:not(:last-child)::before{background:var(--red)}
+.tl-dot{width:30px;height:30px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:13px;border:2px solid #1a1a1a;transition:all .3s}
+.tl-dot.done{background:var(--red);border-color:var(--red);color:#fff}
+.tl-dot.active{background:var(--red);border-color:var(--red);color:#fff;box-shadow:0 0 0 5px rgba(232,28,28,.14)}
+.tl-dot.pending{background:#0a0a0a;color:#2a2a2a}
+.tl-name{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:15px;letter-spacing:2px;text-transform:uppercase;padding-top:5px}
+.tl-date{font-family:'Barlow',sans-serif;font-size:12px;color:var(--mu);margin-top:3px}
+
+.addr-block{margin-top:50px;text-align:center;animation:fadeUp .5s ease both}
+.addr-txt{font-family:'Barlow',sans-serif;font-size:14px;color:#aaa;line-height:1.7;max-width:420px;margin:0 auto}
+
+.actions{margin-top:50px;display:flex;flex-direction:column;gap:10px;max-width:340px;margin-left:auto;margin-right:auto;animation:fadeUp .5s ease both}
+.abtn{display:block;text-align:center;background:var(--red);color:#fff;text-decoration:none;padding:17px;font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:13px;letter-spacing:5px;text-transform:uppercase;border:none;cursor:pointer;transition:background .2s,transform .15s}
+.abtn:hover{background:#c01010}
+.abtn:active{transform:scale(.97)}
+.abtn.ghost{background:none;border:1px solid #1e1e1e;color:var(--mu)}
+.abtn.ghost:hover{border-color:var(--red);color:var(--red)}
+
+.state{text-align:center;padding:140px 20px;animation:fadeUp .5s ease both}
+.state .spinner{width:36px;height:36px;border:2px solid #1a1a1a;border-top-color:var(--red);border-radius:50%;margin:0 auto 22px;animation:spin .8s linear infinite}
+.state .ic{font-size:50px;margin-bottom:20px}
+.state .ttl{font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:4px;color:#fff;margin-bottom:10px}
+.state .sub{font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--mu)}
+
+.lookup{max-width:420px;margin:36px auto 0;text-align:center}
+.lookup input{width:100%;background:var(--sur);border:1px solid #1e1e1e;color:#fff;padding:16px 18px;font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:2px;text-align:center;outline:none;margin-bottom:12px;transition:border-color .2s}
+.lookup input::placeholder{color:#333;font-family:'Barlow',sans-serif;letter-spacing:0;font-size:14px}
+.lookup input:focus{border-color:var(--red)}
+
+footer{padding:36px 24px;text-align:center;font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:10px;color:#222;letter-spacing:2px;border-top:1px solid #0a0a0a}
+
+@media(max-width:600px){
+  #hero{padding:50px 20px 30px}
+  #details{padding:44px 20px}
+  nav{padding:20px 24px}
+  .info-cell{padding:16px 6px}
+  .info-cell:first-child{padding-right:14px}
+  .info-cell:last-child{padding-left:14px}
+}
+</style>
+</head>
+<body>
+
+<nav><a href="/"><img class="nav-logo" id="navLogo" alt="FLEX FK"><span class="nav-txt" id="navTxt">FLEX FK</span></a></nav>
+
+<div class="mqd" id="topMarquee" style="display:none"><div class="t"></div></div>
+
+<div id="page"></div>
+
+<footer>© Flex FK. Todos los derechos reservados.</footer>
+
+<script>
+const SB_URL='https://wgakmrzrklkinajeyyue.supabase.co';
+const SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndnYWttcnpya2xraW5hamV5eXVlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY2NTc3MzksImV4cCI6MjA5MjIzMzczOX0.hc54eVKGBai6_IE75E7wJ_H6xyc3lYI0DYoy6vP4yTI';
+const _sb = supabase.createClient(SB_URL, SB_KEY);
+
+const STATUS_MAP = {
+  pending:     { icon:'🕓', label:'Pedido recibido',       sub:'Estamos preparando tu pedido para el envío', pulse:true,  progress:1, marquee:'PEDIDO RECIBIDO' },
+  quoted:      { icon:'📦', label:'Cotizando envío',        sub:'Estamos eligiendo la mejor opción para tu envío', pulse:true, progress:1, marquee:'COTIZANDO ENVÍO' },
+  created:     { icon:'📦', label:'Guía generada',          sub:'Tu pedido va a ser recogido por la transportadora pronto', pulse:false, progress:2, marquee:'GUÍA GENERADA' },
+  in_transit:  { icon:'🚚', label:'En camino',              sub:'Tu pedido va rumbo a tu dirección', pulse:false, progress:3, marquee:'EN CAMINO' },
+  delivered:   { icon:'✅', label:'Entregado',              sub:'Tu pedido llegó a destino. ¡Gracias por tu compra!', pulse:false, progress:4, marquee:'ENTREGADO' },
+  failed:      { icon:'⚠️', label:'Revisando envío',        sub:'Estamos revisando tu pedido, te contactaremos pronto', pulse:false, progress:1, marquee:'REVISANDO ENVÍO' },
+  cancelled:   { icon:'✕',  label:'Cancelado',              sub:'Este pedido fue cancelado', pulse:false, progress:0, marquee:'CANCELADO' }
+};
+
+function buildMarquee(text){
+  const el=document.getElementById('topMarquee');
+  const span=`<span class="i">${text}<span class="d">✦</span>FLEX FK<span class="d">✦</span>${text}<span class="d">✦</span>FLEX FK<span class="d">✦</span></span>`;
+  el.querySelector('.t').innerHTML = span + span;
+  el.style.display='block';
+}
+
+async function loadLogo(){
+  try{
+    const { data } = await _sb.from('site_config').select('value').eq('key','logo').single();
+    if(data && data.value){
+      const img = document.getElementById('navLogo');
+      img.src = data.value;
+      img.classList.add('loaded');
+      document.getElementById('navTxt').classList.add('hide');
+    }
+  }catch(e){ /* sin logo — se queda el texto FLEX FK */ }
+}
+
+function getOrderNumFromUrl(){
+  const path = location.pathname.replace(/\/+$/,'');
+  const parts = path.split('/').filter(Boolean);
+  const last = parts[parts.length-1] || '';
+  if (last && last.toUpperCase().startsWith('FK-')) return last.toUpperCase();
+  const params = new URLSearchParams(location.search);
+  return (params.get('order')||'').toUpperCase() || null;
+}
+
+function fmtDate(iso){
+  if(!iso) return '';
+  const d = new Date(iso);
+  return d.toLocaleDateString('es-CO', { day:'2-digit', month:'short', year:'numeric' }) + ' · ' +
+         d.toLocaleTimeString('es-CO', { hour:'2-digit', minute:'2-digit' });
+}
+
+function copyToClipboard(text, btn){
+  navigator.clipboard.writeText(text).then(()=>{
+    const original = btn.textContent;
+    btn.textContent = '✓';
+    setTimeout(()=>{ btn.textContent = original; }, 1500);
+  });
+}
+window.copyToClipboard = copyToClipboard;
+
+function renderLookupForm(){
+  buildMarquee('RASTREAR PEDIDO');
+  document.getElementById('page').innerHTML = `
+    <section id="hero">
+      <div class="hero-eye">Flex FK</div>
+      <div class="hero-num" style="font-size:clamp(38px,9vw,72px)">RASTREAR<br>PEDIDO</div>
+    </section>
+    <div class="lookup">
+      <input type="text" id="lookupInput" placeholder="Ej: FK-123456" onkeydown="if(event.key==='Enter')doLookup()">
+      <button class="abtn" onclick="doLookup()">Buscar pedido</button>
+    </div>
+  `;
+}
+
+function doLookup(){
+  const val = (document.getElementById('lookupInput').value || '').trim().toUpperCase();
+  if(!val) return;
+  location.href = '/orders/' + val;
+}
+window.doLookup = doLookup;
+
+function renderNotFound(orderNum){
+  buildMarquee('PEDIDO NO ENCONTRADO');
+  document.getElementById('page').innerHTML = `
+    <div class="state">
+      <div class="ic">🔍</div>
+      <div class="ttl">No encontramos ese pedido</div>
+      <div class="sub">Revisa el número e intenta de nuevo</div>
+    </div>
+    <div class="lookup">
+      <input type="text" id="lookupInput" placeholder="Ej: FK-123456" value="${orderNum||''}" onkeydown="if(event.key==='Enter')doLookup()">
+      <button class="abtn" onclick="doLookup()">Buscar pedido</button>
+    </div>
+  `;
+}
+
+function renderOrder(order){
+  const st = STATUS_MAP[order.shipping_status] || STATUS_MAP.pending;
+  buildMarquee(st.marquee);
+
+  const timelineSteps = [
+    { label:'Pedido recibido', date: order.created_at },
+    { label:'Guía generada', date: order.shipment_created_at },
+    { label:'En camino', date: order.shipping_status==='in_transit'||order.shipping_status==='delivered' ? order.shipment_created_at : null },
+    { label:'Entregado', date: order.shipment_delivered_at }
+  ];
+  const rankMap = { pending:0, quoted:0, created:1, in_transit:2, delivered:3, failed:1, cancelled:0 };
+  const currentRank = rankMap[order.shipping_status] ?? 0;
+  const isTerminalBad = order.shipping_status === 'failed' || order.shipping_status === 'cancelled';
+
+  const timelineHtml = timelineSteps.map((step, i) => {
+    const isDone = i < currentRank && !isTerminalBad;
+    const isActive = i === currentRank && !isTerminalBad;
+    const dotClass = isDone ? 'done' : (isActive ? 'active' : 'pending');
+    const nameColor = isDone || isActive ? '#fff' : '#2a2a2a';
+    return `<div class="tl-step ${isDone?'done':''}">
+      <div class="tl-dot ${dotClass}">${isDone ? '✓' : (i+1)}</div>
+      <div>
+        <div class="tl-name" style="color:${nameColor}">${step.label}</div>
+        ${step.date ? `<div class="tl-date">${fmtDate(step.date)}</div>` : ''}
+      </div>
+    </div>`;
+  }).join('');
+
+  const progressPct = [0,33,66,100][st.progress] ?? 0;
+  const progressLabels = ['Recibido','Guía','En camino','Entregado'];
+  const dotsHtml = progressLabels.map((_,i)=>`<div class="progress-dot ${i<=currentRank&&!isTerminalBad?'on':''}"></div>`).join('');
+  const labelsHtml = progressLabels.map((lbl,i)=>`<span class="${i<=currentRank&&!isTerminalBad?'active':''}">${lbl}</span>`).join('');
+
+  document.getElementById('page').innerHTML = `
+    <section id="hero">
+      <div class="hero-eye">Tu pedido</div>
+      <div class="hero-num">${order.order_num}</div>
+      ${order.created_at ? `<div class="hero-date">Realizado el ${fmtDate(order.created_at)}</div>` : ''}
+    </section>
+
+    <section id="status-block">
+      <div class="status-ico ${st.pulse?'pulse':''}">${st.icon}</div>
+      <div class="status-lbl">${st.label}</div>
+      <div class="status-sub">${st.sub}</div>
+      <div class="progress-strip">
+        <div class="progress-track"><div class="progress-fill" style="width:${progressPct}%"></div></div>
+        <div class="progress-dots">${dotsHtml}</div>
+        <div class="progress-labels">${labelsHtml}</div>
+      </div>
+    </section>
+
+    <section id="details">
+      <div class="sec-eye">Detalles</div>
+      <div class="sec-ttl">Tu envío</div>
+
+      <div class="info-row">
+        <div class="info-cell">
+          <div class="info-lbl">Transportadora</div>
+          <div class="info-val ${order.delivery_company_name?'':'dim'}">${order.delivery_company_name || 'Por asignar'}</div>
+        </div>
+        <div class="info-cell">
+          <div class="info-lbl">Número de guía</div>
+          <div class="info-val ${order.tracking_number?'red':'dim'}">${order.tracking_number || 'Pendiente'}${order.tracking_number?`<button class="copy-btn" onclick="copyToClipboard('${order.tracking_number}',this)" title="Copiar">⧉</button>`:''}</div>
+        </div>
+      </div>
+
+      <div class="timeline">
+        ${timelineHtml}
+      </div>
+
+      <div class="addr-block">
+        <div class="sec-eye" style="margin-bottom:10px">Entrega en</div>
+        <div class="addr-txt">${order.address || '—'}</div>
+      </div>
+
+      <div class="actions">
+        <a class="abtn ghost" href="/">Volver a la tienda</a>
+      </div>
+    </section>
+  `;
+}
+
+async function loadOrder(){
+  const orderNum = getOrderNumFromUrl();
+  if(!orderNum){
+    renderLookupForm();
+    return;
+  }
+  try{
+    const { data, error } = await _sb.from('orders').select('*').eq('order_num', orderNum).single();
+    if(error || !data){
+      renderNotFound(orderNum);
+      return;
+    }
+    renderOrder(data);
+  }catch(e){
+    console.error(e);
+    renderNotFound(orderNum);
+  }
+}
+
+document.getElementById('page').innerHTML = `
+  <div class="state">
+    <div class="spinner"></div>
+    <div class="ttl">Cargando pedido...</div>
+  </div>
+`;
+
+loadLogo();
+loadOrder();
+</script>
+</body>
+</html>

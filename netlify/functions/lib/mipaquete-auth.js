@@ -13,8 +13,11 @@ const { createClient } = require('@supabase/supabase-js');
 const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY);
 
 const MI_PAQUETE_BASE = process.env.MI_PAQUETE_BASE || 'https://api-v2.mpr.mipaquete.com';
-const MI_PAQUETE_EMAIL = process.env.MI_PAQUETE_EMAIL;
-const MI_PAQUETE_PASSWORD = process.env.MI_PAQUETE_PASSWORD;
+// .trim() por seguridad: es muy común que al copiar/pegar una credencial en el
+// panel de Netlify quede un espacio o salto de línea invisible al final, lo cual
+// rompe la comparación exacta del lado de Mi Paquete sin que se note a simple vista.
+const MI_PAQUETE_EMAIL = (process.env.MI_PAQUETE_EMAIL || '').trim();
+const MI_PAQUETE_PASSWORD = (process.env.MI_PAQUETE_PASSWORD || '').trim();
 
 /**
  * Decodifica el PAYLOAD de un JWT sin verificar su firma (no hace falta: el token
@@ -67,20 +70,37 @@ async function loginAndGetFreshToken() {
   if (!MI_PAQUETE_EMAIL || !MI_PAQUETE_PASSWORD) {
     throw new Error('Faltan MI_PAQUETE_EMAIL / MI_PAQUETE_PASSWORD en las variables de entorno');
   }
-  const { data } = await axios.post(`${MI_PAQUETE_BASE}/generateapikey`, {
-    email: MI_PAQUETE_EMAIL,
-    password: MI_PAQUETE_PASSWORD
-  }, {
-    headers: {
-      'session-tracker': crypto.randomUUID(),
-      'Content-Type': 'application/json'
-    },
-    timeout: 10000
+
+  // Log de diagnóstico SEGURO: nunca imprime la contraseña real, solo su longitud
+  // y si el email/password tienen aspecto razonable. Útil para descartar espacios
+  // invisibles o valores vacíos sin exponer ninguna credencial en los logs.
+  console.log('Intentando login en Mi Paquete:', {
+    emailLength: MI_PAQUETE_EMAIL.length,
+    emailLooksValid: MI_PAQUETE_EMAIL.includes('@'),
+    passwordLength: MI_PAQUETE_PASSWORD.length,
+    base: MI_PAQUETE_BASE
   });
-  if (!data || !data.APIKey) {
-    throw new Error('generateapikey no devolvió un APIKey válido');
+
+  try {
+    const { data } = await axios.post(`${MI_PAQUETE_BASE}/generateapikey`, {
+      email: MI_PAQUETE_EMAIL,
+      password: MI_PAQUETE_PASSWORD
+    }, {
+      headers: {
+        'session-tracker': crypto.randomUUID(),
+        'Content-Type': 'application/json'
+      },
+      timeout: 10000
+    });
+    if (!data || !data.APIKey) {
+      throw new Error('generateapikey no devolvió un APIKey válido');
+    }
+    return data.APIKey;
+  } catch (err) {
+    const detail = err.response ? JSON.stringify(err.response.data) : err.message;
+    console.error('Login en Mi Paquete falló:', detail);
+    throw err;
   }
-  return data.APIKey;
 }
 
 /** Devuelve un token vigente: el guardado si existe, o uno nuevo si no hay ninguno. */

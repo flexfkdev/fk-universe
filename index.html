@@ -1641,17 +1641,34 @@ const _sb = supabase.createClient(SB_URL, SB_KEY);
 
 // ─── Helpers REST (para tablas custom, no auth) ────────────────────────────
 async function sbFetch(path,opts={}){
-  const r=await fetch(SB_URL+path,{headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Content-Type':'application/json','Prefer':'return=representation',...(opts.headers||{})},method:opts.method||'GET',body:opts.body||undefined});
-  if(!r.ok){const t=await r.text();console.error('SB error',r.status,t);return null;}
+  let r;
+  try{
+    r=await fetch(SB_URL+path,{headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Content-Type':'application/json','Prefer':'return=representation',...(opts.headers||{})},method:opts.method||'GET',body:opts.body||undefined});
+  }catch(networkErr){
+    console.error('SB network error',networkErr);
+    return{ok:false,data:null,status:0,error:String(networkErr)};
+  }
+  if(!r.ok){
+    const t=await r.text();
+    console.error('SB error',r.status,t);
+    return{ok:false,data:null,status:r.status,error:t};
+  }
   const ct=r.headers.get('content-type')||'';
-  if(ct.includes('application/json'))return r.json();
-  return null;
+  if(ct.includes('application/json')){
+    const data=await r.json();
+    return{ok:true,data,status:r.status,error:null};
+  }
+  // Éxito sin contenido (ej. PATCH/DELETE con Prefer: return=minimal -> 204)
+  return{ok:true,data:null,status:r.status,error:null};
 }
-async function sbGet(table,params=''){return sbFetch('/rest/v1/'+table+'?'+params);}
-async function sbPost(table,data){return sbFetch('/rest/v1/'+table,{method:'POST',body:JSON.stringify(data)});}
-async function sbPatch(table,id,data){return sbFetch('/rest/v1/'+table+'?id=eq.'+id,{method:'PATCH',headers:{'Prefer':'return=minimal'},body:JSON.stringify(data)});}
-async function sbDelete(table,id){return sbFetch('/rest/v1/'+table+'?id=eq.'+id,{method:'DELETE'});}
-async function sbUpsert(table,data,onConflict=''){return sbFetch('/rest/v1/'+table+(onConflict?'?on_conflict='+onConflict:''),{method:'POST',headers:{'Prefer':'resolution=merge-duplicates,return=representation'},body:JSON.stringify(data)});}
+async function sbGet(table,params=''){const r=await sbFetch('/rest/v1/'+table+'?'+params);return r.ok?r.data:null;}
+async function sbPost(table,data){const r=await sbFetch('/rest/v1/'+table,{method:'POST',body:JSON.stringify(data)});return r.ok?r.data:null;}
+// sbPatch/sbDelete devuelven true en éxito (aunque Supabase no mande contenido de vuelta)
+// y false si realmente falló — antes ambos casos devolvían `null` y no se podían distinguir,
+// lo cual causaba que ediciones de producto fallidas se mostraran como guardadas con éxito.
+async function sbPatch(table,id,data){const r=await sbFetch('/rest/v1/'+table+'?id=eq.'+id,{method:'PATCH',headers:{'Prefer':'return=minimal'},body:JSON.stringify(data)});return r.ok;}
+async function sbDelete(table,id){const r=await sbFetch('/rest/v1/'+table+'?id=eq.'+id,{method:'DELETE'});return r.ok;}
+async function sbUpsert(table,data,onConflict=''){const r=await sbFetch('/rest/v1/'+table+(onConflict?'?on_conflict='+onConflict:''),{method:'POST',headers:{'Prefer':'resolution=merge-duplicates,return=representation'},body:JSON.stringify(data)});return r.ok?r.data:null;}
 
 // Upload con upsert (sobreescribe si existe)
 async function sbUploadFile(bucket,path,file){
@@ -2656,7 +2673,7 @@ async function addProduct(){
   }
   btn.disabled=false;btn.textContent='Publicar Producto';
 }
-async function delP(id){if(!adm)return;await sbDelete('products',id);P=P.filter(p=>String(p.id)!==String(id));sOff=0;renderMerch();toast('Producto eliminado');}
+async function delP(id){if(!adm)return;const ok=await sbDelete('products',id);if(!ok){toast('⚠️ Error al eliminar — revisa la consola (F12)');return;}P=P.filter(p=>String(p.id)!==String(id));sOff=0;renderMerch();toast('Producto eliminado');}
 function openEditP(id){
   if(!adm)return;
   const p=P.find(x=>String(x.id)===String(id));if(!p)return;
@@ -2733,7 +2750,11 @@ async function saveEditP(){
     const ordered=Array.from(g('epImgOrder')?.querySelectorAll('[data-url]')||[]).map(el=>el.dataset.url);
     if(ordered.length)updates.imgs=ordered;
   }
-  await sbPatch('products',id,updates);
+  const ok=await sbPatch('products',id,updates);
+  if(!ok){
+    toast('⚠️ Error al guardar — revisa la consola (F12) o si corriste el SQL completo en Supabase');
+    return;
+  }
   P[idx]={...P[idx],...updates,desc:updates.description,stock:updates.stock,dropId:updates.drop_id||null,shipWeight:updates.ship_weight,shipWidth:updates.ship_width,shipLength:updates.ship_length,shipHeight:updates.ship_height};
   renderMerch();closeEditP();toast('✓ Producto actualizado');
 }
@@ -2853,8 +2874,9 @@ async function pmDrop(e,to){
   if(pmDragFrom<0||pmDragFrom===to)return;
   const p=P.find(x=>String(x.id)===String(pmId));if(!p||!p.imgs)return;
   const imgs=[...p.imgs];const[m]=imgs.splice(pmDragFrom,1);imgs.splice(to,0,m);
+  const ok=await sbPatch('products',pmId,{imgs});
+  if(!ok){toast('⚠️ Error al guardar el orden — revisa la consola (F12)');return;}
   p.imgs=imgs;
-  await sbPatch('products',pmId,{imgs});
   pmImgs=imgs.filter(Boolean);pmIdx=to;
   openPM(pmId);renderMerch();toast('✓ Orden actualizado');
 }
@@ -2863,8 +2885,9 @@ async function pmMove(i,dir){
   const p=P.find(x=>String(x.id)===String(pmId));if(!p||!p.imgs)return;
   if(to<0||to>=p.imgs.length)return;
   const imgs=[...p.imgs];const[m]=imgs.splice(i,1);imgs.splice(to,0,m);
+  const ok=await sbPatch('products',pmId,{imgs});
+  if(!ok){toast('⚠️ Error al guardar el orden — revisa la consola (F12)');return;}
   p.imgs=imgs;
-  await sbPatch('products',pmId,{imgs});
   pmImgs=imgs.filter(Boolean);pmIdx=Math.max(0,Math.min(to,pmImgs.length-1));
   openPM(pmId);renderMerch();toast('✓ Orden actualizado');
 }
@@ -3522,7 +3545,8 @@ async function saveDc(){
   const exp=g('dcExp')?.value||null;
   const data={code,type,pct,gift_product_id:giftProductId||null,scope,scope_product_id:scopeProductId||null,max_uses:maxUses,exp:exp||null,active:true};
   if(dcEditId){
-    await sbPatch('discount_codes',dcEditId,data);
+    const ok=await sbPatch('discount_codes',dcEditId,data);
+    if(!ok){toast('⚠️ Error al guardar — revisa la consola (F12)');return;}
     const idx=CODES.findIndex(c=>String(c.id)===String(dcEditId));
     if(idx>=0)CODES[idx]={...CODES[idx],...data,giftProductId,scopeProductId,maxUses,pct};
     toast('✓ Código actualizado');cancelDcEdit();
@@ -3568,14 +3592,17 @@ function cancelDcEdit(){
 async function toggleDcActive(id){
   if(!adm)return;
   const idx=CODES.findIndex(c=>String(c.id)===String(id));if(idx<0)return;
-  CODES[idx].active=!CODES[idx].active;
-  await sbPatch('discount_codes',id,{active:CODES[idx].active});
+  const newActive=!CODES[idx].active;
+  const ok=await sbPatch('discount_codes',id,{active:newActive});
+  if(!ok){toast('⚠️ Error al guardar — revisa la consola (F12)');return;}
+  CODES[idx].active=newActive;
   renderDcList();toast(CODES[idx].active?'Código activado':'Código pausado');
 }
 
 async function deleteDc(id){
   if(!adm)return;
-  await sbDelete('discount_codes',id);
+  const ok=await sbDelete('discount_codes',id);
+  if(!ok){toast('⚠️ Error al eliminar — revisa la consola (F12)');return;}
   CODES=CODES.filter(c=>String(c.id)!==String(id));
   renderDcList();toast('Código eliminado');
 }
@@ -3783,7 +3810,8 @@ async function saveRegionName(id){
   if(!adm)return;
   const name=(g('rname_'+id)?.value||'').trim();
   if(!name)return;
-  await sbPatch('tour_regions',id,{name});
+  const ok=await sbPatch('tour_regions',id,{name});
+  if(!ok){toast('⚠️ Error al guardar — revisa la consola (F12)');return;}
   const idx=TOUR_REGIONS.findIndex(r=>r.id===id);
   if(idx>=0)TOUR_REGIONS[idx].name=name;
   renderTour();toast('✓ Región actualizada');
@@ -3791,7 +3819,8 @@ async function saveRegionName(id){
 
 async function deleteTourRegion(id){
   if(!adm)return;
-  await sbDelete('tour_regions',id);
+  const ok=await sbDelete('tour_regions',id);
+  if(!ok){toast('⚠️ Error al eliminar — revisa la consola (F12)');return;}
   TOUR_REGIONS=TOUR_REGIONS.filter(r=>r.id!==id);
   TOUR_SHOWS=TOUR_SHOWS.filter(s=>s.regionId!==id);
   renderTourAdminPanel();renderTour();toast('Región eliminada');
@@ -3814,7 +3843,8 @@ async function saveShow(){
   const order=TOUR_SHOWS.filter(s=>s.regionId===regionId).length;
   const data={region_id:regionId,country,date,city,venue,status,sale_type:saleType,sale_link:saleLink||null,price:price||null,sort_order:order};
   if(shEditId){
-    await sbPatch('tour_shows',shEditId,data);
+    const ok=await sbPatch('tour_shows',shEditId,data);
+    if(!ok){toast('⚠️ Error al guardar — revisa la consola (F12)');return;}
     const idx=TOUR_SHOWS.findIndex(s=>s.id===shEditId);
     if(idx>=0)TOUR_SHOWS[idx]={...TOUR_SHOWS[idx],country,date,city,venue,status,saleType,saleLink,price,regionId,order};
     shEditId=null;toast('✓ Show actualizado');
@@ -3851,7 +3881,8 @@ function editShow(id){
 
 async function deleteShow(id){
   if(!adm)return;
-  await sbDelete('tour_shows',id);
+  const ok=await sbDelete('tour_shows',id);
+  if(!ok){toast('⚠️ Error al eliminar — revisa la consola (F12)');return;}
   TOUR_SHOWS=TOUR_SHOWS.filter(s=>s.id!==id);
   renderTour();toast('Show eliminado');
 }
@@ -4041,7 +4072,8 @@ function addTicketToCart(){
 async function incrementCodeUses(code){
   const c=CODES.find(x=>x.code===(code||'').toUpperCase());
   if(!c)return;c.uses=(c.uses||0)+1;
-  await sbPatch('discount_codes',c.id,{uses:c.uses});
+  const ok=await sbPatch('discount_codes',c.id,{uses:c.uses});
+  if(!ok)console.warn('No se pudo actualizar el contador de usos del código',code);
 }</script>
 <!-- TICKET MODAL -->
 <div class="tkt-m" id="tktModal">

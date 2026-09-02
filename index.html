@@ -4,6 +4,23 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FLEX FK</title>
+<meta name="description" content="Flex FK — Merch oficial, música y tour. Compra camisetas, hoodies, discos y accesorios de edición limitada.">
+
+<!-- Open Graph (Facebook, WhatsApp, LinkedIn, etc.) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Flex FK">
+<meta property="og:title" content="FLEX FK — Merch Oficial">
+<meta property="og:description" content="Merch oficial, música y tour de Flex FK. Camisetas, hoodies, discos y accesorios de edición limitada.">
+<meta property="og:image" content="https://flexfk.netlify.app/og-image.jpg">
+<meta property="og:url" content="https://flexfk.netlify.app">
+<meta property="og:locale" content="es_CO">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="FLEX FK — Merch Oficial">
+<meta name="twitter:description" content="Merch oficial, música y tour de Flex FK.">
+<meta name="twitter:image" content="https://flexfk.netlify.app/og-image.jpg">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:ital,wght@0,400;0,700;1,700&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
@@ -400,6 +417,13 @@ footer{background:#000;padding:40px 44px 68px;border-top:1px solid #0a0a0a;displ
 .ft-soc a:hover{opacity:1}
 .ft-soc svg{width:16px;height:16px;fill:#fff}
 .ft-copy{font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:10px;color:#171717;letter-spacing:2px;width:100%;text-align:center;padding-top:18px;border-top:1px solid #0a0a0a}
+.ft-powered{display:flex;align-items:center;gap:10px}
+.ft-powered-txt{font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#555}
+.ft-powered img{height:26px;object-fit:contain;display:none;opacity:.85}
+.ft-powered img.loaded{display:inline-block}
+.ft-powered-adm{width:100%;display:none;justify-content:center;gap:10px;padding-top:14px;order:10}
+.admin-mode .ft-powered-adm{display:flex}
+.ft-powered-adm input[type=file]{display:none}
 
 /* SHARED */
 .fade-up{opacity:0;transform:translateY(32px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
@@ -410,6 +434,24 @@ footer{background:#000;padding:40px 44px 68px;border-top:1px solid #0a0a0a;displ
 .adm-ind{position:fixed;top:50%;right:0;transform:translateY(-50%);background:var(--red);color:#fff;font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:10px;letter-spacing:3px;text-transform:uppercase;padding:8px 6px;writing-mode:vertical-rl;z-index:150;cursor:pointer;opacity:.7;transition:opacity .2s;display:none}
 .adm-ind:hover{opacity:1}
 .adm-ind.show{display:block}
+
+/* COOKIES */
+.cookie-bar{position:fixed;left:0;right:0;bottom:0;z-index:950;background:rgba(8,8,8,.98);backdrop-filter:blur(12px);border-top:1px solid #1a1a1a;padding:20px 44px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;transform:translateY(100%);transition:transform .5s cubic-bezier(.16,1,.3,1)}
+.cookie-bar.show{transform:translateY(0)}
+.cookie-txt{flex:1;min-width:240px;font-family:'Barlow',sans-serif;font-size:13px;color:#aaa;line-height:1.6}
+.cookie-txt b{color:#fff}
+.cookie-txt a{color:var(--red);text-decoration:none}
+.cookie-txt a:hover{text-decoration:underline}
+.cookie-btns{display:flex;gap:10px;flex-shrink:0}
+.cookie-btn{background:var(--red);color:#fff;border:none;padding:12px 22px;font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:11px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;transition:background .2s;white-space:nowrap}
+.cookie-btn:hover{background:#c01010}
+.cookie-btn.ghost{background:none;border:1px solid #2a2a2a;color:#888}
+.cookie-btn.ghost:hover{border-color:var(--mu);color:#fff}
+@media(max-width:600px){
+  .cookie-bar{padding:18px 20px;flex-direction:column;align-items:stretch;text-align:center}
+  .cookie-btns{width:100%}
+  .cookie-btn{flex:1}
+}
 
 /* AUTH */
 .auth-m{position:fixed;inset:0;background:rgba(0,0,0,.96);z-index:700;display:none;align-items:center;justify-content:center}
@@ -1260,6 +1302,11 @@ body.user-logged .auth-tabs{display:none!important}
 
 <footer>
   <div class="ft-logo" id="ftLogo" onclick="ftLogoClick()"><img id="logoFt" alt=""><span id="ftTxt">FLEX FK</span></div>
+  <div class="ft-powered">
+    <span class="ft-powered-txt">Flex FK powered by</span>
+    <img id="foldLogo" alt="Fold">
+    <span class="ft-powered-txt" id="foldTxt">FOLD</span>
+  </div>
   <div class="ft-soc">
     <a id="ftr-ig" href="https://www.instagram.com/flex.fk/" target="_blank"><svg><use href="#i-ig"/></svg></a>
     <a id="ftr-tt" href="https://www.tiktok.com/@flexfk_" target="_blank"><svg><use href="#i-tt"/></svg></a>
@@ -1273,6 +1320,10 @@ body.user-logged .auth-tabs{display:none!important}
     <a href="#" onclick="openPolicy('terminos');return false">Términos</a>
     <a href="#" onclick="openPolicy('privacidad');return false">Privacidad</a>
     <a href="#" onclick="openTrack();return false">Rastrear pedido</a>
+  </div>
+  <div class="ft-powered-adm">
+    <label class="abtn" style="display:inline-block;width:auto;padding:8px 14px;font-size:10px;margin:0">📷 Logo de Fold<input type="file" accept="image/*" id="foldLogoFile" onchange="uploadFoldLogo(this)"></label>
+    <button class="abtn" style="background:none;border:1px solid #333;margin:0" onclick="clearFoldLogo()">Quitar</button>
   </div>
   <p class="ft-copy">© 2025 Flex FK. Todos los derechos reservados.</p>
 </footer>
@@ -1630,6 +1681,14 @@ body.user-logged .auth-tabs{display:none!important}
 </div>
 
 <div class="toast" id="toast"></div>
+
+<div class="cookie-bar" id="cookieBar">
+  <div class="cookie-txt">🍪 Usamos cookies para mejorar tu experiencia y recordar tu carrito. Al continuar navegando aceptas nuestra <a href="#" onclick="openPolicy('privacidad');return false">Política de Privacidad</a>.</div>
+  <div class="cookie-btns">
+    <button class="cookie-btn ghost" onclick="handleCookieChoice(false)">Rechazar</button>
+    <button class="cookie-btn" onclick="handleCookieChoice(true)">Aceptar</button>
+  </div>
+</div>
 <script>
 // ─── Supabase SDK ─────────────────────────────────────────────────────────────
 const SB_URL='https://wgakmrzrklkinajeyyue.supabase.co';
@@ -1706,6 +1765,7 @@ let SL={};
 let logo='';
 let hbg=null;
 let trackBgUrl=null;
+let foldLogoUrl=null;
 let sv='';
 let sph='';
 let cats=[null,null,null,null];
@@ -1742,6 +1802,7 @@ async function loadAllFromSB(){
       if(row.key==='logo')logo=row.value;
       else if(row.key==='hero_bg')try{hbg=JSON.parse(row.value);}catch(e){}
       else if(row.key==='track_bg')trackBgUrl=row.value||null;
+      else if(row.key==='fold_logo')foldLogoUrl=row.value||null;
       else if(row.key==='section_video')sv=row.value;
       else if(row.key==='scroll_photo')sph=row.value;
       else if(row.key==='social_links')try{SL=JSON.parse(row.value);}catch(e){}
@@ -1774,7 +1835,7 @@ document.addEventListener('DOMContentLoaded',async()=>{
   await loadAllFromSB();
   await checkOAuthCallback();
   if(cu)await loadCartFromAccount();
-  applyLinks();applyLogo();applyHBG();applySV();applySP();applyCats();applyTrackBg();
+  applyLinks();applyLogo();applyHBG();applySV();applySP();applyCats();applyTrackBg();applyFoldLogo();
   renderMerch();renderAlbums();renderEditAlb();updateCart();applyAdm();updateUI();genCap();
   window.addEventListener('scroll',()=>{
     g('mainNav').classList.toggle('solid',scrollY>60);
@@ -1793,6 +1854,7 @@ document.addEventListener('DOMContentLoaded',async()=>{
   g('hamBtn').addEventListener('click',openMob);
   g('mobX').addEventListener('click',closeMob);
   g('mobMenu').addEventListener('click',e=>{if(e.target===e.currentTarget)closeMob();});
+  initCookieBanner();
   const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:.08});
   document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
   // Admin solo accesible desde el botón "Ingresar" (sin atajos)
@@ -1808,6 +1870,17 @@ document.addEventListener('DOMContentLoaded',async()=>{
 });
 
 function openMob(){g('mobMenu').classList.add('open');g('hamBtn').classList.add('open');}
+
+// COOKIES
+function initCookieBanner(){
+  const choice=localStorage.getItem('ffk_cookie_consent');
+  if(choice)return; // ya eligió antes, no volver a mostrar
+  setTimeout(()=>{g('cookieBar')?.classList.add('show');},600);
+}
+function handleCookieChoice(accepted){
+  localStorage.setItem('ffk_cookie_consent',accepted?'accepted':'rejected');
+  g('cookieBar')?.classList.remove('show');
+}
 function closeMob(){g('mobMenu').classList.remove('open');g('hamBtn').classList.remove('open');}
 
 // HERO BG
@@ -1859,6 +1932,26 @@ async function uploadTrackBg(input){
   applyTrackBg();toast('✓ Video de fondo guardado');
 }
 async function clearTrackBg(){if(!adm)return;trackBgUrl=null;await sbSaveConfig('track_bg','');applyTrackBg();toast('Video de fondo eliminado');}
+
+// FOOTER — POWERED BY FOLD
+function applyFoldLogo(){
+  const img=g('foldLogo'),txt=g('foldTxt');
+  if(!img||!txt)return;
+  if(foldLogoUrl){img.src=foldLogoUrl;img.classList.add('loaded');txt.style.display='none';}
+  else{img.classList.remove('loaded');txt.style.display='';}
+}
+async function uploadFoldLogo(input){
+  if(!adm)return;const f=input.files[0];if(!f)return;
+  toast('Subiendo logo de Fold...');
+  const ext=f.name.split('.').pop().toLowerCase();
+  const path=`site/fold_logo_${Date.now()}.${ext}`;
+  const url=await sdkUpload('flexfk',path,f);
+  if(!url){toast('Error al subir el logo');return;}
+  foldLogoUrl=url;
+  await sbSaveConfig('fold_logo',foldLogoUrl);
+  applyFoldLogo();toast('✓ Logo de Fold guardado');
+}
+async function clearFoldLogo(){if(!adm)return;foldLogoUrl=null;await sbSaveConfig('fold_logo','');applyFoldLogo();toast('Logo de Fold eliminado');}
 
 // LOGO
 async function uploadLogo(input){

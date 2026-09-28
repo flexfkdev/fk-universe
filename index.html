@@ -171,6 +171,7 @@ nav.solid{background:rgba(0,0,0,.97);backdrop-filter:blur(18px);top:0;border-bot
 /* SECTION 1 HERO */
 #s-hero{position:relative;height:100vh;min-height:560px;display:flex;align-items:center;justify-content:center;overflow:hidden}
 .hero-bg{position:absolute;inset:0;overflow:hidden;background:radial-gradient(ellipse at 50% 40%,#2a0505 0%,#000 70%)}
+.hero-bg video::-webkit-media-controls,.hero-bg video::-webkit-media-controls-start-playback-button,#vidWrap video::-webkit-media-controls,#vidWrap video::-webkit-media-controls-start-playback-button{display:none!important;-webkit-appearance:none}
 .hero-bg::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,.45);z-index:1}
 .hero-bg video,.hero-bg img.hbgi{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .hero-ov{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.3) 0%,transparent 35%,transparent 55%,#080808 100%);z-index:1}
@@ -200,6 +201,39 @@ nav.solid{background:rgba(0,0,0,.97);backdrop-filter:blur(18px);top:0;border-bot
 .vid-adm label{font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--mu);display:block;margin-bottom:6px}
 .vid-adm input[type=file]{background:#0a0a0a;border:1px solid #1e1e1e;color:var(--txt);padding:9px;font-size:12px;max-width:380px;cursor:pointer;display:inline-block}
 .vclr{margin-left:12px;background:none;border:1px solid #282828;color:var(--mu);font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:8px 14px;cursor:pointer;vertical-align:middle}
+
+/* SECTION 2B — YOUTUBE VIDEOS */
+#s-ytvids{background:var(--bg);padding:80px 44px}
+.yt-hdr{text-align:center;margin-bottom:48px}
+.yt-hdr-eye{font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:11px;letter-spacing:5px;text-transform:uppercase;color:var(--red);margin-bottom:8px}
+.yt-hdr-ttl{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,6vw,72px);letter-spacing:5px;color:#fff}
+.yt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1200px;margin:0 auto}
+.yt-item{position:relative;aspect-ratio:16/9;background:#0a0a0a;overflow:hidden;border:1px solid #1a1a1a}
+.yt-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s cubic-bezier(.16,1,.3,1)}
+.yt-item:hover img{transform:scale(1.06)}
+.yt-play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;cursor:pointer;background:rgba(0,0,0,.25);transition:background .2s}
+.yt-play:hover{background:rgba(0,0,0,.1)}
+.yt-play-ico{width:60px;height:60px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;box-shadow:0 0 30px rgba(232,28,28,.4);transition:transform .2s}
+.yt-play:hover .yt-play-ico{transform:scale(1.1)}
+.yt-play-ico svg{width:22px;height:22px;fill:#fff;margin-left:3px}
+.yt-item iframe{position:absolute;inset:0;width:100%;height:100%;border:none}
+.yt-empty-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#0d0d0d;color:#1a1a1a;font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:3px;text-transform:uppercase;text-align:center;padding:20px}
+.yt-adm{max-width:600px;margin:36px auto 0;display:none}
+.admin-mode .yt-adm{display:block}
+.yt-adm-row{margin-bottom:12px}
+.yt-adm-row label{font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--mu);display:block;margin-bottom:5px}
+.yt-adm-row input{width:100%;background:#0a0a0a;border:1px solid #1e1e1e;color:#fff;padding:10px 13px;font-family:'Barlow',sans-serif;font-size:13px;outline:none}
+.yt-adm-row input:focus{border-color:var(--red)}
+.yt-adm-block{border:1px solid #1a1a1a;padding:16px;margin-bottom:14px;background:#0a0a0a}
+.yt-adm-block-ttl{font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--red);margin-bottom:10px}
+.yt-type-toggle{display:flex;gap:8px;margin-bottom:12px}
+.yt-type-btn{flex:1;background:none;border:1px solid #2a2a2a;color:#666;font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:8px;cursor:pointer;transition:all .2s}
+.yt-type-btn.sel{background:var(--red);border-color:var(--red);color:#fff}
+.yt-adm-block input[type=file]{width:100%;background:#0a0a0a;border:1px solid #1e1e1e;color:var(--txt);padding:8px;font-family:'Barlow',sans-serif;font-size:11px;cursor:pointer}
+@media(max-width:900px){
+  .yt-grid{grid-template-columns:1fr;gap:16px}
+  #s-ytvids{padding:60px 20px}
+}
 
 /* SECTION 3 MERCH CATS */
 #s-merch1{background:#000;padding:0}
@@ -409,7 +443,7 @@ nav.solid{background:rgba(0,0,0,.97);backdrop-filter:blur(18px);top:0;border-bot
 
 /* FOOTER */
 footer{background:#000;padding:40px 44px 68px;border-top:1px solid #0a0a0a;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:18px}
-.ft-logo{font-family:'Bebas Neue',sans-serif;font-size:34px;letter-spacing:8px;color:var(--red);cursor:pointer;display:flex;align-items:center;gap:10px}
+.ft-logo{font-family:'Bebas Neue',sans-serif;font-size:34px;letter-spacing:8px;color:var(--red);display:flex;align-items:center;gap:10px}
 .ft-logo img{height:38px;object-fit:contain;display:none}
 .ft-logo img.loaded{display:block}
 .ft-soc{display:flex;gap:13px;align-items:center}
@@ -531,7 +565,6 @@ body.user-logged .auth-tabs{display:none!important}
 .edit-p-close:hover{color:#fff}
 
 /* ADMIN MODAL */
-.adm-m{position:fixed;inset:0;background:rgba(0,0,0,.94);z-index:800;display:none;align-items:center;justify-content:center}
 .adm-m.open{display:flex}
 
 /* RESPONSIVE */
@@ -897,8 +930,11 @@ body.user-logged .auth-tabs{display:none!important}
     <button class="abtn" onclick="g('heroBgPhotoFile').click()">🖼 Subir foto de fondo</button>
     <button class="abtn" style="margin-top:4px" onclick="g('heroBgVideoFile').click()">🎬 Subir video de fondo</button>
     <button class="abtn" style="background:none;border:1px solid #333;margin-top:4px" onclick="clearHeroBg()">Quitar fondo</button>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#333;margin-top:12px;margin-bottom:8px">— Subtítulo —</div>
+    <input type="text" id="heroSubInp" placeholder="La Presión" style="width:100%;background:#0a0a0a;border:1px solid #1e1e1e;color:#fff;padding:8px 10px;font-family:'Barlow',sans-serif;font-size:12px;outline:none;margin-bottom:6px">
+    <button class="abtn" onclick="saveHeroSub()">✓ Guardar subtítulo</button>
   </div>
-  <div class="hero-cnt"><h1 class="hero-ttl">FLEX FK</h1><p class="hero-sub">La Presión</p></div>
+  <div class="hero-cnt"><h1 class="hero-ttl">FLEX FK</h1><p class="hero-sub" id="heroSubTxt">La Presión</p></div>
 
 </section>
 
@@ -912,6 +948,17 @@ body.user-logged .auth-tabs{display:none!important}
     <button class="vclr" onclick="clearSV()">Quitar video</button>
     <div id="svProgress" style="display:none;margin-top:10px;font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:11px;letter-spacing:2px;color:var(--red)">⏳ Subiendo video, no cierres esta página...</div>
   </div>
+</section>
+
+<!-- 2B VIDEOS DE YOUTUBE / FOTOS -->
+<div class="mqd"><div class="t"><span class="i">CLIPS<span class="d">✦</span>YOUTUBE<span class="d">✦</span>FLEX FK<span class="d">✦</span>CLIPS<span class="d">✦</span>YOUTUBE<span class="d">✦</span>FLEX FK<span class="d">✦</span></span><span class="i">CLIPS<span class="d">✦</span>YOUTUBE<span class="d">✦</span>FLEX FK<span class="d">✦</span>CLIPS<span class="d">✦</span>YOUTUBE<span class="d">✦</span>FLEX FK<span class="d">✦</span></span></div></div>
+<section id="s-ytvids">
+  <div class="yt-hdr">
+    <div class="yt-hdr-eye">Flex FK</div>
+    <div class="yt-hdr-ttl">CLIPS</div>
+  </div>
+  <div class="yt-grid" id="ytGrid"></div>
+  <div class="yt-adm" id="ytAdm"></div>
 </section>
 
 <!-- 3 MERCH CATS -->
@@ -1301,7 +1348,7 @@ body.user-logged .auth-tabs{display:none!important}
 </section>
 
 <footer>
-  <div class="ft-logo" id="ftLogo" onclick="ftLogoClick()"><img id="logoFt" alt=""><span id="ftTxt">FLEX FK</span></div>
+  <div class="ft-logo" id="ftLogo"><img id="logoFt" alt=""><span id="ftTxt">FLEX FK</span></div>
   <div class="ft-powered">
     <span class="ft-powered-txt">Flex FK powered by</span>
     <img id="foldLogo" alt="Fold">
@@ -1322,10 +1369,10 @@ body.user-logged .auth-tabs{display:none!important}
     <a href="#" onclick="openTrack();return false">Rastrear pedido</a>
   </div>
   <div class="ft-powered-adm">
-    <label class="abtn" style="display:inline-block;width:auto;padding:8px 14px;font-size:10px;margin:0">📷 Logo de Fold<input type="file" accept="image/*" id="foldLogoFile" onchange="uploadFoldLogo(this)"></label>
-    <button class="abtn" style="background:none;border:1px solid #333;margin:0" onclick="clearFoldLogo()">Quitar</button>
+    <label class="abtn" style="display:inline-flex;align-items:center;width:auto;padding:6px 10px;font-size:9px;letter-spacing:1px;margin:0">📷 Logo de Fold<input type="file" accept="image/*" id="foldLogoFile" onchange="uploadFoldLogo(this)"></label>
+    <button class="abtn" style="width:auto;background:none;border:1px solid #333;padding:6px 10px;font-size:9px;letter-spacing:1px;margin:0" onclick="clearFoldLogo()">Quitar</button>
   </div>
-  <p class="ft-copy">© 2025 Flex FK. Todos los derechos reservados.</p>
+  <p class="ft-copy">© <span id="ftYear">2025</span> Flex FK. Todos los derechos reservados.</p>
 </footer>
 
 <!-- TRACKING MODAL -->
@@ -1432,22 +1479,6 @@ body.user-logged .auth-tabs{display:none!important}
       <div style="font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#333;margin-bottom:14px">Si subes fotos nuevas reemplazarán las actuales</div>
     </div>
     <button class="abtn" onclick="saveEditP()">Guardar cambios</button>
-  </div>
-</div>
-
-<div class="adm-m" id="admModal">
-  <div style="background:var(--sur);border:1px solid #1e1e1e;padding:40px;width:100%;max-width:360px;text-align:center">
-    <div style="font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:6px;color:var(--red);margin-bottom:6px">FLEX FK</div>
-    <div style="font-family:'Bebas Neue',sans-serif;font-size:38px;letter-spacing:5px;color:#fff;margin-bottom:4px">ADMIN</div>
-    <p style="font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--mu);margin-bottom:28px">Acceso restringido</p>
-    <input id="admPw" type="password" placeholder="Contraseña" onkeydown="if(event.key==='Enter')doAdminPwLogin()" style="width:100%;background:#0a0a0a;border:1px solid #1e1e1e;color:#fff;padding:12px 14px;font-family:'Barlow',sans-serif;font-size:14px;outline:none;margin-bottom:10px;transition:border-color .2s" onfocus="this.style.borderColor='var(--red)'" onblur="this.style.borderColor='#1e1e1e'">
-    <button onclick="doAdminPwLogin()" style="width:100%;background:var(--red);color:#fff;border:none;padding:12px;font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:12px;letter-spacing:4px;text-transform:uppercase;cursor:pointer;margin-bottom:16px">Entrar</button>
-    <button class="google-btn" onclick="doAdminGoogleLogin()" style="width:100%;justify-content:center">
-      <svg viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.34-8.16 2.34-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/><path fill="none" d="M0 0h48v48H0z"/></svg>
-      Continuar con Google
-    </button>
-    <div id="admErr" style="color:var(--red);font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:11px;letter-spacing:2px;text-transform:uppercase;display:none;margin-top:14px">Acceso denegado</div>
-    <button onclick="closeAdm()" style="margin-top:16px;background:none;border:none;color:var(--mu);font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:11px;letter-spacing:2px;text-transform:uppercase;cursor:pointer">Cancelar</button>
   </div>
 </div>
 
@@ -1766,6 +1797,8 @@ let logo='';
 let hbg=null;
 let trackBgUrl=null;
 let foldLogoUrl=null;
+let heroSubText='La Presión';
+let YT_VIDEOS=['','',''];
 let sv='';
 let sph='';
 let cats=[null,null,null,null];
@@ -1803,6 +1836,8 @@ async function loadAllFromSB(){
       else if(row.key==='hero_bg')try{hbg=JSON.parse(row.value);}catch(e){}
       else if(row.key==='track_bg')trackBgUrl=row.value||null;
       else if(row.key==='fold_logo')foldLogoUrl=row.value||null;
+      else if(row.key==='hero_sub')heroSubText=row.value||'La Presión';
+      else if(row.key==='yt_videos')try{YT_VIDEOS=JSON.parse(row.value);}catch(e){}
       else if(row.key==='section_video')sv=row.value;
       else if(row.key==='scroll_photo')sph=row.value;
       else if(row.key==='social_links')try{SL=JSON.parse(row.value);}catch(e){}
@@ -1824,7 +1859,8 @@ async function loadAllFromSB(){
 }
 
 async function sbSaveConfig(key,value){
-  await sbUpsert('site_config',{key,value},'key');
+  const res=await sbUpsert('site_config',{key,value},'key');
+  return res!==null;
 }
 
 document.addEventListener('DOMContentLoaded',async()=>{
@@ -1835,8 +1871,9 @@ document.addEventListener('DOMContentLoaded',async()=>{
   await loadAllFromSB();
   await checkOAuthCallback();
   if(cu)await loadCartFromAccount();
-  applyLinks();applyLogo();applyHBG();applySV();applySP();applyCats();applyTrackBg();applyFoldLogo();
-  renderMerch();renderAlbums();renderEditAlb();updateCart();applyAdm();updateUI();genCap();
+  applyLinks();applyLogo();applyHBG();applySV();applySP();applyCats();applyTrackBg();applyFoldLogo();applyHeroSub();
+  renderMerch();renderAlbums();renderEditAlb();updateCart();applyAdm();updateUI();genCap();renderYtGrid();
+  const ftYearEl=g('ftYear');if(ftYearEl)ftYearEl.textContent=new Date().getFullYear();
   window.addEventListener('scroll',()=>{
     g('mainNav').classList.toggle('solid',scrollY>60);
     updSP();
@@ -1889,7 +1926,7 @@ function applyHBG(){
   if(!hbg||!hbg.src){bg.style.background='radial-gradient(ellipse at 50% 40%,#2a0505 0%,#000 70%)';return;}
   bg.style.background='#000';
   if(hbg.type==='video'){
-    const v=document.createElement('video');v.src=hbg.src;v.autoplay=true;v.muted=true;v.loop=true;v.playsInline=true;v.setAttribute('webkit-playsinline','');
+    const v=document.createElement('video');v.src=hbg.src;v.autoplay=true;v.muted=true;v.loop=true;v.playsInline=true;v.controls=false;v.disablePictureInPicture=true;v.setAttribute('webkit-playsinline','');v.setAttribute('controlslist','nodownload noplaybackrate');
     v.style.cssText='position:absolute;inset:0;width:100%;height:100%;object-fit:cover;';
     v.addEventListener('timeupdate',()=>{if(v.currentTime>=10){v.currentTime=0;}});
     bg.prepend(v);
@@ -1952,6 +1989,107 @@ async function uploadFoldLogo(input){
   applyFoldLogo();toast('✓ Logo de Fold guardado');
 }
 async function clearFoldLogo(){if(!adm)return;foldLogoUrl=null;await sbSaveConfig('fold_logo','');applyFoldLogo();toast('Logo de Fold eliminado');}
+
+// HERO SUBTITLE
+function applyHeroSub(){
+  const el=g('heroSubTxt');if(el)el.textContent=heroSubText;
+  const inp=g('heroSubInp');if(inp)inp.value=heroSubText;
+}
+async function saveHeroSub(){
+  if(!adm)return;
+  const val=(g('heroSubInp')?.value||'').trim()||'La Presión';
+  heroSubText=val;
+  const ok=await sbSaveConfig('hero_sub',heroSubText);
+  if(!ok){toast('⚠️ Error al guardar — revisa la consola (F12)');return;}
+  applyHeroSub();toast('✓ Subtítulo guardado');
+}
+
+// CLIPS SECTION (YouTube video o foto, por espacio)
+function extractYtId(url){
+  if(!url)return null;
+  const m=url.match(/(?:youtube\.com\/watch\?v=|youtube\.com\/embed\/|youtube\.com\/shorts\/|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+  return m?m[1]:null;
+}
+function normalizeYtSlot(slot){
+  // Compatibilidad con el formato viejo (array de strings de URL de YouTube)
+  if(typeof slot==='string')return{type:'video',value:slot};
+  if(slot&&typeof slot==='object')return{type:slot.type||'video',value:slot.value||''};
+  return{type:'video',value:''};
+}
+function renderYtGrid(){
+  const grid=g('ytGrid');if(!grid)return;
+  const slots=YT_VIDEOS.map(normalizeYtSlot);
+  grid.innerHTML=slots.map((slot,i)=>{
+    if(slot.type==='image'&&slot.value){
+      return `<div class="yt-item"><img src="${slot.value}" alt="Clip ${i+1}" style="cursor:default"></div>`;
+    }
+    if(slot.type==='video'){
+      const id=extractYtId(slot.value);
+      if(id){
+        return `<div class="yt-item" id="ytItem${i}">
+          <img src="https://img.youtube.com/vi/${id}/hqdefault.jpg" alt="Video ${i+1}">
+          <div class="yt-play" onclick="playYtVideo(${i},'${id}')">
+            <div class="yt-play-ico"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          </div>
+        </div>`;
+      }
+    }
+    return `<div class="yt-item"><div class="yt-empty-ph">${adm?'Configura este espacio abajo':'Próximamente'}</div></div>`;
+  }).join('');
+  if(adm)renderYtAdmPanel(slots);
+}
+function renderYtAdmPanel(slots){
+  const wrap=g('ytAdm');if(!wrap)return;
+  wrap.innerHTML=slots.map((slot,i)=>`
+    <div class="yt-adm-block">
+      <div class="yt-adm-block-ttl">Espacio ${i+1}</div>
+      <div class="yt-type-toggle">
+        <button type="button" class="yt-type-btn ${slot.type==='video'?'sel':''}" onclick="setYtSlotType(${i},'video')">🎬 Video de YouTube</button>
+        <button type="button" class="yt-type-btn ${slot.type==='image'?'sel':''}" onclick="setYtSlotType(${i},'image')">🖼 Foto</button>
+      </div>
+      ${slot.type==='video'
+        ?`<div class="yt-adm-row"><input type="text" id="ytUrl${i}" placeholder="https://www.youtube.com/watch?v=..." value="${slot.value}" onchange="saveYtSlotValue(${i},this.value)"></div>`
+        :`<input type="file" accept="image/*" id="ytImgFile${i}" onchange="uploadYtSlotImage(${i},this)">${slot.value?`<div style="margin-top:8px;font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#3a8a3a">✓ Foto cargada</div>`:''}`
+      }
+    </div>
+  `).join('');
+}
+function setYtSlotType(i,type){
+  const slots=YT_VIDEOS.map(normalizeYtSlot);
+  slots[i]={type,value:slots[i].type===type?slots[i].value:''};
+  YT_VIDEOS=slots;
+  renderYtGrid();
+}
+async function saveYtSlotValue(i,value){
+  if(!adm)return;
+  const url=(value||'').trim();
+  if(url&&!extractYtId(url)){toast('⚠️ Ese link no parece ser un video válido de YouTube');return;}
+  const slots=YT_VIDEOS.map(normalizeYtSlot);
+  slots[i]={type:'video',value:url};
+  YT_VIDEOS=slots;
+  const ok=await sbSaveConfig('yt_videos',JSON.stringify(YT_VIDEOS));
+  if(!ok){toast('⚠️ Error al guardar — revisa la consola (F12)');return;}
+  renderYtGrid();toast('✓ Guardado');
+}
+async function uploadYtSlotImage(i,input){
+  if(!adm)return;const f=input.files[0];if(!f)return;
+  toast('Subiendo foto...');
+  const ext=f.name.split('.').pop().toLowerCase();
+  const path=`site/clip_${i}_${Date.now()}.${ext}`;
+  const url=await sdkUpload('flexfk',path,f);
+  if(!url){toast('Error al subir la foto');return;}
+  const slots=YT_VIDEOS.map(normalizeYtSlot);
+  slots[i]={type:'image',value:url};
+  YT_VIDEOS=slots;
+  const ok=await sbSaveConfig('yt_videos',JSON.stringify(YT_VIDEOS));
+  if(!ok){toast('⚠️ Error al guardar — revisa la consola (F12)');return;}
+  renderYtGrid();toast('✓ Foto guardada');
+}
+function playYtVideo(i,id){
+  const item=g('ytItem'+i);if(!item)return;
+  item.innerHTML=`<iframe src="https://www.youtube.com/embed/${id}?autoplay=1&rel=0" title="Video ${i+1}" frameborder="0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe>`;
+}
+
 
 // LOGO
 async function uploadLogo(input){
@@ -2067,25 +2205,14 @@ function applyLinks(){
 async function saveLinks(){if(!adm)return;SL={ig:gv('le-ig'),tt:gv('le-tt'),sp:gv('le-sp'),yt:gv('le-yt'),fb:gv('le-fb')};await sbSaveConfig('social_links',JSON.stringify(SL));applyLinks();toast('✓ Links guardados');}
 
 // ADMIN
-let _ftClicks=0,_ftTimer=null;
-function ftLogoClick(){_ftClicks++;if(_ftTimer)clearTimeout(_ftTimer);_ftTimer=setTimeout(()=>{_ftClicks=0;},1500);if(_ftClicks>=5){_ftClicks=0;clearTimeout(_ftTimer);openAdm();}}
-function openAdm(){if(adm){logoutAdm();return;}g('admModal').classList.add('open');g('admPw').value='';g('admErr').style.display='none';setTimeout(()=>g('admPw').focus(),100);}
-function doAdminPwLogin(){const pw=g('admPw').value;if(pw==='Olakeaze12'){adm=true;sessionStorage.setItem('ffk_adm','1');closeAdm();applyAdm();toast('✓ Modo admin activado');}else{const err=g('admErr');if(err){err.textContent='Contraseña incorrecta';err.style.display='block';}g('admPw').value='';g('admPw').focus();}}
-function closeAdm(){g('admModal').classList.remove('open');}
 const ADMIN_EMAIL='booking.flex.mc@gmail.com';
 
-function doAdminGoogleLogin(){
-  localStorage.setItem('ffk_adm_attempt','1');
-  _sb.auth.signInWithOAuth({provider:'google',options:{redirectTo:location.href}});
-}
-
-async function checkAdm(){/* legacy - no longer used */}
 function logoutAdm(){adm=false;sessionStorage.removeItem('ffk_adm');applyAdm();toast('Sesión admin cerrada');}
 function applyAdm(){
   g('admInd').classList.toggle('show',adm);
   document.body.classList.toggle('admin-mode',adm);
   g('leWrap').style.display=adm?'block':'none';
-  renderMerch();renderDrop();populateDropSelects();renderTour();
+  renderMerch();renderDrop();populateDropSelects();renderTour();renderYtGrid();
 }
 function tP(id){const p=g(id);const open=p.style.display!=='block';p.style.display=open?'block':'none';if(open&&id==='pEditAlb')renderEditAlb();}
 
@@ -2122,24 +2249,6 @@ async function checkOAuthCallback(){
   if(!session)return;
   const u=session.user;
   if(!u||!u.email)return;
-
-  const isAdminAttempt=localStorage.getItem('ffk_adm_attempt')==='1';
-  if(isAdminAttempt)localStorage.removeItem('ffk_adm_attempt');
-
-  if(isAdminAttempt){
-    if(u.email===ADMIN_EMAIL){
-      adm=true;sessionStorage.setItem('ffk_adm','1');
-      closeAdm();applyAdm();
-      window.history.replaceState(null,'',location.pathname+location.search);
-      toast('✓ Modo admin activado');
-    }else{
-      await _sb.auth.signOut();
-      const err=g('admErr');if(err)err.style.display='block';
-      g('admModal').classList.add('open');
-      toast('Acceso denegado');
-    }
-    return;
-  }
 
   if(u.email===ADMIN_EMAIL){
     adm=true;sessionStorage.setItem('ffk_adm','1');
@@ -2678,7 +2787,9 @@ function checkWompiReturn(){
   (async()=>{
     for(let i=0;i<8;i++){
       await new Promise(r=>setTimeout(r,2000));
-      const rows=await sbGet('orders','order_num=eq.'+encodeURIComponent(orderNum));
+      const resp=await fetch('/.netlify/functions/order-lookup?q='+encodeURIComponent(orderNum));
+      const result=await resp.json();
+      const rows=result&&result.data;
       if(rows&&rows[0]){
         const st=rows[0].payment_status;
         const trackingNum=rows[0].tracking_number;
@@ -3489,12 +3600,9 @@ async function lookupTracking(){
   btn.disabled=true;btn.textContent='Buscando...';
   res.style.display='none';res.innerHTML='';
   try{
-    let orders=null;
-    if(q.toUpperCase().startsWith('FK-')){
-      orders=await sbGet('orders','order_num=eq.'+encodeURIComponent(q.toUpperCase()));
-    }else{
-      orders=await sbGet('orders','email=eq.'+encodeURIComponent(q)+'&order=created_at.desc&limit=5');
-    }
+    const resp=await fetch('/.netlify/functions/order-lookup?q='+encodeURIComponent(q.toUpperCase().startsWith('FK-')?q.toUpperCase():q));
+    const result=await resp.json();
+    const orders=result&&result.data;
     if(!orders||!orders.length){
       res.innerHTML='<div style="font-family:Barlow Condensed,sans-serif;font-style:italic;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#555;padding:20px 0;text-align:center">No encontramos ningún pedido con esos datos.</div>';
       res.style.display='block';return;

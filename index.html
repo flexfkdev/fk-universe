@@ -22,7 +22,7 @@
 <meta name="twitter:image" content="https://flexfk.netlify.app/og-image.jpg">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:ital,wght@0,400;0,700;1,700&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Barlow+Condensed:ital,wght@0,400;0,700;1,700&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script type="text/javascript" src="https://checkout.wompi.co/widget.js"></script>
 <style>
@@ -47,22 +47,22 @@ body{background:var(--bg);color:var(--txt);font-family:'Barlow',sans-serif;overf
 .tkt-close:hover{color:#fff}
 .tkt-head{padding:28px 28px 0}
 .tkt-tag{font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--red);margin-bottom:6px}
-.tkt-title{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:4px;color:#fff;line-height:1}
+.tkt-title{font-family:'Dela Gothic One',sans-serif;font-size:32px;letter-spacing:4px;color:#fff;line-height:1}
 .tkt-meta{font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#444;margin-top:4px}
 .tkt-body{padding:20px 28px 28px}
 .tkt-types{display:flex;flex-direction:column;gap:8px;margin-bottom:20px}
 .tkt-type{border:1px solid #1e1e1e;padding:14px 16px;cursor:pointer;transition:border-color .2s;display:flex;align-items:center;justify-content:space-between;background:none}
 .tkt-type:hover,.tkt-type.selected{border-color:var(--red)}
 .tkt-type.selected{background:rgba(232,28,28,.05)}
-.tkt-type-name{font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:3px;color:#fff}
+.tkt-type-name{font-family:'Dela Gothic One',sans-serif;font-size:17px;letter-spacing:3px;color:#fff}
 .tkt-type-desc{font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#444;margin-top:2px}
-.tkt-type-price{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;color:var(--red)}
+.tkt-type-price{font-family:'Dela Gothic One',sans-serif;font-size:22px;letter-spacing:2px;color:var(--red)}
 .tkt-qty{display:flex;align-items:center;gap:12px;margin-bottom:20px}
 .tkt-qty-label{font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#555;flex:1}
 .tkt-qty-ctrl{display:flex;align-items:center;gap:0;border:1px solid #1e1e1e}
 .tkt-qty-ctrl button{background:none;border:none;color:#fff;width:36px;height:36px;font-size:18px;cursor:pointer;font-family:'Barlow Condensed',sans-serif;transition:color .2s}
 .tkt-qty-ctrl button:hover{color:var(--red)}
-.tkt-qty-ctrl span{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:2px;color:#fff;width:36px;text-align:center;border-left:1px solid #1e1e1e;border-right:1px solid #1e1e1e;line-height:36px}
+.tkt-qty-ctrl span{font-family:'Dela Gothic One',sans-serif;font-size:18px;letter-spacing:2px;color:#fff;width:36px;text-align:center;border-left:1px solid #1e1e1e;border-right:1px solid #1e1e1e;line-height:36px}
 .tkt-preventa{background:rgba(232,28,28,.04);border-left:2px solid var(--red);padding:8px 12px;margin-bottom:20px}
 .tkt-preventa-label{font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--red);margin-bottom:2px}
 .tkt-preventa-text{font-family:'Barlow',sans-serif;font-size:12px;color:#555}
@@ -78,25 +78,25 @@ body{background:var(--bg);color:var(--txt);font-family:'Barlow',sans-serif;overf
 .tour-hdr-logo{display:none;margin-bottom:16px}
 .tour-hdr-logo img{height:54px;object-fit:contain}
 .tour-hdr-eye{font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:11px;letter-spacing:5px;text-transform:uppercase;color:var(--red);margin-bottom:10px}
-.tour-hdr-ttl{font-family:'Bebas Neue',sans-serif;font-size:clamp(64px,9vw,110px);letter-spacing:8px;color:#fff;line-height:.9}
+.tour-hdr-ttl{font-family:'Dela Gothic One',sans-serif;font-size:clamp(64px,9vw,110px);letter-spacing:8px;color:#fff;line-height:.9}
 .tour-empty-msg{text-align:center;padding:40px 0}
-.tour-empty-msg .te-title{font-family:'Bebas Neue',sans-serif;font-size:48px;letter-spacing:8px;color:var(--red)}
+.tour-empty-msg .te-title{font-family:'Dela Gothic One',sans-serif;font-size:48px;letter-spacing:8px;color:var(--red)}
 .tour-empty-msg .te-sub{font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:12px;letter-spacing:4px;text-transform:uppercase;color:#333;margin-top:8px}
 .tour-regions{display:grid;grid-template-columns:1fr 1fr;gap:0 80px}
 .tour-region-col{}
-.tour-region-title{font-family:'Bebas Neue',sans-serif;font-size:52px;letter-spacing:6px;color:var(--red);margin-bottom:32px;margin-top:48px}
+.tour-region-title{font-family:'Dela Gothic One',sans-serif;font-size:52px;letter-spacing:6px;color:var(--red);margin-bottom:32px;margin-top:48px}
 .tour-region-col:first-child .tour-region-title{margin-top:0}
 .tour-show{display:flex;align-items:center;gap:0;padding:14px 0;border-bottom:1px solid #1a1a1a;position:relative;transition:background .2s}
 .tour-show.sold-out{opacity:.55}
-.tour-show-country{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:3px;color:#444;width:52px;flex-shrink:0;text-decoration:line-through}
+.tour-show-country{font-family:'Dela Gothic One',sans-serif;font-size:18px;letter-spacing:3px;color:#444;width:52px;flex-shrink:0;text-decoration:line-through}
 .tour-show.sold-out .tour-show-country{text-decoration:line-through}
-.tour-show-date{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:2px;color:#444;width:64px;flex-shrink:0;text-decoration:line-through}
+.tour-show-date{font-family:'Dela Gothic One',sans-serif;font-size:18px;letter-spacing:2px;color:#444;width:64px;flex-shrink:0;text-decoration:line-through}
 .tour-show:not(.sold-out) .tour-show-date{text-decoration:none;color:#666}
 .tour-show-info{flex:1;min-width:0}
-.tour-show-city{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:2px;color:#fff;line-height:1.1}
+.tour-show-city{font-family:'Dela Gothic One',sans-serif;font-size:18px;letter-spacing:2px;color:#fff;line-height:1.1}
 .tour-show.sold-out .tour-show-city{text-decoration:line-through;color:#555}
 .tour-show-venue{font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#333;margin-top:1px}
-.tour-show-status{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:3px;flex-shrink:0;margin-left:12px}
+.tour-show-status{font-family:'Dela Gothic One',sans-serif;font-size:16px;letter-spacing:3px;flex-shrink:0;margin-left:12px}
 .tour-show-status.available{color:var(--red)}
 .tour-show-status.sold-out{color:var(--red)}
 .tour-show-status.soon{color:#555}
@@ -117,7 +117,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Barlow',sans-serif;overf
 
 nav{position:fixed;top:28px;left:0;right:0;z-index:300;display:flex;align-items:center;justify-content:space-between;padding:0 44px;height:56px;transition:background .3s,top .3s}
 nav.solid{background:rgba(0,0,0,.97);backdrop-filter:blur(18px);top:0;border-bottom:1px solid #111}
-.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:8px;color:var(--red);text-decoration:none;display:flex;align-items:center;gap:10px}
+.nav-logo{font-family:'Dela Gothic One',sans-serif;font-size:28px;letter-spacing:8px;color:var(--red);text-decoration:none;display:flex;align-items:center;gap:10px}
 .nav-logo img{height:34px;object-fit:contain;display:none}
 .nav-logo img.loaded{display:block}
 .nav-links{position:absolute;left:50%;transform:translateX(-50%);display:flex;gap:36px;list-style:none;align-items:center}
@@ -153,7 +153,7 @@ nav.solid{background:rgba(0,0,0,.97);backdrop-filter:blur(18px);top:0;border-bot
 /* MOBILE MENU */
 .mob{position:fixed;inset:0;background:rgba(0,0,0,.99);z-index:1200;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;opacity:0;pointer-events:none;transition:opacity .3s}
 .mob.open{opacity:1;pointer-events:all}
-.mob>a{font-family:'Bebas Neue',sans-serif;font-size:52px;letter-spacing:10px;color:#ccc;text-decoration:none;transition:color .2s}
+.mob>a{font-family:'Dela Gothic One',sans-serif;font-size:52px;letter-spacing:10px;color:#ccc;text-decoration:none;transition:color .2s}
 .mob>a:hover{color:var(--red)}
 .mob-sub{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
 .mob-sub a{font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:13px;letter-spacing:3px;text-transform:uppercase;color:var(--mu);text-decoration:none;transition:color .2s}
@@ -165,7 +165,7 @@ nav.solid{background:rgba(0,0,0,.97);backdrop-filter:blur(18px);top:0;border-bot
 .mqd{overflow:hidden;padding:14px 0;background:#000;border-top:1px solid #0d0d0d;border-bottom:1px solid #0d0d0d}
 .mqd .t{display:inline-flex;gap:56px;animation:mq 20s linear infinite;white-space:nowrap}
 .mqd.rev .t{animation-direction:reverse}
-.mqd .i{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:8px;color:#121212;white-space:nowrap;text-transform:uppercase}
+.mqd .i{font-family:'Dela Gothic One',sans-serif;font-size:26px;letter-spacing:8px;color:#121212;white-space:nowrap;text-transform:uppercase}
 .mqd .i .d{color:var(--red);font-size:9px;margin:0 18px;vertical-align:middle}
 
 /* SECTION 1 HERO */
@@ -176,7 +176,7 @@ nav.solid{background:rgba(0,0,0,.97);backdrop-filter:blur(18px);top:0;border-bot
 .hero-bg video,.hero-bg img.hbgi{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .hero-ov{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.3) 0%,transparent 35%,transparent 55%,#080808 100%);z-index:1}
 .hero-cnt{position:relative;z-index:2;text-align:center;transition:transform .1s linear}
-.hero-ttl{font-family:'Bebas Neue',sans-serif;font-size:clamp(100px,18vw,240px);letter-spacing:8px;color:var(--red);line-height:.9;animation:hIn 1.2s cubic-bezier(.16,1,.3,1) forwards;opacity:0;transform:translateY(70px);text-shadow:0 0 80px rgba(232,28,28,.2)}
+.hero-ttl{font-family:'Dela Gothic One',sans-serif;font-size:clamp(100px,18vw,240px);letter-spacing:8px;color:var(--red);line-height:.9;animation:hIn 1.2s cubic-bezier(.16,1,.3,1) forwards;opacity:0;transform:translateY(70px);text-shadow:0 0 80px rgba(232,28,28,.2)}
 .hero-sub{font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:clamp(13px,2vw,22px);letter-spacing:16px;text-transform:uppercase;color:var(--mu);margin-top:6px;animation:hIn .9s .3s cubic-bezier(.16,1,.3,1) forwards;opacity:0;transform:translateY(20px)}
 @keyframes hIn{to{opacity:1;transform:translateY(0)}}
 .scroll-h{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);z-index:2;display:flex;flex-direction:column;align-items:center;gap:6px}
@@ -194,7 +194,7 @@ nav.solid{background:rgba(0,0,0,.97);backdrop-filter:blur(18px);top:0;border-bot
 #s-video{width:100%;background:#000}
 .vid-wrap{position:relative;width:100%;aspect-ratio:16/9;background:#000;overflow:hidden;display:flex;align-items:center;justify-content:center}
 .vid-ph{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;width:100%;min-height:400px;background:#040404}
-.vid-ph .vt{font-family:'Bebas Neue',sans-serif;font-size:52px;color:#181818;letter-spacing:10px}
+.vid-ph .vt{font-family:'Dela Gothic One',sans-serif;font-size:52px;color:#181818;letter-spacing:10px}
 .vid-ph .vs{font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:11px;letter-spacing:4px;color:#1c1c1c;text-transform:uppercase}
 .vid-adm{display:none;padding:18px 44px;background:var(--sur);border-top:1px solid #141414}
 .admin-mode .vid-adm{display:block}
@@ -202,38 +202,48 @@ nav.solid{background:rgba(0,0,0,.97);backdrop-filter:blur(18px);top:0;border-bot
 .vid-adm input[type=file]{background:#0a0a0a;border:1px solid #1e1e1e;color:var(--txt);padding:9px;font-size:12px;max-width:380px;cursor:pointer;display:inline-block}
 .vclr{margin-left:12px;background:none;border:1px solid #282828;color:var(--mu);font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:8px 14px;cursor:pointer;vertical-align:middle}
 
-/* SECTION 2B — YOUTUBE VIDEOS */
-#s-ytvids{background:var(--bg);padding:80px 44px}
-.yt-hdr{text-align:center;margin-bottom:48px}
-.yt-hdr-eye{font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:11px;letter-spacing:5px;text-transform:uppercase;color:var(--red);margin-bottom:8px}
-.yt-hdr-ttl{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,6vw,72px);letter-spacing:5px;color:#fff}
-.yt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1200px;margin:0 auto}
-.yt-item{position:relative;aspect-ratio:16/9;background:#0a0a0a;overflow:hidden;border:1px solid #1a1a1a}
-.yt-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s cubic-bezier(.16,1,.3,1)}
-.yt-item:hover img{transform:scale(1.06)}
-.yt-play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;cursor:pointer;background:rgba(0,0,0,.25);transition:background .2s}
-.yt-play:hover{background:rgba(0,0,0,.1)}
-.yt-play-ico{width:60px;height:60px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;box-shadow:0 0 30px rgba(232,28,28,.4);transition:transform .2s}
-.yt-play:hover .yt-play-ico{transform:scale(1.1)}
-.yt-play-ico svg{width:22px;height:22px;fill:#fff;margin-left:3px}
-.yt-item iframe{position:absolute;inset:0;width:100%;height:100%;border:none}
-.yt-empty-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#0d0d0d;color:#1a1a1a;font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:3px;text-transform:uppercase;text-align:center;padding:20px}
-.yt-adm{max-width:600px;margin:36px auto 0;display:none}
-.admin-mode .yt-adm{display:block}
-.yt-adm-row{margin-bottom:12px}
-.yt-adm-row label{font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--mu);display:block;margin-bottom:5px}
-.yt-adm-row input{width:100%;background:#0a0a0a;border:1px solid #1e1e1e;color:#fff;padding:10px 13px;font-family:'Barlow',sans-serif;font-size:13px;outline:none}
-.yt-adm-row input:focus{border-color:var(--red)}
-.yt-adm-block{border:1px solid #1a1a1a;padding:16px;margin-bottom:14px;background:#0a0a0a}
-.yt-adm-block-ttl{font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--red);margin-bottom:10px}
-.yt-type-toggle{display:flex;gap:8px;margin-bottom:12px}
-.yt-type-btn{flex:1;background:none;border:1px solid #2a2a2a;color:#666;font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:8px;cursor:pointer;transition:all .2s}
-.yt-type-btn.sel{background:var(--red);border-color:var(--red);color:#fff}
-.yt-adm-block input[type=file]{width:100%;background:#0a0a0a;border:1px solid #1e1e1e;color:var(--txt);padding:8px;font-family:'Barlow',sans-serif;font-size:11px;cursor:pointer}
-@media(max-width:900px){
-  .yt-grid{grid-template-columns:1fr;gap:16px}
-  #s-ytvids{padding:60px 20px}
-}
+/* ARCHIVO FK */
+#s-archivo{background:#000;padding:90px 0 80px;position:relative}
+.ar-hdr{text-align:center;margin-bottom:44px;padding:0 20px}
+.ar-eye{font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:11px;letter-spacing:5px;text-transform:uppercase;color:var(--red);margin-bottom:8px}
+.ar-ttl{font-family:'Dela Gothic One',sans-serif;font-size:clamp(56px,10vw,130px);letter-spacing:4px;color:#fff;line-height:.85;transform:skewX(-6deg);text-shadow:4px 4px 0 var(--red)}
+.ar-sub{font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#444;margin-top:16px}
+.ar-rail{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 44px 18px;scrollbar-width:none}
+.ar-rail::-webkit-scrollbar{display:none}
+.ar-card{flex:0 0 230px;aspect-ratio:9/16;position:relative;scroll-snap-align:start;cursor:pointer;background:#0a0a0a;border:1px solid #1a1a1a;overflow:hidden;transition:transform .35s cubic-bezier(.16,1,.3,1),border-color .2s}
+.ar-card:hover{transform:translateY(-8px) rotate(-1deg);border-color:var(--red)}
+.ar-card img,.ar-card video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(.6) contrast(1.15);transition:filter .3s}
+.ar-card:hover img,.ar-card:hover video{filter:none}
+.ar-card::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.9),transparent 55%)}
+.ar-card-n{position:absolute;top:10px;left:12px;z-index:2;font-family:'Dela Gothic One',sans-serif;font-size:34px;color:var(--red);line-height:1}
+.ar-card-t{position:absolute;bottom:12px;left:12px;right:12px;z-index:2;font-family:'Dela Gothic One',sans-serif;font-size:20px;letter-spacing:2px;color:#fff;text-transform:uppercase;line-height:1}
+.ar-card-k{position:absolute;top:12px;right:12px;z-index:2;font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#fff;background:rgba(0,0,0,.7);padding:2px 6px}
+.ar-del{position:absolute;bottom:10px;right:10px;z-index:5;background:rgba(0,0,0,.9);border:1px solid #2a0808;color:#a33;width:28px;height:28px;cursor:pointer;display:none}
+.admin-mode .ar-del{display:block}
+.ar-empty{width:100%;text-align:center;padding:50px 0;font-family:'Dela Gothic One',sans-serif;font-size:40px;letter-spacing:8px;color:#161616}
+.ar-adm{display:none;max-width:560px;margin:30px auto 0;padding:18px;border:1px solid #1a1a1a;background:#0a0a0a}
+.admin-mode .ar-adm{display:block}
+.ar-adm label{font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--mu);display:block;margin:8px 0 4px}
+.ar-adm input,.ar-adm select{width:100%;background:#0a0a0a;border:1px solid #1e1e1e;color:#fff;padding:9px 12px;font-family:'Barlow',sans-serif;font-size:13px;outline:none}
+.ar-v{position:fixed;inset:0;background:rgba(0,0,0,.97);z-index:1300;display:none;align-items:center;justify-content:center}
+.ar-v.open{display:flex}
+.ar-v-box{position:relative;height:min(92vh,820px);aspect-ratio:9/16;max-width:100vw;background:#000;border:1px solid #1a1a1a;overflow:hidden}
+.ar-media{position:absolute;inset:0}
+.ar-media img,.ar-media video,.ar-media iframe{width:100%;height:100%;object-fit:cover;border:none}
+.ar-bars{position:absolute;top:10px;left:10px;right:50px;display:flex;gap:4px;z-index:6}
+.ar-bar{flex:1;height:3px;background:rgba(255,255,255,.2);overflow:hidden}
+.ar-bar i{display:block;height:100%;width:0;background:var(--red)}
+.ar-bar.done i{width:100%}
+.ar-bar.cur i{animation:arp var(--d,6s) linear forwards}
+@keyframes arp{to{width:100%}}
+.ar-x{position:absolute;top:2px;right:8px;z-index:7;background:none;border:none;color:#fff;font-size:22px;cursor:pointer;padding:6px}
+.ar-tap{position:absolute;top:40px;bottom:90px;width:35%;z-index:4;cursor:pointer}
+.ar-tap.l{left:0}.ar-tap.r{right:0;width:65%}
+.ar-foot{position:absolute;left:0;right:0;bottom:0;z-index:6;padding:40px 16px 16px;background:linear-gradient(to top,rgba(0,0,0,.9),transparent);display:flex;align-items:flex-end;justify-content:space-between;gap:12px}
+.ar-cap{font-family:'Dela Gothic One',sans-serif;font-size:26px;letter-spacing:2px;color:#fff;text-transform:uppercase;line-height:1}
+.ar-fire{background:rgba(232,28,28,.15);border:1px solid var(--red);color:#fff;padding:8px 14px;font-size:16px;cursor:pointer;font-family:'Barlow',sans-serif;flex-shrink:0}
+.ar-fire.on{background:var(--red)}
+@media(max-width:768px){.ar-rail{padding:6px 14px 18px}.ar-card{flex-basis:180px}}
 
 /* SECTION 3 MERCH CATS */
 #s-merch1{background:#000;padding:0}
@@ -245,11 +255,11 @@ nav.solid{background:rgba(0,0,0,.97);backdrop-filter:blur(18px);top:0;border-bot
 .mcat-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.88) 0%,rgba(0,0,0,.22) 55%,rgba(0,0,0,.06) 100%);transition:background .4s}
 .mcat-item:hover .mcat-img{transform:scale(1.07);filter:brightness(.72)}
 .mcat-item:hover .mcat-ov{background:linear-gradient(to top,rgba(0,0,0,.92) 0%,rgba(232,28,28,.1) 100%)}
-.mcat-ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:#080808;font-family:'Bebas Neue',sans-serif;font-size:80px;color:#0f0f0f;letter-spacing:4px}
+.mcat-ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:#080808;font-family:'Dela Gothic One',sans-serif;font-size:80px;color:#0f0f0f;letter-spacing:4px}
 .mcat-lbl{position:absolute;bottom:0;left:0;right:0;padding:24px 18px 22px;z-index:2;text-align:center}
 .mcat-ico{display:flex;justify-content:center;margin-bottom:10px}
 .mcat-ico svg{width:38px;height:38px;fill:none;stroke:var(--red);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
-.mcat-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(22px,2.5vw,36px);letter-spacing:6px;color:var(--red);text-transform:uppercase}
+.mcat-name{font-family:'Dela Gothic One',sans-serif;font-size:clamp(22px,2.5vw,36px);letter-spacing:6px;color:var(--red);text-transform:uppercase}
 .mcat-edit{position:absolute;top:10px;right:10px;z-index:5;display:none}
 .admin-mode .mcat-edit{display:block}
 .mcat-ebtn{background:rgba(0,0,0,.88);color:var(--mu);font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:5px 8px;cursor:pointer;border:1px solid #2a2a2a;display:block;transition:color .2s}
@@ -259,7 +269,7 @@ nav.solid{background:rgba(0,0,0,.97);backdrop-filter:blur(18px);top:0;border-bot
 #s-merch2{background:var(--bg);padding:72px 0 80px}
 .m-hdr{padding:0 44px;margin-bottom:36px;display:flex;align-items:flex-end;justify-content:space-between}
 .m-hdr-l .eye{font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:11px;letter-spacing:5px;text-transform:uppercase;color:var(--red);margin-bottom:6px}
-.m-hdr-l .ttl{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5vw,64px);letter-spacing:4px;color:#fff}
+.m-hdr-l .ttl{font-family:'Dela Gothic One',sans-serif;font-size:clamp(36px,5vw,64px);letter-spacing:4px;color:#fff}
 .sarrows{display:flex;gap:8px}
 .sarr{width:46px;height:46px;background:none;border:1px solid #1e1e1e;color:var(--mu);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
 .sarr:hover{border-color:var(--red);color:var(--red)}
@@ -285,16 +295,16 @@ nav.solid{background:rgba(0,0,0,.97);backdrop-filter:blur(18px);top:0;border-bot
 .mc-img{width:100%;height:100%;object-fit:cover;transition:opacity .4s;position:absolute;inset:0}
 .mc-f{opacity:1;z-index:1}.mc-b{opacity:0;z-index:0}
 .mc:hover .mc-f{opacity:0}.mc:hover .mc-b{opacity:1}.mc:hover .mc-ov{opacity:1}
-.mc-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#111;color:#191919;font-family:'Bebas Neue',sans-serif;font-size:42px;letter-spacing:4px}
+.mc-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#111;color:#191919;font-family:'Dela Gothic One',sans-serif;font-size:42px;letter-spacing:4px}
 .mc-ov{position:absolute;bottom:0;left:0;right:0;padding:12px;opacity:0;transition:opacity .25s;z-index:2;display:none}
 .mc-buy{display:none}
 .mc-info{padding:12px 14px 16px}
 .mc-tag{font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--red);margin-bottom:2px}
 .mc-name{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:16px;letter-spacing:1px;color:#fff;text-transform:uppercase}
-.mc-price{font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--mu);letter-spacing:2px;margin-top:2px}
+.mc-price{font-family:'Dela Gothic One',sans-serif;font-size:20px;color:var(--mu);letter-spacing:2px;margin-top:2px}
 .mc-price-row{margin-top:2px;display:flex;align-items:baseline;gap:8px}
-.mc-price-old{font-family:'Bebas Neue',sans-serif;font-size:14px;color:#333;letter-spacing:1px;text-decoration:line-through}
-.mc-price-sale{font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--red);letter-spacing:2px}
+.mc-price-old{font-family:'Dela Gothic One',sans-serif;font-size:14px;color:#333;letter-spacing:1px;text-decoration:line-through}
+.mc-price-sale{font-family:'Dela Gothic One',sans-serif;font-size:20px;color:var(--red);letter-spacing:2px}
 .mc-badge{position:absolute;top:12px;left:12px;background:var(--red);color:#fff;font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:10px;letter-spacing:3px;text-transform:uppercase;padding:3px 9px;z-index:3}
 .mc-disc{position:absolute;top:12px;left:12px;background:#e81c1c;color:#fff;font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:3px 9px;z-index:4}
 .mc-del{position:absolute;top:12px;right:12px;background:rgba(0,0,0,.78);border:none;color:var(--mu);font-size:14px;width:28px;height:28px;cursor:pointer;z-index:3;display:none;align-items:center;justify-content:center}
@@ -324,11 +334,11 @@ nav.solid{background:rgba(0,0,0,.97);backdrop-filter:blur(18px);top:0;border-bot
 .pm-th{width:52px;height:52px;object-fit:cover;cursor:pointer;opacity:.4;border:1px solid transparent;transition:opacity .2s,border-color .2s}
 .pm-th[draggable]{cursor:grab}.pm-th[draggable]:active{cursor:grabbing}
 .pm-th.act,.pm-th:hover{opacity:1;border-color:var(--red)}
-.pm-gal-ph{width:100%;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;background:#111;color:#222;font-family:'Bebas Neue',sans-serif;font-size:80px}
+.pm-gal-ph{width:100%;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;background:#111;color:#222;font-family:'Dela Gothic One',sans-serif;font-size:80px}
 .pm-info{padding:52px 44px;overflow-y:auto;background:var(--bg)}
 .pm-bc{font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--mu);margin-bottom:16px}
-.pm-nm{font-family:'Bebas Neue',sans-serif;font-size:clamp(28px,3vw,46px);letter-spacing:3px;color:#fff;margin-bottom:10px}
-.pm-pr{font-family:'Bebas Neue',sans-serif;font-size:32px;color:var(--red);letter-spacing:3px;margin-bottom:26px}
+.pm-nm{font-family:'Dela Gothic One',sans-serif;font-size:clamp(28px,3vw,46px);letter-spacing:3px;color:#fff;margin-bottom:10px}
+.pm-pr{font-family:'Dela Gothic One',sans-serif;font-size:32px;color:var(--red);letter-spacing:3px;margin-bottom:26px}
 .pm-sl{font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--mu);margin-bottom:8px}
 .pm-sizes{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:26px}
 .pm-sz{width:46px;height:46px;background:transparent;border:1px solid #2a2a2a;color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:12px;cursor:pointer;transition:all .2s}
@@ -345,7 +355,7 @@ nav.solid{background:rgba(0,0,0,.97);backdrop-filter:blur(18px);top:0;border-bot
 .sp-bot{position:absolute;bottom:0;left:0;right:0;height:20%;background:linear-gradient(to bottom,transparent,#000);z-index:2;pointer-events:none}
 .sp-top-fade{position:absolute;top:0;left:0;right:0;height:20%;background:linear-gradient(to bottom,rgba(0,0,0,.3),transparent);z-index:2;pointer-events:none}
 .sp-ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:#030303}
-.sp-ph span{font-family:'Bebas Neue',sans-serif;font-size:80px;color:#0d0d0d;letter-spacing:10px}
+.sp-ph span{font-family:'Dela Gothic One',sans-serif;font-size:80px;color:#0d0d0d;letter-spacing:10px}
 .sp-upl{display:none;position:absolute;top:18px;right:18px;z-index:10;background:rgba(0,0,0,.9);border:1px solid #1e1e1e;padding:10px 16px;flex-direction:column;gap:4px;min-width:140px}
 .admin-mode .sp-upl{display:flex}
 
@@ -358,7 +368,7 @@ nav.solid{background:rgba(0,0,0,.97);backdrop-filter:blur(18px);top:0;border-bot
 #albR{padding-left:60px}
 .alb-card{background:transparent;border:none;margin-bottom:44px}
 .alb-hdr{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;padding:0 0 14px 0;border-bottom:none;margin-bottom:6px}
-.alb-nm{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:3px;color:var(--red);line-height:1}
+.alb-nm{font-family:'Dela Gothic One',sans-serif;font-size:28px;letter-spacing:3px;color:var(--red);line-height:1}
 .alb-ar{font-family:'Barlow',sans-serif;font-size:12px;color:#444;margin-top:3px}
 .pal{width:44px;height:44px;border-radius:50%;background:var(--red);border:none;color:#fff;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .2s,background .2s;flex-shrink:0;margin-top:2px}
 .pal:hover{background:#c01010;transform:scale(1.1)}
@@ -379,7 +389,7 @@ nav.solid{background:rgba(0,0,0,.97);backdrop-filter:blur(18px);top:0;border-bot
 .t-del:hover{color:var(--red)}
 .admin-mode .t-del{display:block}
 .mus-hint{text-align:center;padding:60px 0;color:var(--mu);font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:12px;letter-spacing:3px;text-transform:uppercase}
-.mus-ht{font-family:'Bebas Neue',sans-serif;color:var(--red);font-size:40px;letter-spacing:5px;margin-bottom:12px}
+.mus-ht{font-family:'Dela Gothic One',sans-serif;color:var(--red);font-size:40px;letter-spacing:5px;margin-bottom:12px}
 .trev .trk{flex-direction:row-reverse;border-left:none;border-right:none}
 .trev .t-nm{text-align:right}
 .trev-center{max-width:380px;margin:0 auto}
@@ -443,7 +453,7 @@ nav.solid{background:rgba(0,0,0,.97);backdrop-filter:blur(18px);top:0;border-bot
 
 /* FOOTER */
 footer{background:#000;padding:40px 44px 68px;border-top:1px solid #0a0a0a;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:18px}
-.ft-logo{font-family:'Bebas Neue',sans-serif;font-size:34px;letter-spacing:8px;color:var(--red);display:flex;align-items:center;gap:10px}
+.ft-logo{font-family:'Dela Gothic One',sans-serif;font-size:34px;letter-spacing:8px;color:var(--red);display:flex;align-items:center;gap:10px}
 .ft-logo img{height:38px;object-fit:contain;display:none}
 .ft-logo img.loaded{display:block}
 .ft-soc{display:flex;gap:13px;align-items:center}
@@ -518,7 +528,7 @@ body.user-logged .auth-tabs{display:none!important}
 .cart-empty{display:flex;align-items:center;justify-content:center;height:100%;color:#333;font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:13px;letter-spacing:3px;text-transform:uppercase}
 .cart-item{display:flex;gap:14px;padding:16px 20px;border-bottom:1px solid #0d0d0d;align-items:flex-start}
 .cart-item-img{width:72px;height:72px;object-fit:cover;background:#111;flex-shrink:0}
-.cart-item-img-ph{width:72px;height:72px;background:#111;display:flex;align-items:center;justify-content:center;color:#222;font-family:'Bebas Neue',sans-serif;font-size:18px;flex-shrink:0}
+.cart-item-img-ph{width:72px;height:72px;background:#111;display:flex;align-items:center;justify-content:center;color:#222;font-family:'Dela Gothic One',sans-serif;font-size:18px;flex-shrink:0}
 .cart-item-info{flex:1;min-width:0}
 .cart-item-name{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14px;letter-spacing:1px;color:#fff;text-transform:uppercase;margin-bottom:3px}
 .cart-item-meta{font-family:'Barlow',sans-serif;font-size:11px;color:#555;margin-bottom:10px}
@@ -526,7 +536,7 @@ body.user-logged .auth-tabs{display:none!important}
 .cqbtn{width:28px;height:28px;background:none;border:1px solid #222;color:#888;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;line-height:1}
 .cqbtn:hover{border-color:var(--red);color:var(--red)}
 .cqnum{width:36px;height:28px;background:#0a0a0a;border-top:1px solid #222;border-bottom:1px solid #222;color:#fff;font-family:'Barlow',sans-serif;font-size:13px;text-align:center;display:flex;align-items:center;justify-content:center}
-.cart-item-price{font-family:'Bebas Neue',sans-serif;font-size:18px;color:#fff;letter-spacing:2px;white-space:nowrap}
+.cart-item-price{font-family:'Dela Gothic One',sans-serif;font-size:18px;color:#fff;letter-spacing:2px;white-space:nowrap}
 .cart-item-del{background:none;border:none;color:#333;cursor:pointer;padding:2px;font-size:16px;line-height:1;transition:color .2s;margin-left:6px;align-self:flex-start}
 .cart-item-del:hover{color:var(--red)}
 .cart-foot{padding:20px;border-top:1px solid #111;background:#000}
@@ -535,10 +545,10 @@ body.user-logged .auth-tabs{display:none!important}
 .cart-shipping-arr{color:#555;font-size:14px;transition:transform .2s}
 .cart-sub{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;padding-top:4px}
 .cart-sub-lbl{font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#555}
-.cart-sub-val{font-family:'Bebas Neue',sans-serif;font-size:22px;color:#fff;letter-spacing:2px}
+.cart-sub-val{font-family:'Dela Gothic One',sans-serif;font-size:22px;color:#fff;letter-spacing:2px}
 .cart-total{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px}
 .cart-total-lbl{font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:14px;letter-spacing:2px;text-transform:uppercase;color:#fff;font-weight:700}
-.cart-total-val{font-family:'Bebas Neue',sans-serif;font-size:32px;color:#fff;letter-spacing:2px}
+.cart-total-val{font-family:'Dela Gothic One',sans-serif;font-size:32px;color:#fff;letter-spacing:2px}
 .cart-installments{text-align:right;font-family:'Barlow',sans-serif;font-size:11px;color:#444;margin-bottom:16px}
 .cart-checkout{width:100%;background:var(--red);color:#fff;border:none;padding:15px;font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:13px;letter-spacing:5px;text-transform:uppercase;cursor:pointer;transition:background .2s;margin-bottom:10px}
 .cart-checkout:hover{background:#c01010}
@@ -624,12 +634,12 @@ body.user-logged .auth-tabs{display:none!important}
 .co-items{margin-bottom:20px}
 .co-item{display:flex;gap:14px;padding:12px 0;border-bottom:1px solid #0d0d0d;align-items:flex-start}
 .co-item-img{width:64px;height:64px;object-fit:cover;background:#111;flex-shrink:0;position:relative}
-.co-item-img-ph{width:64px;height:64px;background:#111;display:flex;align-items:center;justify-content:center;color:#222;font-family:'Bebas Neue',sans-serif;font-size:16px;flex-shrink:0}
+.co-item-img-ph{width:64px;height:64px;background:#111;display:flex;align-items:center;justify-content:center;color:#222;font-family:'Dela Gothic One',sans-serif;font-size:16px;flex-shrink:0}
 .co-item-qty{position:absolute;top:-8px;right:-8px;background:var(--red);color:#fff;font-size:10px;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700}
 .co-item-info{flex:1}
 .co-item-name{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;letter-spacing:1px;color:#fff;text-transform:uppercase;margin-bottom:2px}
 .co-item-meta{font-family:'Barlow',sans-serif;font-size:11px;color:#555}
-.co-item-price{font-family:'Bebas Neue',sans-serif;font-size:18px;color:#fff;letter-spacing:1px;white-space:nowrap}
+.co-item-price{font-family:'Dela Gothic One',sans-serif;font-size:18px;color:#fff;letter-spacing:1px;white-space:nowrap}
 .co-coupon{display:flex;gap:8px;margin-bottom:16px}
 .co-coupon input{flex:1;background:#0a0a0a;border:1px solid #1e1e1e;color:#fff;padding:10px 12px;font-family:'Barlow',sans-serif;font-size:13px;outline:none;transition:border-color .2s}
 .co-coupon input:focus{border-color:var(--red)}
@@ -638,7 +648,7 @@ body.user-logged .auth-tabs{display:none!important}
 .co-totals{border-top:1px solid #111;padding-top:16px}
 .co-tot-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
 .co-tot-lbl{font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#555}
-.co-tot-val{font-family:'Bebas Neue',sans-serif;font-size:20px;color:#fff;letter-spacing:1px}
+.co-tot-val{font-family:'Dela Gothic One',sans-serif;font-size:20px;color:#fff;letter-spacing:1px}
 .co-tot-row.total{border-top:1px solid #1a1a1a;padding-top:12px;margin-top:8px}
 .co-tot-row.total .co-tot-lbl{font-size:14px;color:#fff;font-weight:700}
 .co-tot-row.total .co-tot-val{font-size:32px;color:var(--red)}
@@ -655,7 +665,7 @@ body.user-logged .auth-tabs{display:none!important}
 .co-card-fields.show{display:block}
 .co-success{text-align:center;padding:60px 20px}
 .co-success-ico{font-size:64px;margin-bottom:20px}
-.co-success-ttl{font-family:'Bebas Neue',sans-serif;font-size:48px;letter-spacing:6px;color:var(--red);margin-bottom:10px}
+.co-success-ttl{font-family:'Dela Gothic One',sans-serif;font-size:48px;letter-spacing:6px;color:var(--red);margin-bottom:10px}
 .co-success-sub{font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:14px;letter-spacing:3px;text-transform:uppercase;color:#666;margin-bottom:32px}
 /* Google btn */
 .google-btn{width:100%;background:#fff;color:#333;border:none;padding:12px;font-family:'Barlow',sans-serif;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:background .2s;margin-bottom:16px}
@@ -739,7 +749,7 @@ body.user-logged .auth-tabs{display:none!important}
 .track-bg-ov{position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,8,8,.55) 0%,rgba(8,8,8,.85) 45%,var(--sur) 100%);z-index:1}
 .track-x{position:absolute;top:14px;right:16px;background:none;border:none;color:var(--mu);font-size:20px;cursor:pointer;transition:color .2s;line-height:1;z-index:3}
 .track-x:hover{color:#fff}
-.track-ttl{font-family:'Bebas Neue',sans-serif;font-size:34px;letter-spacing:6px;color:var(--red);margin-bottom:4px}
+.track-ttl{font-family:'Dela Gothic One',sans-serif;font-size:34px;letter-spacing:6px;color:var(--red);margin-bottom:4px}
 .track-sub{font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--mu);margin-bottom:24px}
 .track-inp{width:100%;background:#0a0a0a;border:1px solid #1e1e1e;color:#fff;padding:14px;font-family:'Barlow',sans-serif;font-size:14px;outline:none;margin-bottom:10px;transition:border-color .2s}
 .track-inp:focus{border-color:var(--red)}
@@ -750,7 +760,7 @@ body.user-logged .auth-tabs{display:none!important}
 /* Marquee interno del modal */
 .track-mq{overflow:hidden;margin:0 -40px 24px;padding:10px 0;background:#000;border-top:1px solid #1a1a1a;border-bottom:1px solid #1a1a1a}
 .track-mq .t{display:inline-flex;gap:40px;animation:mq 18s linear infinite;white-space:nowrap}
-.track-mq .i{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:6px;color:#161616;white-space:nowrap;text-transform:uppercase}
+.track-mq .i{font-family:'Dela Gothic One',sans-serif;font-size:16px;letter-spacing:6px;color:#161616;white-space:nowrap;text-transform:uppercase}
 .track-mq .i .d{color:var(--red);font-size:8px;margin:0 14px;vertical-align:middle}
 /* Tarjeta de estado principal */
 .track-status-card{text-align:center;padding:26px 20px;margin-bottom:20px;background:linear-gradient(180deg,rgba(232,28,28,.05) 0%,transparent 100%);border:1px solid #1a1a1a;position:relative}
@@ -758,7 +768,7 @@ body.user-logged .auth-tabs{display:none!important}
 .track-status-ico{font-size:38px;margin-bottom:8px;display:inline-block;filter:drop-shadow(0 0 16px rgba(232,28,28,.25))}
 .track-status-ico.pulse{animation:trackPulse 1.7s ease-in-out infinite}
 @keyframes trackPulse{0%,100%{opacity:1}50%{opacity:.5}}
-.track-status-label{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:3px;color:var(--red)}
+.track-status-label{font-family:'Dela Gothic One',sans-serif;font-size:24px;letter-spacing:3px;color:var(--red)}
 .track-status-loc{font-family:'Barlow',sans-serif;font-size:12px;color:var(--mu);margin-top:6px;line-height:1.5}
 /* Barra de progreso */
 .track-progress{max-width:380px;margin:18px auto 0}
@@ -774,7 +784,7 @@ body.user-logged .auth-tabs{display:none!important}
 .track-info-cell{padding:16px 16px}
 .track-info-cell:first-child{border-right:1px solid #1a1a1a}
 .track-info-lbl{font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--mu);margin-bottom:5px}
-.track-info-val{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1px;color:#fff}
+.track-info-val{font-family:'Dela Gothic One',sans-serif;font-size:16px;letter-spacing:1px;color:#fff}
 .track-info-val.red{color:var(--red)}
 .track-info-val.dim{color:#333}
 .track-copy-btn{background:none;border:none;color:#444;cursor:pointer;font-size:11px;margin-left:6px;vertical-align:middle}
@@ -804,9 +814,9 @@ body.user-logged .auth-tabs{display:none!important}
 .policy-box{background:var(--sur);border:1px solid #1a1a1a;padding:44px;max-width:700px;width:100%;position:relative;margin:auto}
 .policy-x{position:absolute;top:16px;right:18px;background:none;border:none;color:var(--mu);font-size:20px;cursor:pointer;transition:color .2s;line-height:1}
 .policy-x:hover{color:#fff}
-.policy-ttl{font-family:'Bebas Neue',sans-serif;font-size:38px;letter-spacing:5px;color:var(--red);margin-bottom:24px}
+.policy-ttl{font-family:'Dela Gothic One',sans-serif;font-size:38px;letter-spacing:5px;color:var(--red);margin-bottom:24px}
 .policy-body{font-family:'Barlow',sans-serif;font-size:14px;color:#aaa;line-height:1.8}
-.policy-body h3{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:3px;color:#fff;margin:22px 0 8px}
+.policy-body h3{font-family:'Dela Gothic One',sans-serif;font-size:20px;letter-spacing:3px;color:#fff;margin:22px 0 8px}
 .policy-body p{margin-bottom:10px}
 /* ── FOOTER POLICY LINKS ──────────────────────────── */
 .ft-policy{display:flex;gap:20px;flex-wrap:wrap;justify-content:center;width:100%;padding-top:12px;border-top:1px solid #0d0d0d}
@@ -826,15 +836,15 @@ body.user-logged .auth-tabs{display:none!important}
 .drop-inner::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--red)}
 .drop-left{}
 .drop-tag{font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:10px;letter-spacing:5px;text-transform:uppercase;color:var(--red);margin-bottom:3px}
-.drop-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(26px,3vw,36px);letter-spacing:5px;color:#fff;line-height:1}
+.drop-name{font-family:'Dela Gothic One',sans-serif;font-size:clamp(26px,3vw,36px);letter-spacing:5px;color:#fff;line-height:1}
 .drop-units{font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#444;margin-top:4px}
 .drop-units b{color:#888}
 .drop-center{display:flex;gap:16px;align-items:center}
 .drop-cd{display:flex;gap:6px;align-items:center}
 .drop-cd-unit{text-align:center;min-width:46px;background:#111;border:1px solid #1a1a1a;padding:6px 4px}
-.drop-cd-num{font-family:'Bebas Neue',sans-serif;font-size:28px;color:#fff;letter-spacing:1px;line-height:1;display:block}
+.drop-cd-num{font-family:'Dela Gothic One',sans-serif;font-size:28px;color:#fff;letter-spacing:1px;line-height:1;display:block}
 .drop-cd-lbl{font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:#444;display:block;margin-top:1px}
-.drop-cd-sep{font-family:'Bebas Neue',sans-serif;font-size:22px;color:#1e1e1e;margin-bottom:12px}
+.drop-cd-sep{font-family:'Dela Gothic One',sans-serif;font-size:22px;color:#1e1e1e;margin-bottom:12px}
 .drop-finished{font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#444}
 /* Drop admin panel */
 .drop-adm-panel{background:var(--sur);border:1px solid #1c1c1c;padding:22px;max-width:600px;margin-top:12px;display:none}
@@ -850,6 +860,33 @@ body.user-logged .auth-tabs{display:none!important}
   .drop-cd-unit{min-width:38px}
 }
 
+
+/* TIPOGRAFÍA AGRESIVA (Dela Gothic One es ancha: se ajustan tamaños y tracking) */
+.hero-ttl{font-size:clamp(54px,13vw,190px);letter-spacing:-2px;line-height:.95;transform:translateY(70px) skewX(-6deg)}
+@keyframes hIn{to{opacity:1;transform:translateY(0) skewX(-6deg)}}
+.nav-logo{font-size:22px;letter-spacing:2px}
+.ft-logo{font-size:26px;letter-spacing:2px}
+.mob>a{font-size:clamp(28px,9vw,46px);letter-spacing:1px}
+.mcat-name{font-size:clamp(14px,1.8vw,26px);letter-spacing:1px}
+.tour-hdr-ttl{font-size:clamp(44px,8vw,96px);letter-spacing:0}
+.tour-region-title{font-size:38px;letter-spacing:1px}
+.m-hdr-l .ttl{font-size:clamp(28px,4.2vw,52px);letter-spacing:1px}
+.ar-ttl{font-size:clamp(40px,8vw,104px);letter-spacing:0;text-shadow:4px 4px 0 var(--red)}
+.pm-nm{font-size:clamp(22px,2.4vw,36px);letter-spacing:1px}
+.track-ttl,.policy-ttl{letter-spacing:1px}
+.co-success-ttl{font-size:34px;letter-spacing:1px}
+.mus-ht{font-size:30px;letter-spacing:1px}
+.alb-nm{font-size:22px;letter-spacing:1px}
+.vid-ph .vt{font-size:40px;letter-spacing:2px}
+.ar-card-t{font-size:15px;letter-spacing:1px}
+.ar-cap{font-size:20px;letter-spacing:1px}
+.ar-empty{font-size:28px;letter-spacing:2px}
+@media(max-width:768px){
+  .hero-ttl{font-size:clamp(40px,15vw,90px)}
+  .tour-region-title{font-size:26px}
+  .tour-hdr-ttl{font-size:clamp(34px,11vw,64px)}
+  .ar-ttl{font-size:clamp(32px,11vw,64px)}
+}
 </style>
   <link rel="icon" id="faviconEl" type="image/png" href="data:,">
 </head>
@@ -950,17 +987,6 @@ body.user-logged .auth-tabs{display:none!important}
   </div>
 </section>
 
-<!-- 2B VIDEOS DE YOUTUBE / FOTOS -->
-<div class="mqd"><div class="t"><span class="i">CLIPS<span class="d">✦</span>YOUTUBE<span class="d">✦</span>FLEX FK<span class="d">✦</span>CLIPS<span class="d">✦</span>YOUTUBE<span class="d">✦</span>FLEX FK<span class="d">✦</span></span><span class="i">CLIPS<span class="d">✦</span>YOUTUBE<span class="d">✦</span>FLEX FK<span class="d">✦</span>CLIPS<span class="d">✦</span>YOUTUBE<span class="d">✦</span>FLEX FK<span class="d">✦</span></span></div></div>
-<section id="s-ytvids">
-  <div class="yt-hdr">
-    <div class="yt-hdr-eye">Flex FK</div>
-    <div class="yt-hdr-ttl">CLIPS</div>
-  </div>
-  <div class="yt-grid" id="ytGrid"></div>
-  <div class="yt-adm" id="ytAdm"></div>
-</section>
-
 <!-- 3 MERCH CATS -->
 <div class="mqd rev"><div class="t"><span class="i">MERCH OFICIAL<span class="d">✦</span>SHOP<span class="d">✦</span>HOODIES<span class="d">✦</span>CAMISETAS<span class="d">✦</span>DISCOS<span class="d">✦</span>ACCESORIOS<span class="d">✦</span></span><span class="i">MERCH OFICIAL<span class="d">✦</span>SHOP<span class="d">✦</span>HOODIES<span class="d">✦</span>CAMISETAS<span class="d">✦</span>DISCOS<span class="d">✦</span>ACCESORIOS<span class="d">✦</span></span></div></div>
 <section id="s-merch1">
@@ -999,18 +1025,18 @@ body.user-logged .auth-tabs{display:none!important}
     <!-- Left: nombre + unidades -->
     <div>
       <div style="font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:10px;letter-spacing:5px;text-transform:uppercase;color:var(--red);margin-bottom:4px">Preventa activa</div>
-      <div id="dropName" style="font-family:'Bebas Neue',sans-serif;font-size:clamp(24px,3vw,34px);letter-spacing:5px;color:#fff;line-height:1">DROP-001</div>
+      <div id="dropName" style="font-family:'Dela Gothic One',sans-serif;font-size:clamp(24px,3vw,34px);letter-spacing:5px;color:#fff;line-height:1">DROP-001</div>
       <div id="dropUnitsWrap" style="display:none;font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#444;margin-top:5px">Unidades disponibles: <b id="dropUnits" style="color:#888">—</b></div>
     </div>
     <!-- Center: countdown -->
     <div id="dropCdActive" style="display:flex;gap:6px;align-items:center">
-      <div style="text-align:center;min-width:48px;background:#111;border:1px solid #1a1a1a;padding:7px 5px"><span id="dD" style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:#fff;letter-spacing:1px;line-height:1;display:block">00</span><span style="font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:#444;display:block;margin-top:2px">Días</span></div>
-      <span style="font-family:'Bebas Neue',sans-serif;font-size:22px;color:#1e1e1e;margin-bottom:14px">:</span>
-      <div style="text-align:center;min-width:48px;background:#111;border:1px solid #1a1a1a;padding:7px 5px"><span id="dH" style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:#fff;letter-spacing:1px;line-height:1;display:block">00</span><span style="font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:#444;display:block;margin-top:2px">Hrs</span></div>
-      <span style="font-family:'Bebas Neue',sans-serif;font-size:22px;color:#1e1e1e;margin-bottom:14px">:</span>
-      <div style="text-align:center;min-width:48px;background:#111;border:1px solid #1a1a1a;padding:7px 5px"><span id="dM" style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:#fff;letter-spacing:1px;line-height:1;display:block">00</span><span style="font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:#444;display:block;margin-top:2px">Min</span></div>
-      <span style="font-family:'Bebas Neue',sans-serif;font-size:22px;color:#1e1e1e;margin-bottom:14px">:</span>
-      <div style="text-align:center;min-width:48px;background:#111;border:1px solid #1a1a1a;padding:7px 5px"><span id="dS" style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:#fff;letter-spacing:1px;line-height:1;display:block">00</span><span style="font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:#444;display:block;margin-top:2px">Seg</span></div>
+      <div style="text-align:center;min-width:48px;background:#111;border:1px solid #1a1a1a;padding:7px 5px"><span id="dD" style="font-family:'Dela Gothic One',sans-serif;font-size:28px;color:#fff;letter-spacing:1px;line-height:1;display:block">00</span><span style="font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:#444;display:block;margin-top:2px">Días</span></div>
+      <span style="font-family:'Dela Gothic One',sans-serif;font-size:22px;color:#1e1e1e;margin-bottom:14px">:</span>
+      <div style="text-align:center;min-width:48px;background:#111;border:1px solid #1a1a1a;padding:7px 5px"><span id="dH" style="font-family:'Dela Gothic One',sans-serif;font-size:28px;color:#fff;letter-spacing:1px;line-height:1;display:block">00</span><span style="font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:#444;display:block;margin-top:2px">Hrs</span></div>
+      <span style="font-family:'Dela Gothic One',sans-serif;font-size:22px;color:#1e1e1e;margin-bottom:14px">:</span>
+      <div style="text-align:center;min-width:48px;background:#111;border:1px solid #1a1a1a;padding:7px 5px"><span id="dM" style="font-family:'Dela Gothic One',sans-serif;font-size:28px;color:#fff;letter-spacing:1px;line-height:1;display:block">00</span><span style="font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:#444;display:block;margin-top:2px">Min</span></div>
+      <span style="font-family:'Dela Gothic One',sans-serif;font-size:22px;color:#1e1e1e;margin-bottom:14px">:</span>
+      <div style="text-align:center;min-width:48px;background:#111;border:1px solid #1a1a1a;padding:7px 5px"><span id="dS" style="font-family:'Dela Gothic One',sans-serif;font-size:28px;color:#fff;letter-spacing:1px;line-height:1;display:block">00</span><span style="font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:#444;display:block;margin-top:2px">Seg</span></div>
     </div>
     <div id="dropCdDone" style="display:none;font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#444">Preventa cerrada</div>
   </div>
@@ -1096,7 +1122,7 @@ body.user-logged .auth-tabs{display:none!important}
           <div id="shTicketTypesList"></div>
           <div class="a2" style="margin-top:4px">
             <div><label>Nombre del tipo</label><input type="text" id="tktTypeName" placeholder="General, VIP, Preventa..."></div>
-            <div><label>Precio</label><div style="position:relative;display:flex;align-items:center"><span style="position:absolute;left:10px;font-family:'Bebas Neue',sans-serif;font-size:16px;color:#555;pointer-events:none">$</span><input type="text" id="tktTypePrice" placeholder="80.000" style="padding-left:22px"></div></div>
+            <div><label>Precio</label><div style="position:relative;display:flex;align-items:center"><span style="position:absolute;left:10px;font-family:'Dela Gothic One',sans-serif;font-size:16px;color:#555;pointer-events:none">$</span><input type="text" id="tktTypePrice" placeholder="80.000" style="padding-left:22px"></div></div>
           </div>
           <div class="a2" style="margin-top:0">
             <div><label>Descripción (opcional)</label><input type="text" id="tktTypeDesc" placeholder="Acceso general, zona de pie..."></div>
@@ -1156,7 +1182,7 @@ body.user-logged .auth-tabs{display:none!important}
     <div class="ap" id="pMerch">
       <div class="at">◆ Nuevo Producto</div>
       <label>Nombre</label><input type="text" id="pN" placeholder="Ej: Hoodie Monograma">
-      <div class="a2"><div><label>Precio</label><div style="position:relative;display:flex;align-items:center"><span style="position:absolute;left:10px;font-family:'Bebas Neue',sans-serif;font-size:16px;color:#555;pointer-events:none">$</span><input type="text" id="pPr" placeholder="90.000" style="padding-left:22px"></div></div><div><label>Categoría</label><select id="pCat"><option>Camisetas</option><option>Hoodies</option><option>Accesorios</option><option>Discos</option><option>Otro</option></select></div></div>
+      <div class="a2"><div><label>Precio</label><div style="position:relative;display:flex;align-items:center"><span style="position:absolute;left:10px;font-family:'Dela Gothic One',sans-serif;font-size:16px;color:#555;pointer-events:none">$</span><input type="text" id="pPr" placeholder="90.000" style="padding-left:22px"></div></div><div><label>Categoría</label><select id="pCat"><option>Camisetas</option><option>Hoodies</option><option>Accesorios</option><option>Discos</option><option>Otro</option></select></div></div>
       <label>Tallas</label>
       <div class="sz-picker" id="szPicker">
         <button type="button" class="szp-btn" onclick="toggleSz(this,'XS')">XS</button>
@@ -1274,6 +1300,22 @@ body.user-logged .auth-tabs{display:none!important}
   <div class="mus-hint" id="musHint"><div id="musHintLogo" style="margin-bottom:18px;display:none"><img id="musHintLogoImg" style="height:48px;object-fit:contain;opacity:.25" alt=""></div><div class="mus-ht">Próximamente</div><p>Música en camino.</p></div>
 </section>
 
+<div class="mqd"><div class="t"><span class="i">ARCHIVO FK<span class="d">✦</span>BACKSTAGE<span class="d">✦</span>SIN FILTRO<span class="d">✦</span>ARCHIVO FK<span class="d">✦</span>BACKSTAGE<span class="d">✦</span>SIN FILTRO<span class="d">✦</span></span><span class="i">ARCHIVO FK<span class="d">✦</span>BACKSTAGE<span class="d">✦</span>SIN FILTRO<span class="d">✦</span>ARCHIVO FK<span class="d">✦</span>BACKSTAGE<span class="d">✦</span>SIN FILTRO<span class="d">✦</span></span></div></div>
+<section id="s-archivo">
+  <div class="ar-hdr"><div class="ar-eye" id="arEye">Backstage · Sin filtro</div><div class="ar-ttl" id="arTtl">ARCHIVO FK</div><div class="ar-sub" id="arSub">Toca una historia · reacciona a las que te vuelan la cabeza</div></div>
+  <div class="ar-rail" id="arRail"></div>
+  <div class="ar-adm" id="arAdm"></div>
+</section>
+<div class="ar-v" id="arV">
+  <div class="ar-v-box">
+    <div class="ar-bars" id="arBars"></div>
+    <button class="ar-x" onclick="closeAr()">✕</button>
+    <div class="ar-media" id="arMedia"></div>
+    <div class="ar-tap l" onclick="stepAr(-1)"></div><div class="ar-tap r" onclick="stepAr(1)"></div>
+    <div class="ar-foot"><div class="ar-cap" id="arCap"></div><button class="ar-fire" id="arFire" onclick="fireAr()">FUEGO <b id="arFireN">0</b></button></div>
+  </div>
+</div>
+
 <!-- TOUR -->
 <div class="mqd rev"><div class="t"><span class="i">SHOWS<span class="d">✦</span>TOUR<span class="d">✦</span>EN VIVO<span class="d">✦</span>FECHAS<span class="d">✦</span>TICKETS<span class="d">✦</span>SHOWS<span class="d">✦</span>TOUR<span class="d">✦</span>EN VIVO<span class="d">✦</span></span><span class="i">SHOWS<span class="d">✦</span>TOUR<span class="d">✦</span>EN VIVO<span class="d">✦</span>FECHAS<span class="d">✦</span>TICKETS<span class="d">✦</span>SHOWS<span class="d">✦</span>TOUR<span class="d">✦</span>EN VIVO<span class="d">✦</span></span></div></div>
 <section id="s-tour">
@@ -1302,7 +1344,7 @@ body.user-logged .auth-tabs{display:none!important}
     <button class="abtn" style="background:none;border:1px solid #333;margin-top:4px" onclick="clearTourBg()">Quitar foto</button>
     <div style="display:flex;align-items:center;gap:8px;margin-top:10px">
       <label style="font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--mu);white-space:nowrap">Título gira:</label>
-      <input type="text" id="tourTitleInp" placeholder="TOUR" value="TOUR" style="flex:1;background:#0a0a0a;border:1px solid #1e1e1e;color:#fff;padding:7px 11px;font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:3px;outline:none;max-width:240px">
+      <input type="text" id="tourTitleInp" placeholder="TOUR" value="TOUR" style="flex:1;background:#0a0a0a;border:1px solid #1e1e1e;color:#fff;padding:7px 11px;font-family:'Dela Gothic One',sans-serif;font-size:16px;letter-spacing:3px;outline:none;max-width:240px">
       <button class="abtn" style="margin:0" onclick="saveTourTitle()">✓ Guardar</button>
     </div>
   </div>
@@ -1425,7 +1467,7 @@ body.user-logged .auth-tabs{display:none!important}
     <input type="hidden" id="epId">
     <label>Nombre</label><input type="text" id="epN">
     <div class="a2">
-      <div><label>Precio</label><div style="position:relative;display:flex;align-items:center"><span style="position:absolute;left:10px;font-family:'Bebas Neue',sans-serif;font-size:16px;color:#555;pointer-events:none">$</span><input type="text" id="epPr" style="padding-left:22px"></div></div>
+      <div><label>Precio</label><div style="position:relative;display:flex;align-items:center"><span style="position:absolute;left:10px;font-family:'Dela Gothic One',sans-serif;font-size:16px;color:#555;pointer-events:none">$</span><input type="text" id="epPr" style="padding-left:22px"></div></div>
       <div><label>Categoría</label><select id="epCat"><option>Camisetas</option><option>Hoodies</option><option>Accesorios</option><option>Discos</option><option>Otro</option></select></div>
     </div>
     <label>Tallas</label>
@@ -1552,7 +1594,7 @@ body.user-logged .auth-tabs{display:none!important}
     </div>
     <div id="cartDiscountRow" style="display:none;justify-content:space-between;align-items:baseline;margin-bottom:6px">
       <span style="font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#3a8a3a" id="cartDiscLabel">Descuento</span>
-      <span style="font-family:'Bebas Neue',sans-serif;font-size:20px;color:#3a8a3a;letter-spacing:2px" id="cartDiscAmt">-$0</span>
+      <span style="font-family:'Dela Gothic One',sans-serif;font-size:20px;color:#3a8a3a;letter-spacing:2px" id="cartDiscAmt">-$0</span>
     </div>
     <div class="cart-total"><span class="cart-total-lbl">Total:</span><span class="cart-total-val" id="cartTotal">$0</span></div>
     <div class="cart-installments" id="cartInstall"></div>
@@ -1578,15 +1620,15 @@ body.user-logged .auth-tabs{display:none!important}
       <!-- Steps indicator -->
       <div class="co-steps">
         <div class="co-step done" id="coStep0">
-          <div class="co-step-ic"><img class="co-step-logo" id="coStepLogo0" src="" alt="FK" style="width:20px;height:20px;object-fit:contain;display:none;filter:brightness(0) invert(1);opacity:.5"><span class="co-step-logo-fb" id="coStepFb0" style="font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:1px">FK</span></div>
+          <div class="co-step-ic"><img class="co-step-logo" id="coStepLogo0" src="" alt="FK" style="width:20px;height:20px;object-fit:contain;display:none;filter:brightness(0) invert(1);opacity:.5"><span class="co-step-logo-fb" id="coStepFb0" style="font-family:'Dela Gothic One',sans-serif;font-size:13px;letter-spacing:1px">FK</span></div>
           <div class="co-step-lbl">Carrito</div>
         </div>
         <div class="co-step active" id="coStep1">
-          <div class="co-step-ic"><img class="co-step-logo" id="coStepLogo1" src="" alt="FK" style="width:20px;height:20px;object-fit:contain;display:none;filter:brightness(0) invert(1)"><span class="co-step-logo-fb" id="coStepFb1" style="font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:1px">FK</span></div>
+          <div class="co-step-ic"><img class="co-step-logo" id="coStepLogo1" src="" alt="FK" style="width:20px;height:20px;object-fit:contain;display:none;filter:brightness(0) invert(1)"><span class="co-step-logo-fb" id="coStepFb1" style="font-family:'Dela Gothic One',sans-serif;font-size:13px;letter-spacing:1px">FK</span></div>
           <div class="co-step-lbl">Entrega</div>
         </div>
         <div class="co-step" id="coStep2">
-          <div class="co-step-ic"><img class="co-step-logo" id="coStepLogo2" src="" alt="FK" style="width:20px;height:20px;object-fit:contain;display:none;filter:brightness(0) invert(1);opacity:.3"><span class="co-step-logo-fb" id="coStepFb2" style="font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:1px">FK</span></div>
+          <div class="co-step-ic"><img class="co-step-logo" id="coStepLogo2" src="" alt="FK" style="width:20px;height:20px;object-fit:contain;display:none;filter:brightness(0) invert(1);opacity:.3"><span class="co-step-logo-fb" id="coStepFb2" style="font-family:'Dela Gothic One',sans-serif;font-size:13px;letter-spacing:1px">FK</span></div>
           <div class="co-step-lbl">Pago</div>
         </div>
       </div>
@@ -1632,7 +1674,7 @@ body.user-logged .auth-tabs{display:none!important}
               <svg style="width:18px;height:18px;fill:none;stroke:var(--red);stroke-width:1.5;flex-shrink:0"><path d="M1 3h11v9H1z"/><path d="M12 6l3 2v4h-3z"/><circle cx="4" cy="13" r="1.5"/><circle cx="14" cy="13" r="1.5"/></svg>
               <div>
                 <div style="font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--red)">Costo de envío</div>
-                <div id="coShipBadgeText" style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1px;color:#fff">—</div>
+                <div id="coShipBadgeText" style="font-family:'Dela Gothic One',sans-serif;font-size:16px;letter-spacing:1px;color:#fff">—</div>
               </div>
             </div>
             <div class="co-row2">
@@ -1798,7 +1840,6 @@ let hbg=null;
 let trackBgUrl=null;
 let foldLogoUrl=null;
 let heroSubText='La Presión';
-let YT_VIDEOS=['','',''];
 let sv='';
 let sph='';
 let cats=[null,null,null,null];
@@ -1837,7 +1878,9 @@ async function loadAllFromSB(){
       else if(row.key==='track_bg')trackBgUrl=row.value||null;
       else if(row.key==='fold_logo')foldLogoUrl=row.value||null;
       else if(row.key==='hero_sub')heroSubText=row.value||'La Presión';
-      else if(row.key==='yt_videos')try{YT_VIDEOS=JSON.parse(row.value);}catch(e){}
+      else if(row.key==='archivo_items')try{ARCH=JSON.parse(row.value)||[];}catch(e){}
+      else if(row.key==='archivo_fire')try{ARCH_FIRE=JSON.parse(row.value)||{};}catch(e){}
+      else if(row.key==='archivo_texts')try{Object.assign(ARCH_TXT,JSON.parse(row.value)||{});}catch(e){}
       else if(row.key==='section_video')sv=row.value;
       else if(row.key==='scroll_photo')sph=row.value;
       else if(row.key==='social_links')try{SL=JSON.parse(row.value);}catch(e){}
@@ -2004,91 +2047,63 @@ async function saveHeroSub(){
   applyHeroSub();toast('✓ Subtítulo guardado');
 }
 
-// CLIPS SECTION (YouTube video o foto, por espacio)
-function extractYtId(url){
-  if(!url)return null;
-  const m=url.match(/(?:youtube\.com\/watch\?v=|youtube\.com\/embed\/|youtube\.com\/shorts\/|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
-  return m?m[1]:null;
-}
-function normalizeYtSlot(slot){
-  // Compatibilidad con el formato viejo (array de strings de URL de YouTube)
-  if(typeof slot==='string')return{type:'video',value:slot};
-  if(slot&&typeof slot==='object')return{type:slot.type||'video',value:slot.value||''};
-  return{type:'video',value:''};
-}
-function renderYtGrid(){
-  const grid=g('ytGrid');if(!grid)return;
-  const slots=YT_VIDEOS.map(normalizeYtSlot);
-  grid.innerHTML=slots.map((slot,i)=>{
-    if(slot.type==='image'&&slot.value){
-      return `<div class="yt-item"><img src="${slot.value}" alt="Clip ${i+1}" style="cursor:default"></div>`;
-    }
-    if(slot.type==='video'){
-      const id=extractYtId(slot.value);
-      if(id){
-        return `<div class="yt-item" id="ytItem${i}">
-          <img src="https://img.youtube.com/vi/${id}/hqdefault.jpg" alt="Video ${i+1}">
-          <div class="yt-play" onclick="playYtVideo(${i},'${id}')">
-            <div class="yt-play-ico"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-          </div>
-        </div>`;
-      }
-    }
-    return `<div class="yt-item"><div class="yt-empty-ph">${adm?'Configura este espacio abajo':'Próximamente'}</div></div>`;
-  }).join('');
-  if(adm)renderYtAdmPanel(slots);
-}
-function renderYtAdmPanel(slots){
-  const wrap=g('ytAdm');if(!wrap)return;
-  wrap.innerHTML=slots.map((slot,i)=>`
-    <div class="yt-adm-block">
-      <div class="yt-adm-block-ttl">Espacio ${i+1}</div>
-      <div class="yt-type-toggle">
-        <button type="button" class="yt-type-btn ${slot.type==='video'?'sel':''}" onclick="setYtSlotType(${i},'video')">🎬 Video de YouTube</button>
-        <button type="button" class="yt-type-btn ${slot.type==='image'?'sel':''}" onclick="setYtSlotType(${i},'image')">🖼 Foto</button>
-      </div>
-      ${slot.type==='video'
-        ?`<div class="yt-adm-row"><input type="text" id="ytUrl${i}" placeholder="https://www.youtube.com/watch?v=..." value="${slot.value}" onchange="saveYtSlotValue(${i},this.value)"></div>`
-        :`<input type="file" accept="image/*" id="ytImgFile${i}" onchange="uploadYtSlotImage(${i},this)">${slot.value?`<div style="margin-top:8px;font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#3a8a3a">✓ Foto cargada</div>`:''}`
-      }
-    </div>
-  `).join('');
-}
-function setYtSlotType(i,type){
-  const slots=YT_VIDEOS.map(normalizeYtSlot);
-  slots[i]={type,value:slots[i].type===type?slots[i].value:''};
-  YT_VIDEOS=slots;
-  renderYtGrid();
-}
-async function saveYtSlotValue(i,value){
+// ARCHIVO FK
+let ARCH=[],ARCH_FIRE={},arIdx=0,arTimer=null;
+let ARCH_TXT={eye:'Backstage · Sin filtro',ttl:'ARCHIVO FK',sub:'Toca una historia · reacciona a las que te vuelan la cabeza'};
+function applyArTxt(){[['arEye','eye'],['arTtl','ttl'],['arSub','sub']].forEach(([id,k])=>{const el=g(id);if(el)el.textContent=ARCH_TXT[k];});}
+async function saveArTxt(){
   if(!adm)return;
-  const url=(value||'').trim();
-  if(url&&!extractYtId(url)){toast('⚠️ Ese link no parece ser un video válido de YouTube');return;}
-  const slots=YT_VIDEOS.map(normalizeYtSlot);
-  slots[i]={type:'video',value:url};
-  YT_VIDEOS=slots;
-  const ok=await sbSaveConfig('yt_videos',JSON.stringify(YT_VIDEOS));
-  if(!ok){toast('⚠️ Error al guardar — revisa la consola (F12)');return;}
-  renderYtGrid();toast('✓ Guardado');
+  ARCH_TXT={eye:(g('arTxEye').value||'').trim(),ttl:(g('arTxTtl').value||'').trim()||'ARCHIVO FK',sub:(g('arTxSub').value||'').trim()};
+  if(!(await sbSaveConfig('archivo_texts',JSON.stringify(ARCH_TXT)))){toast('⚠️ Error al guardar');return;}
+  applyArTxt();toast('✓ Textos guardados');
 }
-async function uploadYtSlotImage(i,input){
-  if(!adm)return;const f=input.files[0];if(!f)return;
-  toast('Subiendo foto...');
-  const ext=f.name.split('.').pop().toLowerCase();
-  const path=`site/clip_${i}_${Date.now()}.${ext}`;
-  const url=await sdkUpload('flexfk',path,f);
-  if(!url){toast('Error al subir la foto');return;}
-  const slots=YT_VIDEOS.map(normalizeYtSlot);
-  slots[i]={type:'image',value:url};
-  YT_VIDEOS=slots;
-  const ok=await sbSaveConfig('yt_videos',JSON.stringify(YT_VIDEOS));
-  if(!ok){toast('⚠️ Error al guardar — revisa la consola (F12)');return;}
-  renderYtGrid();toast('✓ Foto guardada');
+function extractYtId(url){if(!url)return null;const m=url.match(/(?:youtube\.com\/watch\?v=|youtube\.com\/embed\/|youtube\.com\/shorts\/|youtu\.be\/)([a-zA-Z0-9_-]{11})/);return m?m[1]:null;}
+function renderYtGrid(){renderArchivo();}
+function arThumb(it){
+  if(it.type==='image')return `<img src="${it.src}" alt="" loading="lazy">`;
+  if(it.type==='video')return `<video src="${it.src}#t=0.5" muted playsinline preload="metadata"></video>`;
+  return `<img src="https://img.youtube.com/vi/${extractYtId(it.src)}/hqdefault.jpg" alt="" loading="lazy">`;
 }
-function playYtVideo(i,id){
-  const item=g('ytItem'+i);if(!item)return;
-  item.innerHTML=`<iframe src="https://www.youtube.com/embed/${id}?autoplay=1&rel=0" title="Video ${i+1}" frameborder="0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe>`;
+function renderArchivo(){
+  const rail=g('arRail');if(!rail)return;applyArTxt();
+  rail.innerHTML=ARCH.length?ARCH.map((it,i)=>`<div class="ar-card" onclick="openAr(${i})">${arThumb(it)}<span class="ar-card-n">${String(i+1).padStart(2,'0')}</span><span class="ar-card-k">${it.type==='yt'?'YouTube':it.type==='video'?'Video':'Foto'} · ${ARCH_FIRE[it.id]||0} fuego</span><div class="ar-card-t">${it.cap||''}</div><button class="ar-del" onclick="event.stopPropagation();delArchivo('${it.id}')">✕</button></div>`).join(''):`<div class="ar-empty">PRÓXIMAMENTE</div>`;
+  const a=g('arAdm');if(a&&adm&&!a.dataset.ready){a.dataset.ready='1';a.innerHTML=`<div style="font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:12px;letter-spacing:4px;text-transform:uppercase;color:var(--red)">◆ Textos de la sección</div><label>Etiqueta superior</label><input type="text" id="arTxEye" value="${ARCH_TXT.eye.replace(/"/g,'&quot;')}"><label>Título</label><input type="text" id="arTxTtl" value="${ARCH_TXT.ttl.replace(/"/g,'&quot;')}"><label>Subtítulo</label><input type="text" id="arTxSub" value="${ARCH_TXT.sub.replace(/"/g,'&quot;')}"><button class="abtn" onclick="saveArTxt()">Guardar textos</button><div style="font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:12px;letter-spacing:4px;text-transform:uppercase;color:var(--red);margin-top:18px;border-top:1px solid #1a1a1a;padding-top:14px">◆ Agregar al archivo</div><label>Tipo</label><select id="arType" onchange="arToggleType()"><option value="image">Foto</option><option value="video">Video (subir)</option><option value="yt">YouTube (link)</option></select><label>Título corto</label><input type="text" id="arCapInp" placeholder="Ej: Estudio, 3AM"><div id="arSrcWrap"></div><button class="abtn" onclick="addArchivo()">Publicar</button>`;arToggleType();}
 }
+function arToggleType(){const t=g('arType')?.value;const w=g('arSrcWrap');if(!w)return;w.innerHTML=t==='yt'?`<label>Link de YouTube</label><input type="text" id="arUrl" placeholder="https://www.youtube.com/watch?v=...">`:`<label>Archivo</label><input type="file" id="arFile" accept="${t==='video'?'video/*':'image/*'}">`;}
+async function saveArchivo(){return sbSaveConfig('archivo_items',JSON.stringify(ARCH));}
+async function addArchivo(){
+  if(!adm)return;const type=g('arType').value,cap=(g('arCapInp').value||'').trim();let src='';
+  if(type==='yt'){src=(g('arUrl').value||'').trim();if(!extractYtId(src)){toast('⚠️ Link de YouTube inválido');return;}}
+  else{const f=g('arFile').files[0];if(!f){toast('Selecciona un archivo');return;}toast('Subiendo...');src=await sdkUpload('flexfk',`archivo/${Date.now()}.${f.name.split('.').pop().toLowerCase()}`,f);if(!src){toast('Error al subir');return;}}
+  ARCH.push({id:'a'+Date.now(),type,src,cap});
+  if(!(await saveArchivo())){toast('⚠️ Error al guardar');return;}
+  g('arCapInp').value='';arToggleType();renderArchivo();toast('✓ Publicado');
+}
+async function delArchivo(id){
+  if(!adm)return;ARCH=ARCH.filter(x=>x.id!==id);delete ARCH_FIRE[id];
+  await saveArchivo();await sbSaveConfig('archivo_fire',JSON.stringify(ARCH_FIRE));renderArchivo();toast('Eliminado');
+}
+function openAr(i){arIdx=i;g('arV').classList.add('open');document.body.style.overflow='hidden';showAr();}
+function closeAr(){clearTimeout(arTimer);g('arMedia').innerHTML='';g('arV').classList.remove('open');document.body.style.overflow='';}
+function stepAr(d){const n=arIdx+d;if(n<0)return showAr();if(n>=ARCH.length)return closeAr();arIdx=n;showAr();}
+function showAr(){
+  clearTimeout(arTimer);const it=ARCH[arIdx];if(!it)return closeAr();
+  const m=g('arMedia');let dur=6;
+  if(it.type==='image')m.innerHTML=`<img src="${it.src}" alt="">`;
+  else if(it.type==='video'){m.innerHTML=`<video src="${it.src}" autoplay playsinline></video>`;const v=m.firstChild;dur=15;v.onloadedmetadata=()=>{if(v.duration)g('arBars').children[arIdx]?.style.setProperty('--d',v.duration+'s');};v.onended=()=>stepAr(1);v.play().catch(()=>{});}
+  else{m.innerHTML=`<iframe src="https://www.youtube.com/embed/${extractYtId(it.src)}?autoplay=1&rel=0&playsinline=1" allow="autoplay;encrypted-media;picture-in-picture" allowfullscreen></iframe>`;dur=25;}
+  g('arBars').innerHTML=ARCH.map((_,k)=>`<div class="ar-bar ${k<arIdx?'done':k===arIdx?'cur':''}" ${k===arIdx?`style="--d:${dur}s"`:''}><i></i></div>`).join('');
+  g('arCap').textContent=it.cap||'';g('arFireN').textContent=ARCH_FIRE[it.id]||0;
+  g('arFire').classList.toggle('on',!!localStorage.getItem('ffk_fire_'+it.id));
+  if(it.type!=='video')arTimer=setTimeout(()=>stepAr(1),dur*1000);
+}
+async function fireAr(){
+  const it=ARCH[arIdx];if(!it||localStorage.getItem('ffk_fire_'+it.id))return;
+  localStorage.setItem('ffk_fire_'+it.id,'1');ARCH_FIRE[it.id]=(ARCH_FIRE[it.id]||0)+1;
+  g('arFireN').textContent=ARCH_FIRE[it.id];g('arFire').classList.add('on');
+  sbSaveConfig('archivo_fire',JSON.stringify(ARCH_FIRE));renderArchivo();
+}
+document.addEventListener('keydown',e=>{if(!g('arV')?.classList.contains('open'))return;if(e.key==='Escape')closeAr();if(e.key==='ArrowRight')stepAr(1);if(e.key==='ArrowLeft')stepAr(-1);});
 
 
 // LOGO
@@ -2797,7 +2812,7 @@ function checkWompiReturn(){
           g('coModal')?.classList.add('open');
           showCoStep(3);
           const onEl=g('coOrderNum');
-          if(onEl)onEl.innerHTML='<div style="font-family:Bebas Neue,sans-serif;font-size:22px;letter-spacing:4px;color:#fff">'+orderNum+'</div>'+(trackingNum?'<div style="margin-top:8px;font-family:Barlow Condensed,sans-serif;font-style:italic;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#555">Número de guía</div><div style="font-family:Bebas Neue,sans-serif;font-size:18px;letter-spacing:3px;color:var(--red)">'+trackingNum+'</div>':'');
+          if(onEl)onEl.innerHTML='<div style="font-family:Dela Gothic One,sans-serif;font-size:22px;letter-spacing:4px;color:#fff">'+orderNum+'</div>'+(trackingNum?'<div style="margin-top:8px;font-family:Barlow Condensed,sans-serif;font-style:italic;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#555">Número de guía</div><div style="font-family:Dela Gothic One,sans-serif;font-size:18px;letter-spacing:3px;color:var(--red)">'+trackingNum+'</div>':'');
           const trackLink=g('coOrderTrackLink');
           if(trackLink){
             trackLink.href='#';
@@ -2996,7 +3011,7 @@ function renderMerch(){
   });
   const filt=af==='Todos'?visibleP:visibleP.filter(p=>p.cat===af||(af==='Hoodies'&&p.cat==='Buzos'));
   if(!filt.length){track.innerHTML='';if(!P.length){
-    empty.innerHTML=`<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;padding:80px 44px;min-height:300px">${logo?`<img src="${logo}" alt="FLEX FK" style="height:60px;object-fit:contain;opacity:.5">`:`<div style="font-family:'Bebas Neue',sans-serif;font-size:64px;letter-spacing:14px;color:#0f0f0f;user-select:none">FK</div>`}<div style="font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:12px;letter-spacing:4px;text-transform:uppercase;color:#222">No hay nada disponible por el momento</div></div>`;
+    empty.innerHTML=`<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;padding:80px 44px;min-height:300px">${logo?`<img src="${logo}" alt="FLEX FK" style="height:60px;object-fit:contain;opacity:.5">`:`<div style="font-family:'Dela Gothic One',sans-serif;font-size:64px;letter-spacing:14px;color:#0f0f0f;user-select:none">FK</div>`}<div style="font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:12px;letter-spacing:4px;text-transform:uppercase;color:#222">No hay nada disponible por el momento</div></div>`;
   }else{
     empty.innerHTML=`<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:60px 44px;min-height:200px">${logo?`<img src="${logo}" alt="FLEX FK" style="height:52px;object-fit:contain;opacity:.5">`:''}<div style="font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--mu)">No hay productos en "${af}".</div></div>`;
   }
@@ -3027,7 +3042,7 @@ function openPM(id){
   const sizes=p.sizes&&p.sizes.length?p.sizes:[];
   const discPrice=p.discount?discountedPrice(p.price,p.discount):null;
   const priceHtml=discPrice
-    ?`<div style="display:flex;align-items:baseline;gap:10px;margin-bottom:26px"><span style="font-family:'Bebas Neue',sans-serif;font-size:22px;color:#333;text-decoration:line-through;letter-spacing:2px">${p.price}</span><span class="pm-pr" style="margin-bottom:0">${discPrice}</span></div>`
+    ?`<div style="display:flex;align-items:baseline;gap:10px;margin-bottom:26px"><span style="font-family:'Dela Gothic One',sans-serif;font-size:22px;color:#333;text-decoration:line-through;letter-spacing:2px">${p.price}</span><span class="pm-pr" style="margin-bottom:0">${discPrice}</span></div>`
     :`<div class="pm-pr">${p.price}</div>`;
   const promoHtml=p.promo?`<div style="display:inline-block;background:var(--red);color:#fff;font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:11px;letter-spacing:3px;text-transform:uppercase;padding:3px 10px;margin-bottom:14px">${p.promo}</div><br>`:'';
   const thumbsDrag=i=>adm?`draggable="true" ondragstart="pmDragStart(event,${i})" ondragover="event.preventDefault()" ondrop="pmDrop(event,${i})"`:'' ;
@@ -3306,7 +3321,7 @@ function renderEditAlb(){
     const al=AL[k];
     return `<div style="border:1px solid #1a1a1a;margin-bottom:18px;padding:16px;background:#0a0a0a">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
-        <span style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:3px;color:var(--red)">${al.name}</span><span style="font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#444;margin-left:10px">${al.position||'left'}</span>
+        <span style="font-family:'Dela Gothic One',sans-serif;font-size:22px;letter-spacing:3px;color:var(--red)">${al.name}</span><span style="font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#444;margin-left:10px">${al.position||'left'}</span>
         <button onclick="delAlbum('${k}')" style="background:none;border:1px solid #333;color:#444;font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:4px 8px;cursor:pointer">Eliminar álbum</button>
       </div>
       ${al.tracks.map((t,i)=>`
@@ -3574,7 +3589,7 @@ function renderOrderTracking(ord){
   return `${renderTrackMarquee(st.label.toUpperCase())}
     <div style="text-align:center;margin-bottom:18px">
       <div style="font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#444;margin-bottom:4px">Pedido</div>
-      <div style="font-family:'Bebas Neue',sans-serif;font-size:26px;color:#fff;letter-spacing:3px">${ord.order_num}</div>
+      <div style="font-family:'Dela Gothic One',sans-serif;font-size:26px;color:#fff;letter-spacing:3px">${ord.order_num}</div>
     </div>
     <div class="track-status-card">
       <div class="track-status-ico ${st.pulse?'pulse':''}">${st.icon}</div>
@@ -3717,7 +3732,7 @@ function renderDcList(){
     const statusLabel=inactive?`<span style="color:#333">${expired?'Expirado':exhausted?'Agotado':'Pausado'}</span>`:`<span style="color:#3a8a3a">Activo · ${c.uses} uso${c.uses!==1?'s':''}</span>`;
     return `<div style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:#0a0a0a;border:1px solid #1a1a1a;margin-bottom:6px;${inactive?'opacity:.5':''}">
       <div style="flex:1;min-width:0">
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:4px;color:${inactive?'#333':'var(--red)'};">${c.code}</div>
+        <div style="font-family:'Dela Gothic One',sans-serif;font-size:20px;letter-spacing:4px;color:${inactive?'#333':'var(--red)'};">${c.code}</div>
         <div style="font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#555;margin-top:1px">${typeLabel} · ${scopeLabel}</div>
         <div style="font-family:'Barlow',sans-serif;font-size:11px;color:#444;margin-top:2px">${statusLabel}${c.maxUses>0?' · Límite: '+c.maxUses:''}${c.exp?' · Vence: '+new Date(c.exp).toLocaleDateString('es-CO'):''}</div>
       </div>
@@ -4175,7 +4190,7 @@ function renderPendingTicketTypes(){
   el.innerHTML=pendingTicketTypes.map((t,i)=>`
     <div style="display:flex;align-items:center;gap:8px;padding:8px 10px;background:#0a0a0a;border:1px solid #1a1a1a;margin-bottom:4px">
       <div style="flex:1">
-        <span style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:2px;color:#fff">${t.name}</span>
+        <span style="font-family:'Dela Gothic One',sans-serif;font-size:16px;letter-spacing:2px;color:#fff">${t.name}</span>
         <span style="font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--red);margin-left:8px">${t.price}</span>
         ${t.isPreventa?'<span style="font-family:\'Barlow Condensed\',sans-serif;font-style:italic;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#555;margin-left:6px">Preventa</span>':''}
         ${t.desc?`<div style="font-family:'Barlow',sans-serif;font-size:11px;color:#333">${t.desc}</div>`:''}

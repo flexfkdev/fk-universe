@@ -887,6 +887,113 @@ body.user-logged .auth-tabs{display:none!important}
   .tour-hdr-ttl{font-size:clamp(34px,11vw,64px)}
   .ar-ttl{font-size:clamp(32px,11vw,64px)}
 }
+
+/* ARCHIVO admin interactivo + config del tour */
+.ar-ed{outline:1px dashed transparent;outline-offset:6px;cursor:text;transition:outline-color .2s}
+.ar-ed:hover,.ar-ed:focus{outline-color:var(--red)}
+.ar-ed:empty::before{content:'Escribe aquí';color:#333}
+.ar-add{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;border:1px dashed #333;background:transparent}
+.ar-add::after{display:none}
+.ar-add span{font-family:'Dela Gothic One',sans-serif;font-size:64px;color:var(--red);line-height:1}
+.ar-add small{font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#555}
+.ar-add:hover{border-color:var(--red)}
+.admin-mode .ar-card[draggable=true]{cursor:grab}
+.ar-m{position:fixed;inset:0;background:rgba(0,0,0,.94);z-index:1400;display:none;align-items:center;justify-content:center;padding:16px}
+.ar-m.open{display:flex}
+.ar-m-box{position:relative;width:100%;max-width:460px;background:#0a0a0a;border:1px solid #1e1e1e;padding:28px;max-height:92vh;overflow-y:auto}
+.ar-m-x{position:absolute;top:10px;right:14px;background:none;border:none;color:#555;font-size:18px;cursor:pointer}
+.ar-m-x:hover{color:#fff}
+.ar-m-t{font-family:'Dela Gothic One',sans-serif;font-size:24px;color:#fff;margin-bottom:18px}
+.ar-chips{display:flex;gap:8px;margin-bottom:14px}
+.ar-chip{flex:1;background:none;border:1px solid #2a2a2a;color:#666;padding:10px 0;font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:12px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;transition:all .2s}
+.ar-chip:hover{border-color:var(--red);color:var(--red)}
+.ar-chip.on{background:var(--red);border-color:var(--red);color:#fff}
+.ar-zone{min-height:170px;border:1px dashed #333;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:14px;margin-bottom:14px;cursor:pointer;transition:all .2s;text-align:center}
+.ar-zone:hover,.ar-zone.hot{border-color:var(--red);background:rgba(232,28,28,.05)}
+.ar-zone.yt{cursor:default}
+.ar-drop-t{font-family:'Dela Gothic One',sans-serif;font-size:16px;color:#888;display:flex;flex-direction:column;gap:6px}
+.ar-drop-t small,.ar-more{font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#444}
+.ar-pvs{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.ar-pv{width:84px;aspect-ratio:9/16;background:#111;overflow:hidden}
+.ar-pv img,.ar-pv video{width:100%;height:100%;object-fit:cover}
+.ar-zone.yt input,.ar-m-in{width:100%;background:#0a0a0a;border:1px solid #1e1e1e;color:#fff;padding:12px 14px;font-family:'Barlow',sans-serif;font-size:14px;outline:none}
+.ar-zone.yt input:focus,.ar-m-in:focus{border-color:var(--red)}
+#arPrev img{width:100%;max-width:260px}
+.ar-m-in{margin-bottom:14px}
+.ar-pub{width:100%;background:var(--red);color:#fff;border:none;padding:14px;font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:13px;letter-spacing:4px;text-transform:uppercase;cursor:pointer}
+.ar-pub:disabled{background:#333}
+.tour-cfg{display:none;margin:50px auto 90px;max-width:680px;position:relative;z-index:4}
+.admin-mode .tour-cfg{display:block}
+
+/* MÚSICA — lanzamientos */
+#s-music{padding:90px 44px 80px}
+.mus-hdr{text-align:center;margin-bottom:60px}
+.mus-ttl{font-family:'Dela Gothic One',sans-serif;font-size:clamp(40px,8vw,104px);color:#fff;line-height:.9;transform:skewX(-6deg);text-shadow:4px 4px 0 var(--red)}
+#musList{max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:90px}
+.rel{position:relative;display:grid;grid-template-columns:minmax(0,420px) 1fr;gap:56px;align-items:center}
+.rel.flip{grid-template-columns:1fr minmax(0,420px)}
+.rel.flip .rel-art{order:2}
+.rel::before{content:'';position:absolute;inset:-40px;background:var(--cov) center/cover;filter:blur(80px) saturate(1.4);opacity:.22;z-index:0;pointer-events:none;border-radius:50%}
+.rel>*{position:relative;z-index:1}
+.rel-art{position:relative;aspect-ratio:1;cursor:default}
+.rel-disc{position:absolute;inset:3%;z-index:0;transition:transform .7s cubic-bezier(.16,1,.3,1)}
+.rel-disc i{display:block;width:100%;height:100%;border-radius:50%;background:radial-gradient(circle,var(--red) 0 15%,#050505 16% 18%,transparent 19%),repeating-radial-gradient(circle,#0d0d0d 0 2px,#050505 2px 4px);box-shadow:0 0 0 1px #1a1a1a;animation:vspin 3s linear infinite;animation-play-state:paused}
+@keyframes vspin{to{transform:rotate(360deg)}}
+.rel-art:hover .rel-disc,.rel.on .rel-disc{transform:translateX(36%)}
+.rel.flip .rel-art:hover .rel-disc,.rel.flip.on .rel-disc{transform:translateX(-36%)}
+.rel.on .rel-disc i{animation-play-state:running}
+.rel-cover{position:absolute;inset:0;z-index:1;background:#0d0d0d;border:1px solid #1e1e1e;overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,.7)}
+.rel-cover img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.16,1,.3,1)}
+.rel-art:hover .rel-cover img{transform:scale(1.04)}
+.rel-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:'Dela Gothic One',sans-serif;font-size:90px;color:#1a1a1a;background:radial-gradient(circle at 30% 20%,#2a0505,#050505)}
+.rel-play{position:absolute;right:16px;bottom:16px;width:56px;height:56px;border-radius:50%;background:var(--red);color:#fff;border:none;font-size:18px;cursor:pointer;opacity:0;transform:translateY(10px);transition:all .3s;box-shadow:0 0 30px rgba(232,28,28,.5)}
+.rel-art:hover .rel-play{opacity:1;transform:none}
+.rel-edit{position:absolute;inset:auto 0 0 0;background:rgba(0,0,0,.85);color:#fff;text-align:center;padding:10px;font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:11px;letter-spacing:3px;text-transform:uppercase}
+.admin-mode .rel-art{cursor:pointer}
+.rel-meta{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.rel-type{background:var(--red);color:#fff;font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:10px;letter-spacing:3px;text-transform:uppercase;padding:3px 10px}
+.admin-mode .rel-type{cursor:pointer}
+.rel-year{font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:12px;letter-spacing:4px;color:#666}
+.rel-nm{font-family:'Dela Gothic One',sans-serif;font-weight:400;font-size:clamp(26px,3.6vw,48px);color:#fff;line-height:1;margin-bottom:10px;word-break:break-word}
+.rel-ar{font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:14px;letter-spacing:3px;text-transform:uppercase;color:var(--red);margin-bottom:20px}
+.rel-btns{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px}
+.rel-b{background:none;border:1px solid #2a2a2a;color:#aaa;font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:12px;letter-spacing:3px;text-transform:uppercase;padding:11px 20px;cursor:pointer;text-decoration:none;transition:all .2s}
+.rel-b:hover{border-color:var(--red);color:var(--red)}
+.rel-b.main{background:var(--red);border-color:var(--red);color:#fff}
+.rel-b.main:hover{background:#c01010;color:#fff}
+.rel-b.del{border-color:#2a0808;color:#733}
+.rel-in{width:100%;background:#0a0a0a;border:1px solid #1e1e1e;color:#fff;padding:10px 12px;font-family:'Barlow',sans-serif;font-size:13px;outline:none;margin-bottom:12px}
+.rel-in:focus{border-color:var(--red)}
+.rel-trks{border-top:1px solid #151515;margin-bottom:14px}
+.rel .trk{padding:11px 8px;border-bottom:1px solid #121212;gap:14px}
+.rel .trk:hover{background:rgba(232,28,28,.05)}
+.rel .t-nm{font-size:15px;letter-spacing:2px}
+.rel .trk.playing{background:rgba(232,28,28,.08)}
+.t-eq{display:none;align-items:flex-end;gap:2px;height:14px}
+.trk.playing .t-eq{display:flex}
+.t-eq i{width:3px;background:var(--red);animation:eq .8s ease-in-out infinite}
+.t-eq i:nth-child(2){animation-delay:.2s}.t-eq i:nth-child(3){animation-delay:.4s}
+@keyframes eq{0%,100%{height:3px}50%{height:14px}}
+.t-aud{font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#666;border:1px solid #2a2a2a;padding:4px 7px;cursor:pointer;white-space:nowrap}
+.t-aud.ok{color:#3a8a3a;border-color:#1a3a1a}
+.rel-new{display:flex;flex-direction:column;align-items:center;gap:4px;border:1px dashed #333;padding:30px;cursor:pointer;transition:border-color .2s}
+.rel-new:hover{border-color:var(--red)}
+.rel-new span{font-family:'Dela Gothic One',sans-serif;font-size:48px;color:var(--red);line-height:1}
+.rel-new small{font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#555}
+.mp-cov{width:44px;height:44px;object-fit:cover;flex-shrink:0}
+@media(max-width:900px){
+  #s-music{padding:60px 16px}
+  #musList{gap:64px}
+  .rel,.rel.flip{grid-template-columns:1fr;gap:26px}
+  .rel.flip .rel-art{order:0}
+  .rel-art{max-width:340px;margin:0 auto;width:100%}
+  .rel-art:hover .rel-disc,.rel.on .rel-disc,.rel.flip .rel-art:hover .rel-disc,.rel.flip.on .rel-disc{transform:translateX(18%)}
+  .rel-play{opacity:1;transform:none}
+}
+
+.t-pv{margin-left:8px;border:1px solid var(--red);color:var(--red);font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:2px 6px}
+.rel-chk{display:flex;align-items:center;gap:8px;font-family:'Barlow',sans-serif;font-size:12px;color:#777;margin-bottom:14px;cursor:pointer}
+.rel-chk input{accent-color:var(--red)}
 </style>
   <link rel="icon" id="faviconEl" type="image/png" href="data:,">
 </head>
@@ -1071,71 +1178,6 @@ body.user-logged .auth-tabs{display:none!important}
       </div>
       <button class="abtn" style="background:none;border:1px solid #333;margin-top:8px" onclick="clearDrop()">Quitar banner</button>
     </div>
-    <button class="tog-a" style="margin-top:8px" onclick="tP('pTour')"><svg style="width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2"><use href="#i-lock"/></svg>Gestionar Tour</button>
-    <div class="ap" id="pTour" style="max-width:680px">
-      <div class="at">◆ Shows / Tour</div>
-      <!-- Regiones -->
-      <div style="margin-bottom:16px">
-        <div style="font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--red);margin-bottom:8px">Regiones</div>
-        <div id="tourRegionList" style="margin-bottom:12px"></div>
-        <div style="display:grid;grid-template-columns:1fr auto;gap:8px;align-items:stretch">
-          <input type="text" id="newRegionName" placeholder="Ej: Latinoamérica, Colombia, Europa..." style="width:100%;background:#0a0a0a;border:1px solid #333;color:#fff!important;caret-color:#fff;padding:12px 14px;font-family:'Barlow',sans-serif;font-size:14px;outline:none;box-sizing:border-box">
-          <button class="abtn" style="margin:0;white-space:nowrap;padding:12px 18px" onclick="addTourRegion()">+ Región</button>
-        </div>
-      </div>
-      <div style="border-top:1px solid #141414;padding-top:16px">
-        <div style="font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--red);margin-bottom:12px">Agregar Show</div>
-        <div class="a2">
-          <div><label>País / Código</label><input type="text" id="shCountry" placeholder="COL, ARG, ESP..."></div>
-          <div><label>Fecha</label><input type="text" id="shDate" placeholder="Ej: 15.06"></div>
-        </div>
-        <div class="a2" style="margin-top:0">
-          <div><label>Ciudad</label><input type="text" id="shCity" placeholder="Bogotá"></div>
-          <div><label>Recinto</label><input type="text" id="shVenue" placeholder="Movistar Arena"></div>
-        </div>
-        <div class="a2" style="margin-top:0">
-          <div><label>Estado</label>
-            <select id="shStatus" style="width:100%;background:#0a0a0a;border:1px solid #1e1e1e;color:#fff;padding:10px 13px;font-family:'Barlow',sans-serif;font-size:13px;outline:none;margin-bottom:11px">
-              <option value="available">Disponible</option>
-              <option value="soon">Próximamente</option>
-              <option value="sold-out">Agotado</option>
-            </select>
-          </div>
-          <div><label>Región</label>
-            <select id="shRegion" style="width:100%;background:#0a0a0a;border:1px solid #1e1e1e;color:#fff;padding:10px 13px;font-family:'Barlow',sans-serif;font-size:13px;outline:none;margin-bottom:11px">
-            </select>
-          </div>
-        </div>
-        <div class="a2" style="margin-top:0">
-          <div><label>Tipo de venta</label>
-            <select id="shSaleType" onchange="renderShSaleFields()" style="width:100%;background:#0a0a0a;border:1px solid #1e1e1e;color:#fff;padding:10px 13px;font-family:'Barlow',sans-serif;font-size:13px;outline:none;margin-bottom:11px">
-              <option value="link">Link externo (TuBoleta, etc.)</option>
-              <option value="direct">Venta directa en la página</option>
-              <option value="none">Sin botón de compra</option>
-            </select>
-          </div>
-          <div id="shSaleFields"></div>
-        </div>
-        <!-- Ticket types (shown when saleType=direct) -->
-        <div id="shTicketTypesWrap" style="display:none">
-          <div style="font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--red);margin-bottom:10px">Tipos de entrada</div>
-          <div id="shTicketTypesList"></div>
-          <div class="a2" style="margin-top:4px">
-            <div><label>Nombre del tipo</label><input type="text" id="tktTypeName" placeholder="General, VIP, Preventa..."></div>
-            <div><label>Precio</label><div style="position:relative;display:flex;align-items:center"><span style="position:absolute;left:10px;font-family:'Dela Gothic One',sans-serif;font-size:16px;color:#555;pointer-events:none">$</span><input type="text" id="tktTypePrice" placeholder="80.000" style="padding-left:22px"></div></div>
-          </div>
-          <div class="a2" style="margin-top:0">
-            <div><label>Descripción (opcional)</label><input type="text" id="tktTypeDesc" placeholder="Acceso general, zona de pie..."></div>
-            <div style="display:flex;align-items:center;gap:8px;margin-top:20px">
-              <input type="checkbox" id="tktTypePreventa" style="accent-color:var(--red)">
-              <label style="font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#666;margin:0">Es preventa</label>
-            </div>
-          </div>
-          <button class="abtn" style="margin-top:4px" onclick="addTicketType()">+ Tipo de entrada</button>
-        </div>
-        <button class="abtn" onclick="saveShow()" style="margin-top:12px">Agregar show</button>
-      </div>
-    </div>
     <button class="tog-a" style="margin-top:8px" onclick="tP('pCodes')"><svg style="width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2"><use href="#i-lock"/></svg>Códigos de Descuento</button>
     <div class="ap" id="pCodes" style="max-width:680px">
       <div class="at">◆ Códigos de Descuento</div>
@@ -1251,61 +1293,51 @@ body.user-logged .auth-tabs{display:none!important}
 
 <!-- MÚSICA -->
 <section id="s-music">
-  <div class="mus-adm">
-    <button class="tog-a" onclick="tP('pMusic')"><svg style="width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2"><use href="#i-lock"/></svg>Gestionar Música</button>
-    <div class="ap" id="pMusic" style="max-width:700px">
-      <div class="at">♫ Nuevo Álbum / EP</div>
-      <div class="a2">
-        <div><label>Nombre del álbum</label><input type="text" id="aNm" placeholder="Ej: La Presión"></div>
-        <div><label>Artista</label><input type="text" id="aAr" placeholder="Flex FK"></div>
-      </div>
-      <label>Posición del tracklist</label>
-      <select id="aRev" style="width:100%;background:#0a0a0a;border:1px solid #1e1e1e;color:#fff;padding:10px 13px;font-family:'Barlow',sans-serif;font-size:13px;outline:none;margin-bottom:11px">
-        <option value="left">Izquierda</option>
-        <option value="center">Centro</option>
-        <option value="right">Derecha</option>
-      </select>
-      <div style="border-top:1px solid #141414;padding-top:14px;margin-top:4px">
-        <div class="at" style="margin-bottom:8px;font-size:11px">Opción A — Solo nombres (tracklist de texto)</div>
-        <label>Lista de tracks (uno por línea)</label>
-        <textarea id="tListTxt" rows="6" placeholder="Track 1&#10;Track 2 ft. Artista&#10;Track 3&#10;..."></textarea>
-        <button class="abtn" onclick="addAlbumText()">Crear álbum (solo texto)</button>
-      </div>
-      <div style="border-top:1px solid #141414;padding-top:14px;margin-top:14px">
-        <div class="at" style="margin-bottom:8px;font-size:11px">Opción B — Subir audios de una vez</div>
-        <label>Archivos MP3/WAV (múltiples)</label><input type="file" id="tFM" accept="audio/*" multiple>
-        <button class="abtn" onclick="addAlbumFiles()">Crear álbum con audios</button>
-      </div>
-      <div style="border-top:1px solid #141414;padding-top:14px;margin-top:14px">
-        <div class="at" style="margin-bottom:8px;font-size:11px">➕ Agregar canción a álbum ya creado</div>
-        <label>¿A qué álbum?</label>
-        <select id="tAlbTarget" style="width:100%;background:#0a0a0a;border:1px solid #1e1e1e;color:#fff;padding:10px 13px;font-family:'Barlow',sans-serif;font-size:13px;outline:none;margin-bottom:11px">
-          <option value="">— Selecciona álbum —</option>
-        </select>
-        <div class="a2">
-          <div><label>Nombre del track</label><input type="text" id="tNm" placeholder="Ej: Track 1"></div>
-          <div><label>Feat (opcional)</label><input type="text" id="tFt" placeholder="ft. Artista"></div>
-        </div>
-        <label>Archivo de audio (opcional — puedes subirlo después)</label><input type="file" id="tFl" accept="audio/*">
-        <button class="abtn" onclick="addSingleTrack()">Agregar canción</button>
-      </div>
-    </div>
-    <button class="tog-a" style="margin-top:8px" onclick="tP('pEditAlb')"><svg style="width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2"><use href="#i-lock"/></svg>Editar álbumes existentes</button>
-    <div class="ap" id="pEditAlb" style="max-width:700px;display:none">
-      <div class="at">✎ Editar tracks</div>
-      <div id="editAlbList"></div>
-    </div>
-  </div>
-  <div class="mus-cols" id="musCols"><div id="albL" class="mcl"></div><div id="albR"></div></div>
+  <div class="mus-hdr"><div class="ar-eye">Discografía</div><div class="mus-ttl">MÚSICA</div></div>
+  <div id="musList"></div>
   <div class="mus-hint" id="musHint"><div id="musHintLogo" style="margin-bottom:18px;display:none"><img id="musHintLogoImg" style="height:48px;object-fit:contain;opacity:.25" alt=""></div><div class="mus-ht">Próximamente</div><p>Música en camino.</p></div>
 </section>
+<div class="ar-m" id="relAddM" onclick="if(event.target===this)closeRelAdd()">
+  <div class="ar-m-box">
+    <button class="ar-m-x" onclick="closeRelAdd()">✕</button>
+    <div class="ar-m-t">Nuevo lanzamiento</div>
+    <div class="ar-chips" id="relChips">
+      <button class="ar-chip on" data-t="Álbum" onclick="relSetType(this)">Álbum</button>
+      <button class="ar-chip" data-t="EP" onclick="relSetType(this)">EP</button>
+      <button class="ar-chip" data-t="Sencillo" onclick="relSetType(this)">Sencillo</button>
+      <button class="ar-chip" data-t="Mixtape" onclick="relSetType(this)">Mixtape</button>
+    </div>
+    <div class="ar-zone" id="relCovZone"></div>
+    <input class="ar-m-in" id="relNm" placeholder="Nombre">
+    <div style="display:grid;grid-template-columns:1fr 100px;gap:10px"><input class="ar-m-in" id="relAr" placeholder="Artista" value="Flex FK"><input class="ar-m-in" id="relYr" placeholder="Año"></div>
+    <input class="ar-m-in" id="relSp" placeholder="Link de Spotify (opcional)">
+    <textarea class="ar-m-in" id="relTl" rows="5" placeholder="Tracklist: uno por línea (usa «ft.» para feat)"></textarea>
+    <div class="ar-zone" id="relAudZone" style="min-height:90px"></div>
+    <label class="rel-chk"><input type="checkbox" id="relPv"> Estos audios son previews (fragmentos)</label>
+    <button class="ar-pub" id="relPubBtn" onclick="relCreate()">Crear lanzamiento</button>
+  </div>
+</div>
 
 <div class="mqd"><div class="t"><span class="i">ARCHIVO FK<span class="d">✦</span>BACKSTAGE<span class="d">✦</span>SIN FILTRO<span class="d">✦</span>ARCHIVO FK<span class="d">✦</span>BACKSTAGE<span class="d">✦</span>SIN FILTRO<span class="d">✦</span></span><span class="i">ARCHIVO FK<span class="d">✦</span>BACKSTAGE<span class="d">✦</span>SIN FILTRO<span class="d">✦</span>ARCHIVO FK<span class="d">✦</span>BACKSTAGE<span class="d">✦</span>SIN FILTRO<span class="d">✦</span></span></div></div>
 <section id="s-archivo">
   <div class="ar-hdr"><div class="ar-eye" id="arEye">Backstage · Sin filtro</div><div class="ar-ttl" id="arTtl">ARCHIVO FK</div><div class="ar-sub" id="arSub">Toca una historia · reacciona a las que te vuelan la cabeza</div></div>
   <div class="ar-rail" id="arRail"></div>
-  <div class="ar-adm" id="arAdm"></div>
 </section>
+<div class="ar-m" id="arAddM" onclick="if(event.target===this)closeArAdd()">
+  <div class="ar-m-box">
+    <button class="ar-m-x" onclick="closeArAdd()">✕</button>
+    <div class="ar-m-t">Nueva historia</div>
+    <div class="ar-chips">
+      <button class="ar-chip on" data-t="image" onclick="arSetType('image')">Foto</button>
+      <button class="ar-chip" data-t="video" onclick="arSetType('video')">Video</button>
+      <button class="ar-chip" data-t="yt" onclick="arSetType('yt')">YouTube</button>
+    </div>
+    <div class="ar-zone" id="arZone"></div>
+    <input type="file" id="arFileIn" multiple style="display:none">
+    <input type="text" id="arCapInp" class="ar-m-in" placeholder="Título corto (opcional)">
+    <button class="ar-pub" id="arPubBtn" onclick="arPublish()">Publicar</button>
+  </div>
+</div>
 <div class="ar-v" id="arV">
   <div class="ar-v-box">
     <div class="ar-bars" id="arBars"></div>
@@ -1332,6 +1364,72 @@ body.user-logged .auth-tabs{display:none!important}
     </div>
     <!-- Shows list (cuando hay fechas) -->
     <div class="tour-regions" id="tourRegions"></div>
+    <div class="tour-cfg"><button class="tog-a" style="margin-top:8px" onclick="tP('pTour')"><svg style="width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2"><use href="#i-lock"/></svg>Gestionar Tour</button>
+    <div class="ap" id="pTour" style="max-width:680px">
+      <div class="at">◆ Shows / Tour</div>
+      <!-- Regiones -->
+      <div style="margin-bottom:16px">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--red);margin-bottom:8px">Regiones</div>
+        <div id="tourRegionList" style="margin-bottom:12px"></div>
+        <div style="display:grid;grid-template-columns:1fr auto;gap:8px;align-items:stretch">
+          <input type="text" id="newRegionName" placeholder="Ej: Latinoamérica, Colombia, Europa..." style="width:100%;background:#0a0a0a;border:1px solid #333;color:#fff!important;caret-color:#fff;padding:12px 14px;font-family:'Barlow',sans-serif;font-size:14px;outline:none;box-sizing:border-box">
+          <button class="abtn" style="margin:0;white-space:nowrap;padding:12px 18px" onclick="addTourRegion()">+ Región</button>
+        </div>
+      </div>
+      <div style="border-top:1px solid #141414;padding-top:16px">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--red);margin-bottom:12px">Agregar Show</div>
+        <div class="a2">
+          <div><label>País / Código</label><input type="text" id="shCountry" placeholder="COL, ARG, ESP..."></div>
+          <div><label>Fecha</label><input type="text" id="shDate" placeholder="Ej: 15.06"></div>
+        </div>
+        <div class="a2" style="margin-top:0">
+          <div><label>Ciudad</label><input type="text" id="shCity" placeholder="Bogotá"></div>
+          <div><label>Recinto</label><input type="text" id="shVenue" placeholder="Movistar Arena"></div>
+        </div>
+        <div class="a2" style="margin-top:0">
+          <div><label>Estado</label>
+            <select id="shStatus" style="width:100%;background:#0a0a0a;border:1px solid #1e1e1e;color:#fff;padding:10px 13px;font-family:'Barlow',sans-serif;font-size:13px;outline:none;margin-bottom:11px">
+              <option value="available">Disponible</option>
+              <option value="soon">Próximamente</option>
+              <option value="sold-out">Agotado</option>
+            </select>
+          </div>
+          <div><label>Región</label>
+            <select id="shRegion" style="width:100%;background:#0a0a0a;border:1px solid #1e1e1e;color:#fff;padding:10px 13px;font-family:'Barlow',sans-serif;font-size:13px;outline:none;margin-bottom:11px">
+            </select>
+          </div>
+        </div>
+        <div class="a2" style="margin-top:0">
+          <div><label>Tipo de venta</label>
+            <select id="shSaleType" onchange="renderShSaleFields()" style="width:100%;background:#0a0a0a;border:1px solid #1e1e1e;color:#fff;padding:10px 13px;font-family:'Barlow',sans-serif;font-size:13px;outline:none;margin-bottom:11px">
+              <option value="link">Link externo (TuBoleta, etc.)</option>
+              <option value="direct">Venta directa en la página</option>
+              <option value="none">Sin botón de compra</option>
+            </select>
+          </div>
+          <div id="shSaleFields"></div>
+        </div>
+        <!-- Ticket types (shown when saleType=direct) -->
+        <div id="shTicketTypesWrap" style="display:none">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--red);margin-bottom:10px">Tipos de entrada</div>
+          <div id="shTicketTypesList"></div>
+          <div class="a2" style="margin-top:4px">
+            <div><label>Nombre del tipo</label><input type="text" id="tktTypeName" placeholder="General, VIP, Preventa..."></div>
+            <div><label>Precio</label><div style="position:relative;display:flex;align-items:center"><span style="position:absolute;left:10px;font-family:'Dela Gothic One',sans-serif;font-size:16px;color:#555;pointer-events:none">$</span><input type="text" id="tktTypePrice" placeholder="80.000" style="padding-left:22px"></div></div>
+          </div>
+          <div class="a2" style="margin-top:0">
+            <div><label>Descripción (opcional)</label><input type="text" id="tktTypeDesc" placeholder="Acceso general, zona de pie..."></div>
+            <div style="display:flex;align-items:center;gap:8px;margin-top:20px">
+              <input type="checkbox" id="tktTypePreventa" style="accent-color:var(--red)">
+              <label style="font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#666;margin:0">Es preventa</label>
+            </div>
+          </div>
+          <button class="abtn" style="margin-top:4px" onclick="addTicketType()">+ Tipo de entrada</button>
+        </div>
+        <button class="abtn" onclick="saveShow()" style="margin-top:12px">Agregar show</button>
+      </div>
+    </div>
+    </div>
     <!-- Estado vacío (cuando no hay fechas) -->
     <div class="tour-empty-msg" id="tourEmpty" style="display:none">
 
@@ -1448,7 +1546,7 @@ body.user-logged .auth-tabs{display:none!important}
 
 
 <div class="mini-p" id="miniP">
-  <div class="mp-info"><div class="mp-tn" id="mpTN">—</div><div class="mp-ar" id="mpAr">—</div></div>
+  <img class="mp-cov" id="mpCov" alt="" style="display:none"><div class="mp-info"><div class="mp-tn" id="mpTN">—</div><div class="mp-ar" id="mpAr">—</div></div>
   <div class="mp-ctrl"><button class="mp-btn" onclick="prevT()">⏮</button><button class="mp-play" id="mpPlay" onclick="togglePlay()">▶</button><button class="mp-btn" onclick="nextT()">⏭</button></div>
   <div class="mp-prog"><span class="mp-t" id="tCurr">0:00</span><div class="pb" onclick="seekA(event)"><div class="pf" id="pFill"></div></div><span class="mp-t" id="tDur">0:00</span></div>
   <div class="mp-vol"><svg style="width:13px;height:13px;fill:var(--mu)"><path d="M11 5L6 9H2v6h4l5 4V5z"/></svg><input type="range" min="0" max="1" step="0.01" value="0.8" oninput="setVol(this.value)"></div>
@@ -1878,6 +1976,7 @@ async function loadAllFromSB(){
       else if(row.key==='track_bg')trackBgUrl=row.value||null;
       else if(row.key==='fold_logo')foldLogoUrl=row.value||null;
       else if(row.key==='hero_sub')heroSubText=row.value||'La Presión';
+      else if(row.key==='album_meta')try{ALB_META=JSON.parse(row.value)||{};}catch(e){}
       else if(row.key==='archivo_items')try{ARCH=JSON.parse(row.value)||[];}catch(e){}
       else if(row.key==='archivo_fire')try{ARCH_FIRE=JSON.parse(row.value)||{};}catch(e){}
       else if(row.key==='archivo_texts')try{Object.assign(ARCH_TXT,JSON.parse(row.value)||{});}catch(e){}
@@ -1907,7 +2006,7 @@ async function sbSaveConfig(key,value){
 }
 
 document.addEventListener('DOMContentLoaded',async()=>{
-  ae=new Audio();ae.volume=0.8;
+  ae=new Audio();ae.volume=0.8;ae.addEventListener('play',relSync);ae.addEventListener('pause',relSync);
   ae.addEventListener('timeupdate',updProg);
   ae.addEventListener('ended',nextT);
   ae.addEventListener('loadedmetadata',()=>{g('tDur').textContent=fmt(ae.duration);});
@@ -1952,13 +2051,26 @@ document.addEventListener('DOMContentLoaded',async()=>{
 function openMob(){g('mobMenu').classList.add('open');g('hamBtn').classList.add('open');}
 
 // COOKIES
+function getCk(n){const m=document.cookie.match(new RegExp('(?:^|; )'+n+'=([^;]*)'));return m?decodeURIComponent(m[1]):null;}
+function setCk(n,v,days){document.cookie=n+'='+encodeURIComponent(v)+'; max-age='+(days*86400)+'; path=/; SameSite=Lax'+(location.protocol==='https:'?'; Secure':'');}
+function getCookieChoice(){
+  let ls=null;try{ls=localStorage.getItem('ffk_cookie_consent');}catch(e){}
+  return getCk('ffk_cookie_consent')||ls;
+}
 function initCookieBanner(){
-  const choice=localStorage.getItem('ffk_cookie_consent');
-  if(choice)return; // ya eligió antes, no volver a mostrar
+  const choice=getCookieChoice();
+  if(choice){
+    // Re-sincroniza ambos almacenes para que la elección sobreviva si uno se borra
+    setCk('ffk_cookie_consent',choice,365);
+    try{localStorage.setItem('ffk_cookie_consent',choice);}catch(e){}
+    return;
+  }
   setTimeout(()=>{g('cookieBar')?.classList.add('show');},600);
 }
 function handleCookieChoice(accepted){
-  localStorage.setItem('ffk_cookie_consent',accepted?'accepted':'rejected');
+  const v=accepted?'accepted':'rejected';
+  setCk('ffk_cookie_consent',v,365);
+  try{localStorage.setItem('ffk_cookie_consent',v);}catch(e){}
   g('cookieBar')?.classList.remove('show');
 }
 function closeMob(){g('mobMenu').classList.remove('open');g('hamBtn').classList.remove('open');}
@@ -2050,12 +2162,26 @@ async function saveHeroSub(){
 // ARCHIVO FK
 let ARCH=[],ARCH_FIRE={},arIdx=0,arTimer=null;
 let ARCH_TXT={eye:'Backstage · Sin filtro',ttl:'ARCHIVO FK',sub:'Toca una historia · reacciona a las que te vuelan la cabeza'};
-function applyArTxt(){[['arEye','eye'],['arTtl','ttl'],['arSub','sub']].forEach(([id,k])=>{const el=g(id);if(el)el.textContent=ARCH_TXT[k];});}
+function applyArTxt(){
+  [['arEye','eye'],['arTtl','ttl'],['arSub','sub']].forEach(([id,k])=>{
+    const el=g(id);if(!el)return;
+    if(document.activeElement!==el)el.textContent=ARCH_TXT[k];
+    el.contentEditable=adm?'true':'false';
+    el.classList.toggle('ar-ed',!!adm);
+    if(!el.dataset.bound){el.dataset.bound='1';
+      el.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();el.blur();}});
+      el.addEventListener('blur',()=>{if(adm)saveArTxt();});
+      el.addEventListener('paste',e=>{e.preventDefault();document.execCommand('insertText',false,(e.clipboardData||window.clipboardData).getData('text'));});
+    }
+  });
+}
 async function saveArTxt(){
   if(!adm)return;
-  ARCH_TXT={eye:(g('arTxEye').value||'').trim(),ttl:(g('arTxTtl').value||'').trim()||'ARCHIVO FK',sub:(g('arTxSub').value||'').trim()};
+  const n={eye:(g('arEye').textContent||'').trim(),ttl:(g('arTtl').textContent||'').trim()||'ARCHIVO FK',sub:(g('arSub').textContent||'').trim()};
+  if(JSON.stringify(n)===JSON.stringify(ARCH_TXT))return;
+  ARCH_TXT=n;
   if(!(await sbSaveConfig('archivo_texts',JSON.stringify(ARCH_TXT)))){toast('⚠️ Error al guardar');return;}
-  applyArTxt();toast('✓ Textos guardados');
+  toast('✓ Guardado');
 }
 function extractYtId(url){if(!url)return null;const m=url.match(/(?:youtube\.com\/watch\?v=|youtube\.com\/embed\/|youtube\.com\/shorts\/|youtu\.be\/)([a-zA-Z0-9_-]{11})/);return m?m[1]:null;}
 function renderYtGrid(){renderArchivo();}
@@ -2066,18 +2192,63 @@ function arThumb(it){
 }
 function renderArchivo(){
   const rail=g('arRail');if(!rail)return;applyArTxt();
-  rail.innerHTML=ARCH.length?ARCH.map((it,i)=>`<div class="ar-card" onclick="openAr(${i})">${arThumb(it)}<span class="ar-card-n">${String(i+1).padStart(2,'0')}</span><span class="ar-card-k">${it.type==='yt'?'YouTube':it.type==='video'?'Video':'Foto'} · ${ARCH_FIRE[it.id]||0} fuego</span><div class="ar-card-t">${it.cap||''}</div><button class="ar-del" onclick="event.stopPropagation();delArchivo('${it.id}')">✕</button></div>`).join(''):`<div class="ar-empty">PRÓXIMAMENTE</div>`;
-  const a=g('arAdm');if(a&&adm&&!a.dataset.ready){a.dataset.ready='1';a.innerHTML=`<div style="font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:12px;letter-spacing:4px;text-transform:uppercase;color:var(--red)">◆ Textos de la sección</div><label>Etiqueta superior</label><input type="text" id="arTxEye" value="${ARCH_TXT.eye.replace(/"/g,'&quot;')}"><label>Título</label><input type="text" id="arTxTtl" value="${ARCH_TXT.ttl.replace(/"/g,'&quot;')}"><label>Subtítulo</label><input type="text" id="arTxSub" value="${ARCH_TXT.sub.replace(/"/g,'&quot;')}"><button class="abtn" onclick="saveArTxt()">Guardar textos</button><div style="font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:12px;letter-spacing:4px;text-transform:uppercase;color:var(--red);margin-top:18px;border-top:1px solid #1a1a1a;padding-top:14px">◆ Agregar al archivo</div><label>Tipo</label><select id="arType" onchange="arToggleType()"><option value="image">Foto</option><option value="video">Video (subir)</option><option value="yt">YouTube (link)</option></select><label>Título corto</label><input type="text" id="arCapInp" placeholder="Ej: Estudio, 3AM"><div id="arSrcWrap"></div><button class="abtn" onclick="addArchivo()">Publicar</button>`;arToggleType();}
+  const add=adm?`<div class="ar-card ar-add" onclick="openArAdd()"><span>+</span><small>Agregar</small></div>`:'';
+  const cards=ARCH.map((it,i)=>`<div class="ar-card" ${adm?`draggable="true" ondragstart="arDragS(event,${i})" ondragover="event.preventDefault()" ondrop="arDragD(event,${i})"`:''} onclick="openAr(${i})">${arThumb(it)}<span class="ar-card-n">${String(i+1).padStart(2,'0')}</span><span class="ar-card-k">${it.type==='yt'?'YouTube':it.type==='video'?'Video':'Foto'} · ${ARCH_FIRE[it.id]||0} fuego</span><div class="ar-card-t">${it.cap||''}</div><button class="ar-del" onclick="event.stopPropagation();delArchivo('${it.id}')">✕</button></div>`).join('');
+  rail.innerHTML=add+(cards||(adm?'':`<div class="ar-empty">PRÓXIMAMENTE</div>`));
 }
-function arToggleType(){const t=g('arType')?.value;const w=g('arSrcWrap');if(!w)return;w.innerHTML=t==='yt'?`<label>Link de YouTube</label><input type="text" id="arUrl" placeholder="https://www.youtube.com/watch?v=...">`:`<label>Archivo</label><input type="file" id="arFile" accept="${t==='video'?'video/*':'image/*'}">`;}
+let arDragI=-1;
+function arDragS(e,i){arDragI=i;e.dataTransfer.effectAllowed='move';}
+async function arDragD(e,to){e.preventDefault();if(arDragI<0||arDragI===to)return;const[m]=ARCH.splice(arDragI,1);ARCH.splice(to,0,m);arDragI=-1;renderArchivo();await saveArchivo();toast('✓ Orden guardado');}
 async function saveArchivo(){return sbSaveConfig('archivo_items',JSON.stringify(ARCH));}
-async function addArchivo(){
-  if(!adm)return;const type=g('arType').value,cap=(g('arCapInp').value||'').trim();let src='';
-  if(type==='yt'){src=(g('arUrl').value||'').trim();if(!extractYtId(src)){toast('⚠️ Link de YouTube inválido');return;}}
-  else{const f=g('arFile').files[0];if(!f){toast('Selecciona un archivo');return;}toast('Subiendo...');src=await sdkUpload('flexfk',`archivo/${Date.now()}.${f.name.split('.').pop().toLowerCase()}`,f);if(!src){toast('Error al subir');return;}}
-  ARCH.push({id:'a'+Date.now(),type,src,cap});
+let arAddType='image',arAddFiles=[],arBound=false;
+function openArAdd(){
+  if(!adm)return;arAddType='image';arAddFiles=[];g('arCapInp').value='';
+  if(!arBound){arBound=true;
+    const z=g('arZone'),fi=g('arFileIn');
+    z.addEventListener('click',e=>{if(arAddType!=='yt'&&e.target.tagName!=='INPUT')fi.click();});
+    z.addEventListener('dragover',e=>{e.preventDefault();z.classList.add('hot');});
+    z.addEventListener('dragleave',()=>z.classList.remove('hot'));
+    z.addEventListener('drop',e=>{e.preventDefault();z.classList.remove('hot');arTake(e.dataTransfer.files);});
+    fi.addEventListener('change',()=>{arTake(fi.files);fi.value='';});
+  }
+  arAddRender();g('arAddM').classList.add('open');
+}
+function closeArAdd(){g('arAddM').classList.remove('open');}
+function arSetType(t){arAddType=t;arAddFiles=[];arAddRender();}
+function arTake(list){
+  const pre=arAddType==='image'?'image/':'video/';
+  const ok=Array.from(list||[]).filter(f=>f.type.startsWith(pre));
+  if(!ok.length){toast('Ese archivo no es '+(arAddType==='image'?'una foto':'un video'));return;}
+  arAddFiles=arAddFiles.concat(ok);arAddRender();
+}
+function arAddRender(){
+  const t=arAddType,z=g('arZone');
+  document.querySelectorAll('#arAddM .ar-chip').forEach(c=>c.classList.toggle('on',c.dataset.t===t));
+  g('arFileIn').accept=t==='image'?'image/*':'video/*';
+  if(t==='yt'){z.className='ar-zone yt';z.innerHTML=`<input type="text" id="arUrl" placeholder="Pega el link de YouTube" oninput="arYtPrev()"><div id="arPrev"></div>`;return;}
+  z.className='ar-zone';
+  z.innerHTML=arAddFiles.length
+    ?`<div class="ar-pvs">${arAddFiles.map(f=>`<div class="ar-pv">${t==='image'?`<img src="${URL.createObjectURL(f)}" alt="">`:`<video src="${URL.createObjectURL(f)}#t=0.5" muted preload="metadata"></video>`}</div>`).join('')}</div><small class="ar-more">+ arrastra o toca para sumar más</small>`
+    :`<div class="ar-drop-t">Arrastra ${t==='image'?'fotos':'videos'} aquí<small>o toca para elegir</small></div>`;
+}
+function arYtPrev(){const id=extractYtId(g('arUrl').value);g('arPrev').innerHTML=id?`<img src="https://img.youtube.com/vi/${id}/hqdefault.jpg" alt="">`:'';}
+async function arPublish(){
+  if(!adm)return;const cap=(g('arCapInp').value||'').trim(),btn=g('arPubBtn'),items=[];
+  if(arAddType==='yt'){const u=(g('arUrl').value||'').trim();if(!extractYtId(u)){toast('⚠️ Link de YouTube inválido');return;}items.push({type:'yt',src:u});}
+  else{
+    if(!arAddFiles.length){toast('Agrega al menos un archivo');return;}
+    btn.disabled=true;
+    for(let k=0;k<arAddFiles.length;k++){
+      const f=arAddFiles[k];btn.textContent=`Subiendo ${k+1}/${arAddFiles.length}...`;
+      const src=await sdkUpload('flexfk',`archivo/${Date.now()}_${k}.${f.name.split('.').pop().toLowerCase()}`,f);
+      if(!src){toast('Error al subir '+f.name);btn.disabled=false;btn.textContent='Publicar';return;}
+      items.push({type:arAddType,src});
+    }
+  }
+  items.forEach((it,k)=>ARCH.push({id:'a'+Date.now()+k,type:it.type,src:it.src,cap}));
+  btn.disabled=false;btn.textContent='Publicar';
   if(!(await saveArchivo())){toast('⚠️ Error al guardar');return;}
-  g('arCapInp').value='';arToggleType();renderArchivo();toast('✓ Publicado');
+  closeArAdd();renderArchivo();toast('✓ Publicado');
 }
 async function delArchivo(id){
   if(!adm)return;ARCH=ARCH.filter(x=>x.id!==id);delete ARCH_FIRE[id];
@@ -3470,37 +3641,126 @@ function populateAlbSelect(){
 
 function addTrack(){addSingleTrack();}// legacy alias
 
+let ALB_META={};
+const REL_TYPES=['Álbum','EP','Sencillo','Mixtape'];
+function esc(t){return String(t==null?'':t).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');}
+function albMeta(k){return ALB_META[k]||{};}
+async function saveAlbMeta(){return sbSaveConfig('album_meta',JSON.stringify(ALB_META));}
+function relOrder(){return Object.keys(AL).sort((a,b)=>(parseInt(albMeta(b).year)||0)-(parseInt(albMeta(a).year)||0));}
+function parseTrk(l){const m=l.match(/^(.+?)\s+ft\.\s+(.+)$/i);return m?{name:m[1].trim(),feat:m[2].trim(),src:''}:{name:l,feat:'',src:''};}
+function edAttr(k,f){return adm?` contenteditable="true" onblur="relEdit('${k}','${f}',this)" onkeydown="if(event.key==='Enter'){event.preventDefault();this.blur();}"`:'';}
 function renderAlbums(){
-  const L=g('albL'),R=g('albR'),hint=g('musHint'),MC=g('musCols');
-  const keys=Object.keys(AL);
-  if(!keys.length){if(L)L.innerHTML='';if(R)R.innerHTML='';if(hint)hint.style.display='block';const mhl=g('musHintLogoImg');if(mhl&&logo){mhl.src=logo;const w=g('musHintLogo');if(w)w.style.display='block';}return;}
-  if(hint)hint.style.display='none';
-  if(L)L.innerHTML='';if(R)R.innerHTML='';
-  const single=keys.length===1;
-  if(MC){
-    if(single){
-      // Single album: disable grid, center everything
-      MC.style.display='flex';
-      MC.style.justifyContent='center';
-    }else{
-      MC.style.display='grid';
-      MC.style.justifyContent='';
-      MC.style.gridTemplateColumns='1fr 1fr';
-    }
+  const list=g('musList'),hint=g('musHint');if(!list)return;
+  const keys=relOrder();
+  if(hint)hint.style.display=(keys.length||adm)?'none':'block';
+  const add=adm?`<div class="rel-new" onclick="openRelAdd()"><span>+</span><small>Nuevo lanzamiento</small></div>`:'';
+  list.innerHTML=add+keys.map((k,i)=>{
+    const al=AL[k],m=albMeta(k),cov=m.cover||'';
+    const trk=al.tracks.map((t,ii)=>`<div class="trk${(t.src||t.preview)?'':' no-audio'}" data-alb="${k}" data-i="${ii}" ${adm?'':`onclick="playT('${k}',${ii})"`}><span class="t-num">${ii+1}</span><span class="t-nm"><span${adm?` contenteditable="true" onblur="relTrackName('${k}',${ii},this)" onkeydown="if(event.key==='Enter'){event.preventDefault();this.blur();}"`:''}>${esc(t.name)}</span>${t.feat?`<span class="t-ft">ft. ${esc(t.feat)}</span>`:''}${(!t.src&&t.preview)?'<span class="t-pv">Preview</span>':''}</span><span class="t-eq"><i></i><i></i><i></i></span>${adm?`<label class="t-aud${t.src?' ok':''}">${t.src?'✓ audio':'+ audio'}<input type="file" accept="audio/*" style="display:none" onchange="uploadTrackAudio('${k}',${ii},this)"></label><label class="t-aud${t.preview?' ok':''}">${t.preview?'✓ preview':'+ preview'}<input type="file" accept="audio/*" style="display:none" onchange="uploadTrackPreview('${k}',${ii},this)"></label>${t.preview?`<button class="t-aud" style="background:none" title="Quitar preview" onclick="event.stopPropagation();clearPreview('${k}',${ii})">✕</button>`:''}`:''}<span class="t-pi"${adm?` onclick="playT('${k}',${ii})" style="cursor:pointer"`:''}>${(t.src||t.preview)?'▶':'○'}</span>${adm?`<button class="t-del" onclick="event.stopPropagation();delTrack('${k}',${ii})">✕</button>`:''}</div>`).join('');
+    return `<article class="rel${i%2?' flip':''}" data-k="${k}" style="--cov:${cov?`url('${cov}')`:'none'}">
+ <div class="rel-art"${adm?` onclick="relPickCover('${k}')"`:''}>
+  <div class="rel-disc"><i></i></div>
+  <div class="rel-cover">${cov?`<img src="${cov}" alt="${esc(al.name)}" loading="lazy">`:`<div class="rel-ph">FK</div>`}${adm?'<span class="rel-edit">Cambiar portada</span>':`<button class="rel-play" onclick="playT('${k}',0)">▶</button>`}</div>
+ </div>
+ <div class="rel-info">
+  <div class="rel-meta"><span class="rel-type"${adm?` onclick="relCycleType('${k}')" title="Clic para cambiar"`:''}>${esc(m.type||'Álbum')}</span><span class="rel-year"${edAttr(k,'year')}>${esc(m.year||'')}</span></div>
+  <h3 class="rel-nm"${edAttr(k,'name')}>${esc(al.name)}</h3>
+  <div class="rel-ar"${edAttr(k,'artist')}>${esc(al.artist||'Flex FK')}</div>
+  <div class="rel-btns"><button class="rel-b main" onclick="playT('${k}',0)">▶ Reproducir</button>${m.spotify?`<a class="rel-b" href="${esc(m.spotify)}" target="_blank" rel="noopener">Spotify</a>`:''}${adm?`<button class="rel-b del" onclick="relDel('${k}')">Eliminar</button>`:''}</div>
+  ${adm?`<input class="rel-in" type="text" placeholder="Link de Spotify (opcional)" value="${esc(m.spotify||'')}" onchange="relSetMeta('${k}','spotify',this.value.trim())">`:''}
+  <div class="rel-trks">${trk}</div>
+  ${adm?`<input class="rel-in" type="text" placeholder="+ Nuevo track (Enter) — usa «ft.» para feat" onkeydown="if(event.key==='Enter'){relAddTrk('${k}',this)}">`:''}
+ </div></article>`;
+  }).join('');
+  relSync();
+}
+function relSync(){
+  const on=typeof ae!=='undefined'&&ae&&!ae.paused&&cAlb;
+  document.querySelectorAll('.rel').forEach(r=>r.classList.toggle('on',!!on&&r.dataset.k===cAlb));
+  document.querySelectorAll('.trk').forEach(el=>el.classList.remove('playing'));
+  if(cAlb){const el=document.querySelector(`.trk[data-alb="${cAlb}"][data-i="${cIdx}"]`);if(el)el.classList.add('playing');}
+  const c=g('mpCov');if(c){const cv=cAlb&&albMeta(cAlb).cover;if(cv){c.src=cv;c.style.display='block';}else c.style.display='none';}
+}
+async function relEdit(k,f,el){
+  if(!adm||!AL[k])return;const v=el.textContent.trim();
+  if(f==='name'){if(!v||v===AL[k].name)return;AL[k].name=v;await sbSaveAlbum(k);}
+  else if(f==='artist'){if(v===AL[k].artist)return;AL[k].artist=v||'Flex FK';await sbSaveAlbum(k);}
+  else{if(v===(albMeta(k)[f]||''))return;ALB_META[k]={...albMeta(k),[f]:v};await saveAlbMeta();renderAlbums();}
+  toast('✓ Guardado');
+}
+async function uploadTrackPreview(k,i,input){
+  if(!adm)return;const f=input.files[0];if(!f)return;
+  toast('Subiendo preview...');
+  const src=await sdkUpload('flexfk',`music/${k}_${i}_preview_${Date.now()}.${f.name.split('.').pop().toLowerCase()}`,f);
+  if(!src)return toast('Error al subir preview');
+  AL[k].tracks[i].preview=src;await sbSaveAlbum(k);renderAlbums();toast('✓ Preview subido');
+}
+async function clearPreview(k,i){if(!adm)return;delete AL[k].tracks[i].preview;await sbSaveAlbum(k);renderAlbums();toast('Preview quitado');}
+function relTrackName(k,i,el){const v=el.textContent.trim();if(!adm||!v||v===AL[k].tracks[i].name)return;updateTrackName(k,i,v);}
+async function relSetMeta(k,f,v){if(!adm)return;ALB_META[k]={...albMeta(k),[f]:v};await saveAlbMeta();renderAlbums();toast('✓ Guardado');}
+function relCycleType(k){const cur=albMeta(k).type||'Álbum';relSetMeta(k,'type',REL_TYPES[(REL_TYPES.indexOf(cur)+1)%REL_TYPES.length]);}
+async function relAddTrk(k,inp){const v=inp.value.trim();if(!v||!adm)return;AL[k].tracks.push(parseTrk(v));await sbSaveAlbum(k);renderAlbums();toast('✓ Track agregado');}
+async function relDel(k){if(!adm||!confirm('¿Eliminar este lanzamiento completo?'))return;await delAlbum(k);delete ALB_META[k];await saveAlbMeta();renderAlbums();}
+function relPickCover(k){
+  if(!adm)return;const i=document.createElement('input');i.type='file';i.accept='image/*';
+  i.onchange=async()=>{const f=i.files[0];if(!f)return;toast('Subiendo portada...');
+    const url=await sdkUpload('flexfk',`music/cover_${k}_${Date.now()}.${f.name.split('.').pop().toLowerCase()}`,f);
+    if(!url){toast('Error al subir');return;}
+    ALB_META[k]={...albMeta(k),cover:url};await saveAlbMeta();renderAlbums();toast('✓ Portada guardada');};
+  i.click();
+}
+// Modal nuevo lanzamiento
+let relCover=null,relAuds=[],relType='Álbum',relBound=false;
+function relZoneBind(z,pre,multi,cb){
+  const fi=document.createElement('input');fi.type='file';fi.accept=pre+'*';fi.multiple=multi;fi.style.display='none';z.after(fi);
+  z.addEventListener('click',()=>fi.click());
+  z.addEventListener('dragover',e=>{e.preventDefault();z.classList.add('hot');});
+  z.addEventListener('dragleave',()=>z.classList.remove('hot'));
+  const take=l=>{const ok=Array.from(l||[]).filter(f=>f.type.startsWith(pre));if(ok.length)cb(ok);};
+  z.addEventListener('drop',e=>{e.preventDefault();z.classList.remove('hot');take(e.dataTransfer.files);});
+  fi.addEventListener('change',()=>{take(fi.files);fi.value='';});
+}
+function relPaint(){
+  g('relCovZone').innerHTML=relCover?`<div class="ar-pv" style="width:120px;aspect-ratio:1"><img src="${URL.createObjectURL(relCover)}" alt=""></div><small class="ar-more">Cambiar portada</small>`:`<div class="ar-drop-t">Portada<small>arrastra o toca</small></div>`;
+  g('relAudZone').innerHTML=relAuds.length?`<div class="ar-drop-t" style="font-size:13px">${relAuds.length} audio(s) listos<small>toca para sumar más</small></div>`:`<div class="ar-drop-t" style="font-size:14px">Audios (opcional)<small>arrastra MP3/WAV aquí</small></div>`;
+}
+function openRelAdd(){
+  if(!adm)return;relCover=null;relAuds=[];relType='Álbum';
+  ['relNm','relYr','relSp','relTl'].forEach(id=>g(id).value='');g('relYr').value=new Date().getFullYear();g('relAr').value='Flex FK';g('relPv').checked=false;
+  if(!relBound){relBound=true;
+    relZoneBind(g('relCovZone'),'image/',false,l=>{relCover=l[0];relPaint();});
+    relZoneBind(g('relAudZone'),'audio/',true,l=>{relAuds=relAuds.concat(l);relPaint();});
   }
-  const trkHtml=(k,al)=>al.tracks.map((t,ii)=>`<div class="trk${t.src?'':' no-audio'}" data-alb="${k}" data-i="${ii}" onclick="playT('${k}',${ii})"><span class="t-num">${ii+1}</span><span class="t-nm">${t.name}${t.feat?`<span class="t-ft">ft. ${t.feat}</span>`:''}</span><span class="t-pi">${t.src?'▶':'○'}</span><button class="t-del" onclick="event.stopPropagation();delTrack('${k}',${ii})">✕</button></div>`).join('');
-  keys.forEach((k,i)=>{
-    const al=AL[k];
-    const pos=single?'left':(al.position||'left');
-    const col=single?L:(i%2===0?L:R);
-    const trkClass=pos==='right'?'trev':pos==='center'?'trev-center':'';
-    const wrapStyle=single?'max-width:480px;width:100%':'';
-    const hdrStyle='justify-content:space-between';
-    col.innerHTML+=`<div class="alb-card" style="${wrapStyle}"><div class="alb-hdr" style="${hdrStyle}"><div><div class="alb-nm">${al.name}</div><div class="alb-ar">${al.artist||'Flex FK'}</div></div><button class="pal" onclick="playT('${k}',0)">▶</button></div><div class="trk-list${trkClass?' '+trkClass:''}">${trkHtml(k,al)}</div></div>`;
-  });
+  document.querySelectorAll('#relChips .ar-chip').forEach(c=>c.classList.toggle('on',c.dataset.t==='Álbum'));
+  relPaint();g('relAddM').classList.add('open');
+}
+function closeRelAdd(){g('relAddM').classList.remove('open');}
+function relSetType(b){relType=b.dataset.t;document.querySelectorAll('#relChips .ar-chip').forEach(c=>c.classList.toggle('on',c===b));}
+async function relCreate(){
+  if(!adm)return;const name=g('relNm').value.trim();if(!name){toast('Ponle nombre');return;}
+  const key=getAlbKey(name);if(AL[key]){toast('Ya existe un lanzamiento con ese nombre');return;}
+  const lines=g('relTl').value.split('\n').map(l=>l.trim()).filter(Boolean);
+  if(!lines.length&&!relAuds.length){toast('Agrega al menos un track');return;}
+  const btn=g('relPubBtn');btn.disabled=true;
+  const fail=m=>{toast(m);btn.disabled=false;btn.textContent='Crear lanzamiento';};
+  const tracks=[];let cover='';
+  if(relCover){btn.textContent='Subiendo portada...';cover=await sdkUpload('flexfk',`music/cover_${key}_${Date.now()}.${relCover.name.split('.').pop().toLowerCase()}`,relCover)||'';}
+  for(let k=0;k<relAuds.length;k++){
+    const f=relAuds[k];btn.textContent=`Subiendo audio ${k+1}/${relAuds.length}...`;
+    const src=await sdkUpload('flexfk',`music/${key}_${Date.now()}_${k}.${f.name.split('.').pop().toLowerCase()}`,f);
+    if(!src)return fail('Error al subir '+f.name);
+    tracks.push(g('relPv').checked?{name:f.name.replace(/\.[^.]+$/,''),feat:'',src:'',preview:src}:{name:f.name.replace(/\.[^.]+$/,''),feat:'',src});
+  }
+  lines.forEach(l=>tracks.push(parseTrk(l)));
+  AL[key]={name,artist:g('relAr').value.trim()||'Flex FK',reversed:false,position:'left',tracks};
+  await sbSaveAlbum(key);
+  ALB_META[key]={cover,year:g('relYr').value.trim(),type:relType,spotify:g('relSp').value.trim()};
+  await saveAlbMeta();
+  btn.disabled=false;btn.textContent='Crear lanzamiento';
+  closeRelAdd();renderAlbums();toast('✓ Lanzamiento creado');
 }
 
-function playT(k,i){const al=AL[k];if(!al)return;const t=al.tracks[i];if(!t)return;if(!t.src){toast(`"${t.name}" — audio no disponible todavía`);return;}cAlb=k;cIdx=i;playing=true;ae.src=t.src;ae.play().catch(()=>{});g('miniP').classList.add('vis');g('mpTN').textContent=t.name;g('mpAr').textContent=t.feat?`ft. ${t.feat}`:al.name;g('mpPlay').textContent='⏸';document.querySelectorAll('.trk').forEach(el=>el.classList.remove('playing'));const el=document.querySelector(`[data-alb="${k}"][data-i="${i}"]`);if(el)el.classList.add('playing');}
+function playT(k,i){const al=AL[k];if(!al)return;const t=al.tracks[i];if(!t)return;const _u=t.src||t.preview;if(!_u){toast(`"${t.name}" — audio no disponible todavía`);return;}cAlb=k;cIdx=i;playing=true;ae.src=_u;ae.play().catch(()=>{});g('miniP').classList.add('vis');g('mpTN').textContent=t.name;g('mpAr').textContent=(t.src?'':'PREVIEW · ')+(t.feat?`ft. ${t.feat}`:al.name);g('mpPlay').textContent='⏸';document.querySelectorAll('.trk').forEach(el=>el.classList.remove('playing'));const el=document.querySelector(`[data-alb="${k}"][data-i="${i}"]`);if(el)el.classList.add('playing');}
 function togglePlay(){if(!ae.src)return;if(playing){ae.pause();playing=false;g('mpPlay').textContent='▶';}else{ae.play().catch(()=>{});playing=true;g('mpPlay').textContent='⏸';}}
 function nextT(){if(!cAlb)return;playT(cAlb,(cIdx+1)%AL[cAlb].tracks.length);}
 function prevT(){if(!cAlb)return;const tl=AL[cAlb].tracks;playT(cAlb,(cIdx-1+tl.length)%tl.length);}

@@ -2588,7 +2588,7 @@ document.addEventListener('DOMContentLoaded',async()=>{
   document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
   // Admin solo accesible desde el botón "Ingresar" (sin atajos)
   document.addEventListener('keydown',e=>{
-    if(e.code==='Space'&&e.target.tagName!=='INPUT'&&e.target.tagName!=='TEXTAREA'){e.preventDefault();togglePlay();}
+    if(e.code==='Space'&&!e.target.isContentEditable&&!['INPUT','TEXTAREA','SELECT','BUTTON','SUMMARY','A'].includes(e.target.tagName)){e.preventDefault();togglePlay();}
     if(e.key==='Escape'){closePM();closeAuth();closeMob();if(g('cartPanel').classList.contains('open'))toggleCart();}
   });
   g('pModal').addEventListener('click',e=>{if(e.target===e.currentTarget)closePM();});
